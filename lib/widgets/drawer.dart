@@ -11,6 +11,7 @@ import '../screen/AboutusScreen.dart';
 import '../screen/GalleryScreen.dart';
 import '../screen/HomeScreen.dart';
 import '../screen/TermsConditionScreen.dart';
+import '../utils/CustomCachedImage.dart';
 import '../utils/common_functions.dart';
 
 class MyDrawer extends StatefulWidget {
@@ -109,7 +110,18 @@ class _MyDrawerState extends State<MyDrawer> {
                             left: 20.0, top: 20.0, right: 10.0, bottom: 10.0),
                         child: CircleAvatar(
                           radius: 30.0,
-                          backgroundImage: NetworkImage(profilePic),
+                         /* backgroundImage:
+
+                          NetworkImage(profilePic),*/
+                          child: ClipOval(
+                            child: CustomCachedImage(
+                              imageUrl: profilePic,
+                              width: MediaQuery.of(context).size.width,
+                              height: 70,
+                              borderRadius: BorderRadius.circular(12),
+
+                            ),
+                          ),
                         ),
                       ),
                       Column(

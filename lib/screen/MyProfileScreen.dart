@@ -10,6 +10,7 @@ import 'package:agraseva/responseModel/state_list_model.dart';
 import 'package:agraseva/screen/EditAstroDetailScreen.dart';
 import 'package:agraseva/screen/EditBasicDetailScreen.dart';
 import 'package:agraseva/screen/EditProfileDetailScreen.dart';
+import 'package:agraseva/screen/deleteMyAccountScreen.dart';
 import 'package:agraseva/utils/common_functions.dart';
 import 'package:agraseva/utils/constant.dart';
 import 'package:agraseva/widgets/MySeparator.dart';
@@ -21,6 +22,7 @@ import 'package:http/http.dart' as http;
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../utils/CustomCachedImage.dart';
 import 'EditFamilyDetailScreen.dart';
 
 class MyProfileScreen extends StatefulWidget {
@@ -462,13 +464,20 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                                       child: ClipRRect(
                                         borderRadius:
                                             BorderRadius.circular(10.0),
-                                        child: Image.network(imageCover,
+                                     /*   child: Image.network(imageCover,
                                             key: ValueKey(imageCover),
                                             fit: BoxFit.cover,
                                             height: 120,
                                             width: MediaQuery.of(context)
                                                 .size
-                                                .width),
+                                                .width),*/
+                                        child: CustomCachedImage(
+                                          imageUrl: imageCover,
+                                          width: MediaQuery.of(context).size.width,
+                                          height: 120,
+                                          borderRadius: BorderRadius.circular(12),
+                                          errorIcon:  Icons.image,
+                                        ),
                                       ),
                                     ),
                                   )),
@@ -495,6 +504,16 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                                               radius: 40.0,
                                               backgroundColor: Colors.white,
                                               backgroundImage: NetworkImage(imageProfile),
+                                               /* child: ClipOval(
+                                                  child: CustomCachedImage(
+                                                    imageUrl: imageCover,
+                                                    width: MediaQuery.of(context).size.width,
+                                                    height: 60,
+                                                    borderRadius: BorderRadius.circular(12),
+
+
+                                                  ),
+                                                ),*/
                                             ),)
                                           ),
                                       GestureDetector(
@@ -657,6 +676,24 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                       basicDetailContainer(),
                       astroDetailContainer(),
                       familyDetailContainer(),
+                      SizedBox(height: 10,),
+                      TextButton(
+                          onPressed: (){
+                            Navigator.push(context, MaterialPageRoute(
+                                builder: (BuildContext context) =>
+                                    DeleteMyAccountScreen()));
+                          },
+                          child: Text(
+                            "Delete my account",
+                            style: TextStyle(
+                              color: kRedColor,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 14.0,
+                            ),
+                          )
+                      ),
+                      SizedBox(height: 30,)
+
                     ],
                   ),
                 ),

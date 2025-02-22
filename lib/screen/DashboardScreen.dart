@@ -16,6 +16,7 @@ import 'package:flutter_html/flutter_html.dart';
 import 'package:http/http.dart' as http;
 
 import '../responseModel/dashboard_model.dart';
+import '../utils/CustomCachedImage.dart';
 import 'PaymentScreen.dart';
 import 'SigninScreen.dart';
 import 'SuccessStoryListScreen.dart';
@@ -193,14 +194,32 @@ String payNow = "";
                             Radius.circular(40.0) //                 <--- border radius here
                         ),
                       ),
+                      child: ClipOval(
+                        child: CustomCachedImage(
+                          imageUrl: userModel!=null? Constant.base_url+'/uploaded/matri/profilepic/'+userModel.profilePic.toString() :'',
+                          width: 70,
+                          height: 70,
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                      ),
+                    ),
+                  /*  Container(
+                      height: 70,
+                      width: 70,
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.white, width: 0.5),
+                        borderRadius: BorderRadius.all(
+                            Radius.circular(40.0) //                 <--- border radius here
+                        ),
+                      ),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(40.0),
                         child: Image.network(userModel!=null? Constant.base_url+'/uploaded/matri/profilepic/'+userModel.profilePic.toString() :'',
 
-                          /* fit: BoxFit.cover,*/
+                           fit: BoxFit.cover,
                         ),
                       ),
-                    ),
+                    ),*/
                   ],
                 ),),
               Container(
