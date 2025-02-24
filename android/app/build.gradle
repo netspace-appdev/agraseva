@@ -54,8 +54,8 @@ android {
         applicationId "st.agraseva.app"
         minSdkVersion 21
         targetSdkVersion 35
-        versionCode flutterVersionCode.toInteger()
-        versionName flutterVersionName
+        versionCode 16//flutterVersionCode.toInteger()
+        versionName "1.2.0"//flutterVersionName
         multiDexEnabled true
     }
     signingConfigs {

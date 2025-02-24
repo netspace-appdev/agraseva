@@ -213,6 +213,8 @@ class _DeleteMyAccountScreenState extends State<DeleteMyAccountScreen> {
                       if(isChecked){
                         setState(() {
                           deleteAccountApi();
+
+
                         });
                       }
                     }:null,
@@ -275,7 +277,11 @@ class _DeleteMyAccountScreenState extends State<DeleteMyAccountScreen> {
       if (response.statusCode == 200) {
         var map = Map<String, dynamic>.from(jsonData);
         CommonFunctions.showSuccessToast(jsonData['message'] as String);
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => SigninScreen()));
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) =>SigninScreen()),
+              (Route<dynamic> route) => false, // This condition always returns false, removing all routes.
+        );
       } else {
         print(jsonData['message'] as String);
         CommonFunctions.showSuccessToast(jsonData['message'] as String);
