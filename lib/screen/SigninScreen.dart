@@ -291,12 +291,13 @@ class _SigninScreenState extends State<SigninScreen> {
   Future<http.Response?> loginRequest() async {
     CommonFunctions.showLoader(true, context);
     final uri = Uri.parse(Constant.base_url+'/agraapi/UserLogin');
+    print("url==>${uri.toString()}");
     Map<String, String> body = {
       'mobileno': _userMobile.text,
       'password': _password.text,
     };
     await  http.post(uri,
-        /* headers: {"Content-Type": "application/json"},*/
+       //  headers: {"Content-Type": "application/json"},
         body: body
     ).then((http.Response response) {
       final jsonData = json.decode(response.body);
@@ -332,6 +333,67 @@ class _SigninScreenState extends State<SigninScreen> {
 
     );
   }
+/*  Future<http.Response?> loginRequest() async {
+    CommonFunctions.showLoader(true, context);
+    final uri = Uri.parse(Constant.base_url + '/agraapi/UserLogin');
+    print("url==>${uri.toString()}");
+    print("_userMobile==>${_userMobile.text.toString()}");
+    print("_userMobile==>${_password.text.toString()}");
+
+    Map<String, String> body = {
+      'mobileno': _userMobile.text.toString(),
+      'password': _password.text.toString(),
+    };
+
+    try {
+      final response = await http.post(
+        uri,
+        headers: {"Content-Type": "application/json"},
+        body:jsonEncode(body),
+      );
+
+      if (response.statusCode == 200) {
+        print("body req: ${body}");
+        print("Response Body: ${response.body}");
+        final jsonData = json.decode(response.body);
+
+        Navigator.of(context).pop();
+
+        if (jsonData['response_code'] == 200) {
+          var map = Map<String, dynamic>.from(jsonData);
+          var modelData = MemberListModel.fromJson(map);
+
+          memberList = modelData.result;
+          print("memberListsize: ${memberList!.length}");
+          print("memberType: ${memberList![0].memberType}");
+
+          Constant.prefs?.setBool("loggedIn", true);
+          Constant.prefs?.setString("ProfileID", memberList![0].mId!);
+          Constant.prefs?.setString("contact", memberList![0].contact!);
+          Constant.prefs?.setString("token", memberList![0].token!);
+          Constant.prefs?.setString(
+              "name", "${memberList![0].fName} ${memberList![0].lName}");
+          Constant.prefs?.setString("gender", memberList![0].gender!);
+          Constant.prefs?.setString("gotra", memberList![0].gotra!);
+          Constant.prefs?.setString("userStatus", memberList![0].status!);
+          Constant.prefs?.setString("memberType", memberList![0].memberType!);
+
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (BuildContext context) => HomeScreen()),
+          );
+        } else {
+          print(jsonData['message']);
+          CommonFunctions.showSuccessToast(jsonData['message'] as String);
+        }
+      } else {
+        print("Error: ${response.statusCode}");
+        print("Response Body: ${response.body}");
+      }
+    } catch (e) {
+      print("Exception: $e");
+    }
+  }*/
 
 }
 
