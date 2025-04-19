@@ -11,6 +11,9 @@ import '../screen/AboutusScreen.dart';
 import '../screen/GalleryScreen.dart';
 import '../screen/HomeScreen.dart';
 import '../screen/TermsConditionScreen.dart';
+import '../screen/delete_your_account_screen.dart';
+import '../screen/privacy_policy_screen.dart';
+import '../screen/report_user.dart';
 import '../utils/CustomCachedImage.dart';
 import '../utils/common_functions.dart';
 
@@ -60,7 +63,10 @@ class _MyDrawerState extends State<MyDrawer> {
   bool isFaq = false;
   bool isContactUs = false;
   bool isAboutUs = false;
+  bool isPrivacy = false;
   bool isLogout = false;
+  bool isAcDelete = false;
+  bool isReportUser = false;
 
   Map<int, bool> itemsSelectedValue = Map();
   String profilePic = Constant.prefs!.getString("profilepic").toString();
@@ -366,9 +372,11 @@ class _MyDrawerState extends State<MyDrawer> {
             onTap: () {
               setState(() {
                 isFaq = true;
+                isPrivacy=false;
                 isContactUs = false;
                 isAboutUs = false;
                 isLogout = false;
+                isAcDelete=false;
                 Navigator.push(context, MaterialPageRoute(
                     builder: (BuildContext context) =>
                         TermsConditionScreen()));
@@ -445,20 +453,113 @@ class _MyDrawerState extends State<MyDrawer> {
               ),
             ),
           ),
+          ///Privacy
           GestureDetector(
             onTap: () {
               setState(() {
+                isPrivacy = true;
+                isFaq = false;
+                isContactUs = false;
+                isAboutUs = false;
+                isLogout = false;
+                isAcDelete=false;
+                isReportUser=false;
+                Navigator.push(context, MaterialPageRoute(
+                    builder: (BuildContext context) =>
+                        PrivacyPolicyScreen()));
+              });
+
+            },
+            child: isPrivacy?Align(
+              alignment: Alignment.topLeft,
+              child: Container(
+                width: size.width/2,
+                margin: const EdgeInsets.only(left: 20.0, right: 20.0, bottom: 20),
+                padding: const EdgeInsets.only(left: 10.0, right: 10.0, bottom: 10, top: 10),
+                decoration: const BoxDecoration(
+                  shape: BoxShape.rectangle,
+
+                  gradient: LinearGradient(
+                    begin: Alignment.topRight,
+                    end: Alignment.bottomLeft,
+                    stops: [0.1, 0.5, 0.7, 0.9],
+                    colors: [
+                      darkRedColor,
+                      kRed2Color,
+                      kRed2Color,
+                      kRedColor,
+                    ],
+                  ),
+                  borderRadius: BorderRadius.all(Radius.circular(25.0)),
+                ),
+                child:Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Image.asset(
+                      "assets/images/faq.png",
+                      color: Colors.white,
+                      height: 20,
+                    ),
+                    const SizedBox(
+                      width: 15,
+                    ),
+                    Text(
+                      "Privacy Policy",
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 14,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ):
+            Container(
+              margin: const EdgeInsets.only(left: 20.0, right: 20.0, bottom: 20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Image.asset(
+                    "assets/images/faq.png",
+                    color: kRedColor,
+                    height: 20,
+                  ),
+                  const SizedBox(
+                    width: 15,
+                  ),
+                  Text(
+                    "Privacy Policy",
+                    style: const TextStyle(
+                      color: Colors.black,
+                      fontSize: 14,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          ///Privacy
+
+          //Account deelte
+          GestureDetector(
+            onTap: () {
+              setState(() {
+                isAcDelete=true;
                 isFaq = false;
                 isAboutUs = true;
                 isContactUs = false;
                 isLogout = false;
+                isPrivacy=false;
+                isReportUser=false;
                 Navigator.push(context, MaterialPageRoute(
                     builder: (BuildContext context) =>
-                        AboutusScreen()));
+                        DeleteAccountScreen()));
               });
 
             },
-            child: isAboutUs?Align(
+            child: isAcDelete?Align(
               alignment: Alignment.topLeft,
               child: Container(
                width: size.width/2,
@@ -492,7 +593,7 @@ class _MyDrawerState extends State<MyDrawer> {
                       width: 15,
                     ),
                     Text(
-                      "About Us",
+                      "Account Deletion",
                       style: const TextStyle(
                         color: Colors.white,
                         fontSize: 14,
@@ -517,7 +618,7 @@ class _MyDrawerState extends State<MyDrawer> {
                     width: 15,
                   ),
                   Text(
-                    "About Us",
+                    "Account Deletion",
                     style: const TextStyle(
                       color: Colors.black,
                       fontSize: 14,
@@ -527,6 +628,94 @@ class _MyDrawerState extends State<MyDrawer> {
               ),
             ),
           ),
+
+          //Report user
+          GestureDetector(
+            onTap: () {
+              setState(() {
+                isReportUser=true;
+                isAcDelete=false;
+                isFaq = false;
+                isAboutUs = true;
+                isContactUs = false;
+                isLogout = false;
+                isPrivacy=false;
+                Navigator.push(context, MaterialPageRoute(
+                    builder: (BuildContext context) =>
+                        ReportUserScreen()));
+              });
+
+            },
+            child: isReportUser?Align(
+              alignment: Alignment.topLeft,
+              child: Container(
+                width: size.width/2,
+                margin: const EdgeInsets.only(left: 20.0, right: 20.0, bottom: 20),
+                padding: const EdgeInsets.only(left: 10.0, right: 10.0, bottom: 10, top: 10),
+                decoration: const BoxDecoration(
+                  shape: BoxShape.rectangle,
+                  gradient: LinearGradient(
+                    begin: Alignment.topRight,
+                    end: Alignment.bottomLeft,
+                    stops: [0.1, 0.5, 0.7, 0.9],
+                    colors: [
+                      darkRedColor,
+                      kRed2Color,
+                      kRed2Color,
+                      kRedColor,
+                    ],
+                  ),
+                  borderRadius: BorderRadius.all(Radius.circular(25.0)),
+                ),
+                child:Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Icon(
+                      Icons.account_balance_wallet_outlined,
+                      color: Colors.white,
+                      size: 20,
+                    ),
+                    const SizedBox(
+                      width: 15,
+                    ),
+                    Text(
+                      "Report A User",
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 14,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ):
+            Container(
+              margin: const EdgeInsets.only(left: 20.0, right: 20.0, bottom: 20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Icon(
+                    Icons.account_balance_wallet_outlined,
+                    color: kRedColor,
+                    size: 20,
+                  ),
+                  const SizedBox(
+                    width: 15,
+                  ),
+                  Text(
+                    "Report A User",
+                    style: const TextStyle(
+                      color: Colors.black,
+                      fontSize: 14,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+
           GestureDetector(
             onTap: () {
               setState(() {
@@ -534,6 +723,7 @@ class _MyDrawerState extends State<MyDrawer> {
                 isContactUs = true;
                 isAboutUs = false;
                 isLogout = false;
+                isFaq = false;
                 Navigator.push(context, MaterialPageRoute(
                     builder: (BuildContext context) =>
                         ContactusScreen()));

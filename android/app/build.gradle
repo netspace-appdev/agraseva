@@ -54,7 +54,7 @@ android {
         applicationId "com.ns.agraseva"
         minSdkVersion 21
         targetSdkVersion 35
-        versionCode 1//flutterVersionCode.toInteger()
+        versionCode 2//flutterVersionCode.toInteger()
         versionName "1.0.0"//flutterVersionName
         multiDexEnabled true
     }
