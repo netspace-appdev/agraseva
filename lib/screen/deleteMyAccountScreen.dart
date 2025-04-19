@@ -31,39 +31,7 @@ class _DeleteMyAccountScreenState extends State<DeleteMyAccountScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    //  Constant.prefs?.setBool("loggedIn", false);
-    // isLoading = true;
-    // Future.delayed(Duration.zero, () {
-    //   this.getMemberList();
-    // });
-  }
 
-  Future<http.Response?> getMemberList() async {
-    CommonFunctions.showLoader(true, context);
-    final uri = Uri.parse(Constant.base_url + '/agraapi/Getstatic_page');
-    Map<String, String> body = {
-      'PageName': 'terms',
-    };
-    await http.post(uri, body: body).then((http.Response response) {
-      final jsonData = json.decode(response.body);
-      print("TermsCondition");
-      print(jsonData);
-      setState(() {
-        isLoading = false;
-      });
-      Navigator.of(context).pop();
-      if (response.statusCode == 200) {
-        var map = Map<String, dynamic>.from(jsonData);
-        var modelData = StaticPageModel.fromJson(map);
-
-        memberList = modelData.result;
-        dataValue = memberList![0].content.toString();
-        print("dataValue:  " + dataValue);
-      } else {
-        print(jsonData['message'] as String);
-        CommonFunctions.showSuccessToast(jsonData['message'] as String);
-      }
-    });
   }
 
   @override
@@ -258,7 +226,7 @@ class _DeleteMyAccountScreenState extends State<DeleteMyAccountScreen> {
         ));
   }
 
-  Future<http.Response?> deleteAccountApi() async {
+/*  Future<http.Response?> deleteAccountApi() async {
     print("========deleteAccountApi===>");
     CommonFunctions.showLoader(true, context);
     final uri = Uri.parse(Constant.base_url + '/agraapi/DeleteUser');
@@ -287,5 +255,49 @@ class _DeleteMyAccountScreenState extends State<DeleteMyAccountScreen> {
         CommonFunctions.showSuccessToast(jsonData['message'] as String);
       }
     });
+  }*/
+  Future<http.Response?> deleteAccountApi() async {
+    print("========deleteAccountApi===>");
+    CommonFunctions.showLoader(true, context); // ENABLE this
+
+    final uri = Uri.parse("${Constant.base_url}/agraapi/DeleteUser");
+    Map<String, String> body = {
+      'm_id': Constant.prefs!.getString("ProfileID").toString(),
+    };
+
+    print("Request Body: $body");
+    print("Request URL: $uri");
+
+    try {
+      final response = await http.post(uri, body: body);
+
+      print("Response Status: ${response.statusCode}");
+      print("Response Body: ${response.body}");
+
+      final jsonData = json.decode(response.body);
+
+      if (response.statusCode == 200 && jsonData['status'] == 'Success') {
+        CommonFunctions.showSuccessToast(jsonData['message'] ?? "Account deleted successfully.");
+        CommonFunctions.showLoader(false, context); // ✅ Hide here
+
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => SigninScreen()),
+              (Route<dynamic> route) => false,
+        );
+      } else {
+        // ❌ Status != Success
+        CommonFunctions.showLoader(false, context); // ✅ Hide here
+        CommonFunctions.showSuccessToast(jsonData['message'] ?? "Something went wrong.");
+      }
+    } catch (e) {
+      print("Exception during deleteAccountApi: $e");
+      CommonFunctions.showLoader(false, context); // ✅ Hide here
+      CommonFunctions.showSuccessToast("Something went wrong. Please check your connection.");
+    }
+
+    return null;
   }
+
+
 }

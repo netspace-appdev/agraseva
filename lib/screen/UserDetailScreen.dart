@@ -31,6 +31,9 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
   int selectTab = 1;
   String isUserShorted = "";
   int currentPos = 0;
+  bool showMoreOptions = false;
+  bool showMenu = false;
+
   @override
   void initState() {
     // TODO: implement initState
@@ -144,6 +147,7 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
     ]);
 
     Size size = MediaQuery.of(context).size;
+
     return Scaffold(
       appBar: PreferredSize(
           preferredSize: Size.fromHeight(180),
@@ -164,21 +168,75 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
                 style: TextStyle(fontSize: 20, color: Colors.white),
               ),
             ),
-            /*actions: [
+            actions: [
             IconButton(
-              icon: Icon(Icons.autorenew),
+              icon: Icon(Icons.more_vert, color: Colors.grey,),
               color: Colors.white,
               onPressed: () {
-
+                setState(() {
+                  showMenu = !showMenu;
+                });
               },
             ),
-          ],*/
-            flexibleSpace: Image.network(userModel!=null? Constant.base_url+'/uploaded/matri/coverpic/'+userModel.coverPic.toString() :'',
-              fit: BoxFit.cover,
-              width: double.infinity,
-              /*   color: Colors.black.withOpacity(0.4),
+          ],
+            flexibleSpace:Stack(
+              children: [
+                userModel!=null && userModel.coverPic.toString()==""?
+                   Image.asset("assets/images/noImg.png", fit: BoxFit.cover,
+                     width: double.infinity,) :
+                Image.network(userModel!=null? Constant.base_url+'/uploaded/matri/coverpic/'+userModel.coverPic.toString() :'',
+                  fit: BoxFit.cover,
+                  width: double.infinity,
+                  /*   color: Colors.black.withOpacity(0.4),
             colorBlendMode: BlendMode.darken,*/
-              height: 300,
+                  height: 300,
+                ),
+                if (showMenu)
+                  Positioned(
+                    top: 80,
+                    right: 20,
+                    child: Material(
+                      color: Colors.transparent,
+                      child: Container(
+                        padding: EdgeInsets.symmetric(vertical: 8),
+                        width: 150,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(8),
+                          boxShadow: [
+                            BoxShadow(color: Colors.black26, blurRadius: 5),
+                          ],
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            /*ListTile(
+                              leading: Icon(Icons.block, color: Colors.red),
+                              title: Text("Block"),
+                              onTap: () {
+                                setState(() {
+                                  showMenu = false;
+                                });
+                                print("User blocked");
+                              },
+                            ),*/
+                            ListTile(
+                              leading: Icon(Icons.report, color: Colors.orange),
+                              title: Text("Report"),
+                              onTap: () {
+                                setState(() {
+                                  showMenu = false;
+                                });
+                                _showReportDialog(context);
+                                print("User reported");
+                              },
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+              ],
             ),
             backgroundColor: Colors.transparent,
 
@@ -193,68 +251,69 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
             margin: EdgeInsets.only(bottom: 0.0, top: 0.0),
             child: Column(
               children: [
-                Container(
-                    height: 110,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                        image: DecorationImage(
-                          colorFilter: new ColorFilter.mode(Colors.black.withOpacity(0.8), BlendMode.darken),
-                          image:  AssetImage("assets/images/bg.png"),
-                          fit: BoxFit.cover,
-                        )
-                    ),
-                    /* padding: EdgeInsets.symmetric(vertical: 15.0),
-                    margin: EdgeInsets.symmetric(vertical: 15.0),*/
-                    alignment: AlignmentDirectional.centerStart,
-                    child: Row(
-                      children: [
-                        Container(
-                          height: 70,
-                            width: 70,
-                          decoration: BoxDecoration(
-                              border: Border.all(color: Colors.white, width: 0.5),
-                              borderRadius: BorderRadius.all(
-                          Radius.circular(40.0) //                 <--- border radius here
-                    ),
-                          ),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(40.0),
-                            child: Image.network(userModel!=null? Constant.base_url+'/uploaded/matri/profilepic/'+userModel.profilePic.toString() :'',
 
-                                 /* fit: BoxFit.cover,*/
-                                 ),
+                Container(
+                  height: 110,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.8), BlendMode.darken),
+                      image: AssetImage("assets/images/bg.png"),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  child: Row(
+                    children: [
+                      // Profile Pic Section
+                      Container(
+                        height: 70,
+                        width: 70,
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.white, width: 0.5),
+                          borderRadius: BorderRadius.circular(40.0),
+                        ),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(40.0),
+                          child: Image.network(
+                            userModel != null
+                                ? Constant.base_url + '/uploaded/matri/profilepic/' + userModel.profilePic.toString()
+                                : '',
+                            fit: BoxFit.cover,
                           ),
                         ),
-                        SizedBox(
-                          width: 10.0,
-                        ),
-                        Expanded(
-                          flex: 5,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(userModel!=null? userModel.fName.toString()+' '+userModel.lName.toString():'',
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                  letterSpacing: 0.5,
-                                ),
+                      ),
+                      SizedBox(width: 10.0),
+
+                      // Name and Shortlist
+                      Expanded(
+                        flex: 5,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              userModel != null
+                                  ? userModel.fName.toString() + ' ' + userModel.lName.toString()
+                                  : '',
+                              style: TextStyle(
+                                fontSize: 20,
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                letterSpacing: 0.5,
                               ),
-                              SizedBox(
-                                height: 10.0,
-                              ),
-                              isUserShorted=="Yes"?Container(): GestureDetector(
-                                onTap: () {
-                                  isUserShorted=="Yes"?
-                                  deleteToShortlist():
-                                      addToShortlist();
-                                },
-                                child:  Container(
+                            ),
+                            SizedBox(height: 10.0),
+                            isUserShorted == "Yes"
+                                ? Container()
+                                : GestureDetector(
+                              onTap: () {
+                                isUserShorted == "Yes"
+                                    ? deleteToShortlist()
+                                    : addToShortlist();
+                              },
+                              child: Container(
                                 alignment: Alignment.center,
-                                height: size.height * 0.055,
-                                margin: EdgeInsets.only(bottom: 3.0),
+                                height: 40,
                                 width: 120.0,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
@@ -263,22 +322,28 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                   Icon(Icons.star_outline_rounded,color: Colors.white,size: 15,),
-
-                                    Text( "Shortlist",
+                                    Icon(Icons.star_outline_rounded, color: Colors.white, size: 15),
+                                    SizedBox(width: 5),
+                                    Text(
+                                      "Shortlist",
                                       style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 14.0,
-                                          letterSpacing: 1.0),
+                                        color: Colors.white,
+                                        fontSize: 14.0,
+                                        letterSpacing: 1.0,
+                                      ),
                                     ),
                                   ],
                                 ),
-                              ),)
-                            ],
-                          ),
+                              ),
+                            )
+                          ],
                         ),
-                      ],
-                    )),
+                      ),
+
+
+                    ],
+                  ),
+                ),
                 Container(
                   padding: EdgeInsets.symmetric(vertical: 15.0),
                   color: Colors.white,
@@ -598,7 +663,8 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
             ),
 
           ),
-        ),)
+        )
+      )
       ,
     );
   }
@@ -1617,6 +1683,70 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
 
         ],),
       ),
+    );
+  }
+  void _showReportDialog(BuildContext context) {
+    String? selectedReason;
+    List<String> reportReasons = [
+      "Fake profile",
+      "Abusive behavior",
+      "Inappropriate photos",
+      "Harassment",
+      "Spamming",
+    ];
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("Report User"),
+          content: StatefulBuilder(
+            builder: (BuildContext context, StateSetter setState) {
+              return Column(
+                mainAxisSize: MainAxisSize.min,
+                children: reportReasons.map((reason) {
+                  return RadioListTile<String>(
+                    activeColor: Colors.red,
+                    title: Text(reason),
+                    value: reason,
+                    groupValue: selectedReason,
+                    onChanged: (value) {
+                      setState(() {
+                        selectedReason = value;
+                      });
+                    },
+                  );
+                }).toList(),
+              );
+            },
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(); // Close the dialog
+              },
+              child: Text("Cancel"),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                if (selectedReason != null) {
+                  Navigator.of(context).pop(); // Close the dialog
+                  // Do something with the selectedReason, like call an API
+                  print("User reported for: $selectedReason");
+                  // Optionally show confirmation
+                  CommonFunctions.showSuccessToast("User is reported");
+
+                } else {
+
+                  CommonFunctions.showSuccessToast("Please select a reason.");
+                }
+              },
+              style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+              child: Text("Submit",style: TextStyle(color: Colors.white),),
+            ),
+          ],
+        );
+      },
     );
   }
 
