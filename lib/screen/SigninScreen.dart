@@ -9,6 +9,8 @@ import 'package:agraseva/utils/constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import '../widgets/drawer.dart';
+import '../widgets/preLoginDrawer.dart';
 import 'ForgotPasswordScreen.dart';
 import 'SignupScreen.dart';
 
@@ -22,6 +24,8 @@ class _SigninScreenState extends State<SigninScreen> {
   final _userMobile = TextEditingController();
   final _password = TextEditingController();
   List<Result>? memberList = <Result>[];
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+
   @override
   void initState() {
     super.initState();
@@ -35,9 +39,11 @@ class _SigninScreenState extends State<SigninScreen> {
     ]);
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      body: Container(
+      key: _scaffoldKey,
+      drawer: new PreLoginDrawer(),
 
-        decoration: BoxDecoration(
+      body: Container(
+        decoration: const BoxDecoration(
             image: DecorationImage(
               image:  AssetImage("assets/images/bg.png"),
               fit: BoxFit.cover,
@@ -49,15 +55,36 @@ class _SigninScreenState extends State<SigninScreen> {
               flex: 2,
               child: Container(
                 alignment: Alignment.center,
-                child:Center(
-                    child: Text(
+                child:Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        IconButton(
+                          icon: Icon(
+                            Icons.menu,
+                            size: 30,
+                            color: Colors.white,
+                          ),
+                          onPressed: () {
+                            _scaffoldKey.currentState?.openDrawer();
+                          },
+                        ),
+                      ],
+                    ),
+                    Text(
                       "Agraseva",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           fontSize: 30,
                           color: Colors.white,
                           fontWeight: FontWeight.bold),
-                    )),
+                    ),
+                    SizedBox(width: 40,),
+
+                  ],
+                ),
               ),
             ),
             Expanded(
@@ -82,10 +109,10 @@ class _SigninScreenState extends State<SigninScreen> {
                             child: Column(
                               children: [
                                 SizedBox(height: 20),
-                                Align(
+                                const Align(
                                   alignment: Alignment.center,
                                   child: Padding(
-                                    padding: const EdgeInsets.only(
+                                    padding: EdgeInsets.only(
                                       left: 0.0,
                                     ),
                                     child: Row(
@@ -101,10 +128,10 @@ class _SigninScreenState extends State<SigninScreen> {
                                     ),
                                   ),
                                 ),
-                                Align(
+                                const Align(
                                   alignment: Alignment.center,
                                   child: Padding(
-                                    padding: const EdgeInsets.only(top: 10.0
+                                    padding: EdgeInsets.only(top: 10.0
                                     ),
                                     child: Text("Please enter your login details",
                                       style: TextStyle(fontSize: 14, color: Colors.black54),),
@@ -113,11 +140,11 @@ class _SigninScreenState extends State<SigninScreen> {
                                 SizedBox(height: 20),
                                 Container(
                                   margin: EdgeInsets.only( left: 0.0, right: 0.0, ),
-                                  padding: EdgeInsets.only(
+                                  padding: const EdgeInsets.only(
                                     left: 10.0,
                                     right: 10.0,
                                   ),
-                                    decoration: BoxDecoration(
+                                    decoration: const BoxDecoration(
                                       shape: BoxShape.rectangle,
                                       color: Colors.white,
                                       borderRadius: BorderRadius.all(
@@ -130,7 +157,7 @@ class _SigninScreenState extends State<SigninScreen> {
                                     ),
                                   child: TextFormField(
                                           controller: _userMobile,
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                              /* fontFamily: "segoeregular",*/
                                               fontSize: 14,
                                               color: Color(0xff191847)
@@ -173,7 +200,7 @@ class _SigninScreenState extends State<SigninScreen> {
                                           fontSize: 14,
                                           color: Color(0xff191847)
                                       ),
-                                      decoration: InputDecoration(
+                                      decoration: const InputDecoration(
                                         hintText: 'Password',
                                         border: InputBorder.none,
                                           icon: Icon(
@@ -191,7 +218,7 @@ class _SigninScreenState extends State<SigninScreen> {
                                   alignment: Alignment.centerRight,
                                   child: GestureDetector(
                                   onTap: () => Navigator.push(context, MaterialPageRoute(builder : (context) => ForgotPasswordScreen())),
-                                    child: Row(
+                                    child: const Row(
                                       mainAxisAlignment: MainAxisAlignment.end,
                                       children: [
                                         Text(
@@ -394,6 +421,7 @@ class _SigninScreenState extends State<SigninScreen> {
       print("Exception: $e");
     }
   }*/
+
 
 }
 

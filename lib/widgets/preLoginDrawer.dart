@@ -2,7 +2,11 @@ import 'package:agraseva/responseModel/DrawerModel.dart';
 import 'package:agraseva/screen/ContactusScreen.dart';
 import 'package:agraseva/screen/PaymentScreen.dart';
 import 'package:agraseva/screen/SigninScreen.dart';
+import 'package:agraseva/screen/SignupScreen.dart';
 import 'package:agraseva/screen/SuccessStoryListScreen.dart';
+import 'package:agraseva/screen/social/GetSocialMemeberListScreen.dart';
+import 'package:agraseva/screen/social/aboutAgrasewaScreen.dart';
+import 'package:agraseva/screen/social/newEventScreen.dart';
 import 'package:agraseva/screen/socialMemberSignUpScreen.dart';
 import 'package:agraseva/utils/constant.dart';
 import 'package:flutter/cupertino.dart';
@@ -18,32 +22,32 @@ import '../screen/report_user.dart';
 import '../utils/CustomCachedImage.dart';
 import '../utils/common_functions.dart';
 
-class MyDrawer extends StatefulWidget {
+class PreLoginDrawer extends StatefulWidget {
   @override
-  _MyDrawerState createState() => _MyDrawerState();
+  _PreLoginDrawerState createState() => _PreLoginDrawerState();
 }
 
-class _MyDrawerState extends State<MyDrawer> {
+class _PreLoginDrawerState extends State<PreLoginDrawer> {
   List<DrawerModel> drawerItemList = [
     new DrawerModel(
-        title: 'Home',
+        title: 'About Agraseva',
         position: '0',
         icon: "assets/images/home_two.png",
         selected: false),
     new DrawerModel(
-        title: 'Search',
+        title: 'Member Sign',
         position: '1',
-        icon: "assets/images/search.png",
+        icon: "assets/images/login.png",
         selected: false),
     new DrawerModel(
-        title: 'My Shortlist',
+        title: 'Member Sign Up',
         position: '2',
         icon: "assets/images/my_shortlist.png",
         selected: false),
     new DrawerModel(
-        title: 'Who visit',
+        title: 'News & Events',
         position: '3',
-        icon: "assets/images/who_visit_two.png",
+        icon: "assets/images/event.png",
         selected: false),
     new DrawerModel(
         title: 'Success Story',
@@ -57,12 +61,12 @@ class _MyDrawerState extends State<MyDrawer> {
         icon: "assets/images/gallery.png",
         selected: false),
     new DrawerModel(
-        title: 'Payment',
+        title: 'Social Members',
         position: '6',
         icon: "assets/images/payment.png",
         selected: false),
     new DrawerModel(
-        title: 'Social Register',
+        title: 'Add Social Member',
         position: '7',
         icon: "assets/images/success_story.png",
         selected: false),
@@ -99,71 +103,33 @@ class _MyDrawerState extends State<MyDrawer> {
                       size: 25,
                     )),
               )),
-          Container(
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage("assets/images/ractangle_bg_red.png"),
-                  /* fit: BoxFit.cover,*/
+          Padding(
+            padding: const EdgeInsets.only(top: 18.0),
+            child: Container(
+              height: 50,
+                width: double.infinity,
+                decoration: const BoxDecoration(
+                 /* image: DecorationImage(
+                    image: AssetImage("assets/images/ractangle_bg_red.png"),
+                    *//* fit: BoxFit.cover,*//*
+                  ),*/
+                   shape: BoxShape.rectangle,
+                  color: kRedColor,
+                  borderRadius: BorderRadius.all(Radius.circular(5)),
+                   //   bottomLeft: Radius.circular(25.0),
+                   //   bottomRight: Radius.circular(25.0)),
                 ),
-                /*  shape: BoxShape.rectangle,
-                color: kRedColor,
-                borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(25.0),
-                    bottomRight: Radius.circular(25.0)),*/
-              ),
-              child: Column(
-                children: [
-                  const SizedBox(
-                    height: 0,
+                child: Center(
+                  child: Text(
+                    "Welcome to Agraseva",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold),
                   ),
-                  Row(
-                    children: [
-                       Padding(
-                        padding: EdgeInsets.only(
-                            left: 20.0, top: 20.0, right: 10.0, bottom: 10.0),
-                        child: CircleAvatar(
-                          radius: 30.0,
-                         /* backgroundImage:
-
-                          NetworkImage(profilePic),*/
-                          child: ClipOval(
-                            child: CustomCachedImage(
-                              imageUrl: profilePic,
-                              width: MediaQuery.of(context).size.width,
-                              height: 70,
-                              borderRadius: BorderRadius.circular(12),
-
-                            ),
-                          ),
-                        ),
-                      ),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          Text(Constant.prefs!.getString("name").toString(),
-                              style: const TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 16)),
-                          const SizedBox(
-                            height: 5,
-                          ),
-                          Text(Constant.prefs!.getString("contact").toString(),
-                              style: const TextStyle(
-                                  color: Colors.white, fontSize: 14))
-                        ],
-                      )
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                ],
-              )),
+                )),
+          ),
           Container(
             height: 370,
             child: ListView.builder(
@@ -210,7 +176,7 @@ class _MyDrawerState extends State<MyDrawer> {
                                       child: Row(
                                         mainAxisAlignment: MainAxisAlignment.start,
                                         crossAxisAlignment:
-                                            CrossAxisAlignment.center,
+                                        CrossAxisAlignment.center,
                                         children: <Widget>[
                                           Image.asset(
                                             drawerItemList[index].icon!,
@@ -218,7 +184,7 @@ class _MyDrawerState extends State<MyDrawer> {
                                             height: 20,
                                           ),
                                           const SizedBox(
-                                            width: 15,
+                                            width: 10,
                                           ),
                                           Text(
                                             drawerItemList[index].title!,
@@ -257,7 +223,7 @@ class _MyDrawerState extends State<MyDrawer> {
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     crossAxisAlignment:
-                                        CrossAxisAlignment.center,
+                                    CrossAxisAlignment.center,
                                     children: <Widget>[
                                       Image.asset(
                                         drawerItemList[index].icon!,
@@ -303,14 +269,13 @@ class _MyDrawerState extends State<MyDrawer> {
                       }
                       print("OnClick :  ${drawerItemList[index].selected}");
                       if (index == 0) {
-                        Navigator.pushReplacement(context, MaterialPageRoute(
-                            builder: (BuildContext context) =>
-                                HomeScreen(FROM: "HOME",)));
+                        Navigator.of(context).push(MaterialPageRoute(builder:
+                            (context) {return AboutAgraSewaScreen();}));
                       } else if (index == 1) {
-                        if(Constant.prefs!.getString("userStatus").toString()!='0'){
-                          Navigator.pushReplacement(context, MaterialPageRoute(
-                              builder: (BuildContext context) =>
-                                  HomeScreen(FROM: "SEARCH",)));
+                            Navigator.of(context)
+                                .push(MaterialPageRoute(builder: (context) {
+                            return SigninScreen();
+                            }));
                         }else{
                           CommonFunctions.showSuccessToast("Admin Approval Required");
                         }
@@ -318,20 +283,20 @@ class _MyDrawerState extends State<MyDrawer> {
                             builder: (BuildContext context) =>
                                 HomeScreen(FROM: "SEARCH",)));*/
 
-                      } else if (index == 2) {
+                       if (index == 2) {
                         if(Constant.prefs!.getString("userStatus").toString()!='0'){
-                          Navigator.pushReplacement(context, MaterialPageRoute(
-                              builder: (BuildContext context) =>
-                                  HomeScreen(FROM: "SHORTLIST",)));
+                          Navigator.of(context)
+                              .push(MaterialPageRoute(builder: (context) {
+                            return SignupScreen();
+                          }));
                         }else{
                           CommonFunctions.showSuccessToast("Admin Approval Required");
                         }
                       } else if (index == 3) {
 
                         if(Constant.prefs!.getString("userStatus").toString()!='0'){
-                          Navigator.pushReplacement(context, MaterialPageRoute(
-                              builder: (BuildContext context) =>
-                                  HomeScreen(FROM: "WHOVISIT",)));
+                          Navigator.push(context, MaterialPageRoute(builder:
+                              (BuildContext context) => NewAndEventScreen()));
                         }else{
                           CommonFunctions.showSuccessToast("Admin Approval Required");
                         }
@@ -346,9 +311,8 @@ class _MyDrawerState extends State<MyDrawer> {
                           return GalleryScreen();
                         }));
                       }else if (index == 6) {
-                        Navigator.of(context)
-                            .push(MaterialPageRoute(builder: (context) {
-                          return PaymentScreen();
+                        Navigator.of(context).push(MaterialPageRoute(builder: (context)
+                        {return GetsocialMemeberListScreen();
                         }));
                       }
                       else if (index == 7) {
@@ -511,7 +475,7 @@ class _MyDrawerState extends State<MyDrawer> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
                     Image.asset(
-                      "assets/images/faq.png",
+                      "assets/images/privacy.png",
                       color: Colors.white,
                       height: 20,
                     ),
@@ -557,178 +521,8 @@ class _MyDrawerState extends State<MyDrawer> {
           ///Privacy
 
           //Account deelte
-          GestureDetector(
-            onTap: () {
-              setState(() {
-                isAcDelete=true;
-                isFaq = false;
-                isAboutUs = true;
-                isContactUs = false;
-                isLogout = false;
-                isPrivacy=false;
-                isReportUser=false;
-                Navigator.push(context, MaterialPageRoute(
-                    builder: (BuildContext context) =>
-                        DeleteAccountScreen()));
-              });
-
-            },
-            child: isAcDelete?Align(
-              alignment: Alignment.topLeft,
-              child: Container(
-               width: size.width/2,
-                margin: const EdgeInsets.only(left: 20.0, right: 20.0, bottom: 20),
-                padding: const EdgeInsets.only(left: 10.0, right: 10.0, bottom: 10, top: 10),
-                decoration: const BoxDecoration(
-                  shape: BoxShape.rectangle,
-                  gradient: LinearGradient(
-                    begin: Alignment.topRight,
-                    end: Alignment.bottomLeft,
-                    stops: [0.1, 0.5, 0.7, 0.9],
-                    colors: [
-                      darkRedColor,
-                      kRed2Color,
-                      kRed2Color,
-                      kRedColor,
-                    ],
-                  ),
-                  borderRadius: BorderRadius.all(Radius.circular(25.0)),
-                ),
-                child:Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    Icon(
-                      Icons.account_balance_wallet_outlined,
-                      color: Colors.white,
-                      size: 20,
-                    ),
-                    const SizedBox(
-                      width: 15,
-                    ),
-                    Text(
-                      "Account Deletion",
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 14,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ):
-            Container(
-              margin: const EdgeInsets.only(left: 20.0, right: 20.0, bottom: 20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Icon(
-                    Icons.account_balance_wallet_outlined,
-                    color: kRedColor,
-                    size: 20,
-                  ),
-                  const SizedBox(
-                    width: 15,
-                  ),
-                  Text(
-                    "Account Deletion",
-                    style: const TextStyle(
-                      color: Colors.black,
-                      fontSize: 14,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
 
           //Report user
-          GestureDetector(
-            onTap: () {
-              setState(() {
-                isReportUser=true;
-                isAcDelete=false;
-                isFaq = false;
-                isAboutUs = true;
-                isContactUs = false;
-                isLogout = false;
-                isPrivacy=false;
-                Navigator.push(context, MaterialPageRoute(
-                    builder: (BuildContext context) =>
-                        ReportUserScreen()));
-              });
-
-            },
-            child: isReportUser?Align(
-              alignment: Alignment.topLeft,
-              child: Container(
-                width: size.width/2,
-                margin: const EdgeInsets.only(left: 20.0, right: 20.0, bottom: 20),
-                padding: const EdgeInsets.only(left: 10.0, right: 10.0, bottom: 10, top: 10),
-                decoration: const BoxDecoration(
-                  shape: BoxShape.rectangle,
-                  gradient: LinearGradient(
-                    begin: Alignment.topRight,
-                    end: Alignment.bottomLeft,
-                    stops: [0.1, 0.5, 0.7, 0.9],
-                    colors: [
-                      darkRedColor,
-                      kRed2Color,
-                      kRed2Color,
-                      kRedColor,
-                    ],
-                  ),
-                  borderRadius: BorderRadius.all(Radius.circular(25.0)),
-                ),
-                child:Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    Icon(
-                      Icons.account_balance_wallet_outlined,
-                      color: Colors.white,
-                      size: 20,
-                    ),
-                    const SizedBox(
-                      width: 15,
-                    ),
-                    Text(
-                      "Report A User",
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 14,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ):
-            Container(
-              margin: const EdgeInsets.only(left: 20.0, right: 20.0, bottom: 20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Icon(
-                    Icons.account_balance_wallet_outlined,
-                    color: kRedColor,
-                    size: 20,
-                  ),
-                  const SizedBox(
-                    width: 15,
-                  ),
-                  Text(
-                    "Report A User",
-                    style: const TextStyle(
-                      color: Colors.black,
-                      fontSize: 14,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
 
           GestureDetector(
             onTap: () {
@@ -747,7 +541,7 @@ class _MyDrawerState extends State<MyDrawer> {
             child: isContactUs?Align(
               alignment: Alignment.topLeft,
               child: Container(
-               width: size.width/2,
+                width: size.width/2,
                 margin: const EdgeInsets.only(left: 20.0, right: 20.0, bottom: 20),
                 padding: const EdgeInsets.only(left: 10.0, right: 10.0, bottom: 10, top: 10),
                 decoration: const BoxDecoration(
@@ -815,75 +609,6 @@ class _MyDrawerState extends State<MyDrawer> {
           ),
 
 
-          GestureDetector(
-            onTap: () {
-              isLogout = !isLogout;
-              Constant.prefs!.setBool("loggedIn", false);
-              Constant.prefs!.clear();
-              Navigator.pushAndRemoveUntil<dynamic>(
-                context,
-                MaterialPageRoute<dynamic>(
-                  builder: (BuildContext context) => SigninScreen(),
-                ),
-                (route) =>
-                    false, //if you want to disable back feature set to false
-              );
-            },
-            child: isLogout?Container(
-              margin: const EdgeInsets.only(left: 20.0, right: 20.0, bottom: 0),
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage("assets/images/ractangle_bg_two.png"),
-                ),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Icon(
-                    Icons.logout,
-                    color: kRedColor,
-                    size: 20,
-                  ),
-                  const SizedBox(
-                    width: 15,
-                  ),
-                  Text(
-                    "Logout",
-                    style: const TextStyle(
-                      color: Colors.black,
-                      fontSize: 14,
-                    ),
-                  ),
-                ],
-              ),
-            ):
-            Container(
-              margin: const EdgeInsets.only(left: 20.0, right: 20.0, bottom: 0),
-
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Icon(
-                    Icons.logout,
-                    color: kRedColor,
-                    size: 20,
-                  ),
-                  const SizedBox(
-                    width: 15,
-                  ),
-                  Text(
-                    "Logout",
-                    style: const TextStyle(
-                      color: Colors.black,
-                      fontSize: 14,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
           Image.asset(
             "assets/images/drawer_footer.png",
           ),
@@ -922,65 +647,65 @@ class DrawerItem extends StatelessWidget {
       },
       child: (isCurrentIndexSelected!)
           ? Container(
-              child: Padding(
-                padding: const EdgeInsets.only(left: 15.0, top: 20),
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Icon(
-                          icon,
-                          color: const Color(0xFFff9cad),
-                          size: 30,
-                        ),
-                        const SizedBox(
-                          width: 15,
-                        ),
-                        Text(
-                          title!,
-                          style: const TextStyle(
-                              color: Colors.black,
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+        child: Padding(
+          padding: const EdgeInsets.only(left: 15.0, top: 20),
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Icon(
+                    icon,
+                    color: const Color(0xFFff9cad),
+                    size: 30,
+                  ),
+                  const SizedBox(
+                    width: 15,
+                  ),
+                  Text(
+                    title!,
+                    style: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ],
               ),
-            )
+            ],
+          ),
+        ),
+      )
           : Container(
-              child: Padding(
-                padding: const EdgeInsets.only(left: 15.0, top: 20),
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Icon(
-                          icon,
-                          color: Colors.grey,
-                          size: 30,
-                        ),
-                        const SizedBox(
-                          width: 15,
-                        ),
-                        Text(
-                          title!,
-                          style: const TextStyle(
-                              color: Colors.grey,
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+        child: Padding(
+          padding: const EdgeInsets.only(left: 15.0, top: 20),
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Icon(
+                    icon,
+                    color: Colors.grey,
+                    size: 30,
+                  ),
+                  const SizedBox(
+                    width: 15,
+                  ),
+                  Text(
+                    title!,
+                    style: const TextStyle(
+                        color: Colors.grey,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ],
               ),
-            ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
