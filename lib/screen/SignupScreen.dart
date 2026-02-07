@@ -17,12 +17,16 @@ import 'package:flutter/services.dart';
 
 import 'package:http/http.dart' as http;
 
+import '../widgets/preLoginDrawer.dart';
+
 class SignupScreen extends StatefulWidget {
   @override
   _SignupScreenState createState() => _SignupScreenState();
 }
 
 class _SignupScreenState extends State<SignupScreen> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+
   int isGender = 1;
   bool isTermCheck = false;
   bool isLoading = false;
@@ -48,6 +52,7 @@ class _SignupScreenState extends State<SignupScreen> {
   final _userAddress = TextEditingController();
   final _password = TextEditingController();
   final _passwordComfirm = TextEditingController();
+
   @override
   void initState() {
     super.initState();
@@ -197,7 +202,8 @@ class _SignupScreenState extends State<SignupScreen> {
 
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-
+      key: _scaffoldKey,
+      drawer: new PreLoginDrawer(),
       body: Container(
         decoration: BoxDecoration(
             image: DecorationImage(
@@ -211,15 +217,36 @@ class _SignupScreenState extends State<SignupScreen> {
               flex: 2,
               child: Container(
                 alignment: Alignment.center,
-                child:Center(
-                    child: Text(
+                child:Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        IconButton(
+                          icon: Icon(
+                            Icons.menu,
+                            size: 30,
+                            color: Colors.white,
+                          ),
+                          onPressed: () {
+                            _scaffoldKey.currentState?.openDrawer();
+                          },
+                        ),
+                      ],
+                    ),
+                    Text(
                       "Agraseva",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           fontSize: 30,
                           color: Colors.white,
                           fontWeight: FontWeight.bold),
-                    )),
+                    ),
+                    SizedBox(width: 40,),
+
+                  ],
+                ),
               ),
             ),
             Expanded(
@@ -926,27 +953,6 @@ class _SignupScreenState extends State<SignupScreen> {
                             ),
                             SizedBox(height: 20),
 
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  "Have an account?",
-                                  style: TextStyle(
-                                    color: Color(0xFF666666),
-                                    fontSize: 14,
-                                  ),
-                                ),
-                                GestureDetector(
-                                  onTap: () => Navigator.pushReplacement(context, MaterialPageRoute(builder : (context) => SigninScreen())),
-                                  child: Text(
-                                    "    Signin",
-                                    style: TextStyle(
-                                      color: kRedColor,
-                                      fontSize: 14,),
-                                  ),
-                                ),
-                              ],
-                            ),
                           ],
                         ),
                       ),

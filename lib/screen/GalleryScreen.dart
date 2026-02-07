@@ -149,7 +149,7 @@ class FeaturedItem extends StatelessWidget {
             ),
           ],
         ),
-        margin: EdgeInsets.only(left: 3.0, right: 3.0, bottom: 8.0),
+        margin: EdgeInsets.only(left: 3.0, right: 3.0, bottom: 5.0),
         child: Column(
           children: [
             Column(

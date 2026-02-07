@@ -56,11 +56,13 @@ class _MyDrawerState extends State<MyDrawer> {
         position: '5',
         icon: "assets/images/gallery.png",
         selected: false),
+
     new DrawerModel(
         title: 'Payment',
         position: '6',
         icon: "assets/images/payment.png",
         selected: false),
+
     new DrawerModel(
         title: 'Social Register',
         position: '7',

@@ -279,6 +279,7 @@ class _SigninScreenState extends State<SigninScreen> {
 
                           SizedBox(height: 20),
 
+/*
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -300,6 +301,7 @@ class _SigninScreenState extends State<SigninScreen> {
                               ),
                             ],
                           ),
+*/
 
                           //SizedBox(height: size.height*0.03),
                         ],

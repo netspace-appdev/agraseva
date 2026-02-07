@@ -11,7 +11,9 @@ import 'package:agraseva/screen/socialMemberSignUpScreen.dart';
 import 'package:agraseva/utils/constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
+import '../controller/newsEventController.dart';
 import '../screen/AboutusScreen.dart';
 import '../screen/GalleryScreen.dart';
 import '../screen/HomeScreen.dart';
@@ -35,12 +37,12 @@ class _PreLoginDrawerState extends State<PreLoginDrawer> {
         icon: "assets/images/home_two.png",
         selected: false),
     new DrawerModel(
-        title: 'Member Sign',
+        title: 'Member SigIn',
         position: '1',
         icon: "assets/images/login.png",
         selected: false),
     new DrawerModel(
-        title: 'Member Sign Up',
+        title: 'Member Registration',
         position: '2',
         icon: "assets/images/my_shortlist.png",
         selected: false),
@@ -145,7 +147,7 @@ class _PreLoginDrawerState extends State<PreLoginDrawer> {
                     child:Align(
                       alignment: Alignment.topLeft,
                       child: Container(
-                        width: size.width/2,
+                        width: size.width/1.5,
                         height: 40,
                         margin: const EdgeInsets.only(left: 20.0, right: 20.0, bottom: 20),
                         padding: const EdgeInsets.only(left: 10.0, right: 10.0, bottom: 10, top: 10),
@@ -295,6 +297,9 @@ class _PreLoginDrawerState extends State<PreLoginDrawer> {
                       } else if (index == 3) {
 
                         if(Constant.prefs!.getString("userStatus").toString()!='0'){
+                          NewsEventController newsEventController = Get.put(NewsEventController());
+                          newsEventController.getNewsAndEventResponse()
+                          ;
                           Navigator.push(context, MaterialPageRoute(builder:
                               (BuildContext context) => NewAndEventScreen()));
                         }else{

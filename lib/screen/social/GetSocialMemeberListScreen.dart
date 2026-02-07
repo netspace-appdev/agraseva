@@ -1,24 +1,16 @@
 import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart'as http;
-
-import 'dart:convert';
-
 import 'package:agraseva/responseModel/member_list_model.dart';
 import 'package:agraseva/utils/common_functions.dart';
 import 'package:agraseva/utils/constant.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import '../../responseModel/GetSocialListResponse.dart';
+import 'package:agraseva/responseModel/GetSocialListResponse.dart' as social;
 
-import 'package:http/http.dart' as http;
-import '../../responseModel/member_list_model.dart';
-import '../../utils/common_functions.dart';
-import '../../utils/constant.dart';
-import '../UserDetailScreen.dart';
+import 'SocialMemberDetailScreen.dart';
+
 
 class GetsocialMemeberListScreen extends StatefulWidget {
   const GetsocialMemeberListScreen({super.key});
@@ -28,7 +20,8 @@ class GetsocialMemeberListScreen extends StatefulWidget {
 }
 
 class _GetsocialMemeberListScreenState extends State<GetsocialMemeberListScreen> {
-  List<Result>? memberList = <Result>[];
+
+  List<social.Result>? memberList = <social.Result>[];
 
   bool isLoading = false;
 
@@ -42,10 +35,45 @@ class _GetsocialMemeberListScreenState extends State<GetsocialMemeberListScreen>
       this.getMemberList();
     });
   }
+  Future<void> getMemberList() async {
+    setState(() => isLoading = true);
 
+    final uri = Uri.parse(
+        '${Constant.base_url}/agraapi/GetSocialMemberLists');
+
+    final body = {
+      'ProfileID': Constant.prefs!.getString("ProfileID") ?? '',
+    };
+
+    try {
+      final response = await http.post(uri, body: body);
+
+      final jsonData = json.decode(response.body);
+
+      if (response.statusCode == 200 &&
+          jsonData['response_code'] == 200) {
+
+        final socialList =
+        GetSocialListResponse.fromJson(jsonData);
+
+        setState(() {
+          memberList = socialList.result ?? [];
+          isLoading = false;
+        });
+      } else {
+        setState(() => isLoading = false);
+        CommonFunctions.showSuccessToast(jsonData['message']);
+      }
+    } catch (e) {
+      setState(() => isLoading = false);
+      CommonFunctions.showSuccessToast("Something went wrong");
+    }
+  }
+
+/*
   Future<http.Response?> getMemberList() async {
     CommonFunctions.showLoader(true, context);
-    final uri = Uri.parse(Constant.base_url + '/agraapi/GetWhoVisitList');
+    final uri = Uri.parse(Constant.base_url + '/agraapi/GetSocialMemberLists');
     Map<String, String> body = {
       'ProfileID': Constant.prefs!.getString("ProfileID").toString(),
     };
@@ -61,13 +89,14 @@ class _GetsocialMemeberListScreenState extends State<GetsocialMemeberListScreen>
         var map = Map<String, dynamic>.from(jsonData);
         var modelData = MemberListModel.fromJson(map);
         memberList = modelData.result;
-        print("memberListsize:  " + memberList!.length.toString());
+        print("memberListsize:  ${memberList!.length}");
       } else {
         print(jsonData['message'] as String);
         CommonFunctions.showSuccessToast(jsonData['message'] as String);
       }
     });
   }
+*/
 
   @override
   Widget build(BuildContext context) {
@@ -90,7 +119,7 @@ class _GetsocialMemeberListScreenState extends State<GetsocialMemeberListScreen>
         leading: Row(
           children: [
             IconButton(
-              icon: Icon(
+              icon: const Icon(
                 Icons.arrow_back_ios_rounded,
                 color: Colors.white,
               ),
@@ -100,35 +129,31 @@ class _GetsocialMemeberListScreenState extends State<GetsocialMemeberListScreen>
             ),
           ],
         ),
-        shape: RoundedRectangleBorder(
+        shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(
               bottom: Radius.circular(20),
             )),
       ),
 
       body: Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
               color: Colors.white
           ),
           padding: const EdgeInsets.only(bottom: 0.0,top: 0,right: 0),
 
-          child: Container(
-
-
-            child: GridView.builder(
-              itemCount: memberList!.length,
-              itemBuilder: (context, index) {
-                return FeaturedItem(
-                  result: memberList![index],
-                );
-              },
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                childAspectRatio: 0.63,
-              ),
-              shrinkWrap: false,
-              /*physics: NeverScrollableScrollPhysics(),*/
+          child: GridView.builder(
+            itemCount: memberList!.length,
+            itemBuilder: (context, index) {
+              return FeaturedItem(
+                result: memberList![index],
+              );
+            },
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              childAspectRatio: 0.55,
             ),
+            shrinkWrap: false,
+            /*physics: NeverScrollableScrollPhysics(),*/
           )),
     );
   }
@@ -138,11 +163,11 @@ class _GetsocialMemeberListScreenState extends State<GetsocialMemeberListScreen>
       padding: const EdgeInsets.all(15.0),
       child: Column(
         children: [
-          Align(
+          const Align(
               alignment: Alignment.centerRight,
               child: Icon(Icons.close_outlined, color: Colors.black38)),
 
-          Column(
+          const Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -164,7 +189,7 @@ class _GetsocialMemeberListScreenState extends State<GetsocialMemeberListScreen>
               left: 10.0,
               right: 10.0,
             ),
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               shape: BoxShape.rectangle,
               color: Colors.white,
               borderRadius: BorderRadius.all(
@@ -219,19 +244,19 @@ class FeaturedItem extends StatelessWidget {
     required this.result,
   }) : super(key: key);
 
-  final Result result;
+  final social.Result result;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () async {
         Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-          return UserDetailScreen(profileID: result.mId,);
+          return SocialMemberDetailScreen(profileID: result.id,);
         }));
       },
       child: Container(
         /*height: 280.0,*/
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(15)),
           color: Colors.white,
           boxShadow: [
@@ -243,7 +268,7 @@ class FeaturedItem extends StatelessWidget {
             ),
           ],
         ),
-        margin: EdgeInsets.only(left: 3.0, right: 3.0, bottom: 8.0),
+        margin: EdgeInsets.only(left: 3.0, right: 3.0, bottom: 5.0),
         child: Column(
           children: [
             Expanded(
@@ -257,16 +282,35 @@ class FeaturedItem extends StatelessWidget {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(15.0),
                         child: Image.network(
-                            Constant.base_url +
-                                '/uploaded/matri/' +
-                                result.profilePic.toString(),
-                            /*color: Colors.black.withOpacity(0.1),
-                                    colorBlendMode: BlendMode.darken,*/
+                          '${Constant.base_url}/${result.profilePhoto}',
+                          height: 120,
+                          width: MediaQuery.of(context).size.width,
+                          fit: BoxFit.cover,
 
-                            height: 120,
-                            width: MediaQuery.of(context).size.width),
+                          // ✅ Loader while image loads
+                          loadingBuilder: (context, child, loadingProgress) {
+                            if (loadingProgress == null) return child;
+                            return const Center(
+                              child: CircularProgressIndicator(strokeWidth: 2),
+                            );
+                          },
+
+                          // ✅ Error image if URL fails
+                          errorBuilder: (context, error, stackTrace) {
+                            return Container(
+                              color: Colors.grey.shade200,
+                              alignment: Alignment.center,
+                              child: const Icon(
+                                Icons.image,
+                                size: 50,
+                                color: Colors.grey,
+                              ),
+                            );
+                          },
+                        ),
                       ),
                     ),
+
                   ),
                   SizedBox(height: 5),
                   Padding(
@@ -274,11 +318,11 @@ class FeaturedItem extends StatelessWidget {
                     child: Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
-                          result.fName.toString() +
-                              ' ' +
-                              result.lName.toString(),
+                          result.name.toString(),
+                             // ' ' +
+                            //  result.lName.toString(),
                           maxLines: 1,
-                          style: TextStyle(
+                          style: const TextStyle(
                               color: kTextBlackColor,
                               fontSize: 14,
                               letterSpacing: 0.1,
@@ -293,17 +337,16 @@ class FeaturedItem extends StatelessWidget {
                       alignment: Alignment.centerLeft,
                       child: Row(
                         children: [
-                          Text('Education: ',
+                          const Text('Mobile: ',
                               maxLines: 1,
                               style: TextStyle(
                                 color:  Colors.black,
                                 fontSize: 12,
                                 letterSpacing: 0.1,
                               )), Text(
-                              ' ' +
-                                  result.education.toString(),
+                              ' ' + result.mobileNumber.toString(),
                               maxLines: 1,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: kTextGreyColor,
                                 fontSize: 12,
                                 letterSpacing: 0.1,
@@ -319,26 +362,30 @@ class FeaturedItem extends StatelessWidget {
                     child: Align(
                       alignment: Alignment.centerLeft,
 
-                      child:  Row(
+                      child:  Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text('Height: ',
+                          const Text('City-',
                               maxLines: 1,
                               style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 12,
                                 letterSpacing: 0.1,
                                 height: 1.2,
-                              )), Text(
-                              ' ' +
-                                  result.height2.toString(),
+                              )),
+                          Text(
+                              result.cityName.toString(),
                               maxLines: 1,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: kTextGreyColor,
                                 fontSize: 12,
                                 letterSpacing: 0.1,
                                 height: 1.2,
                               )),
-                          Text('   Age: ',
+                          SizedBox(height: 5),
+
+                          const Text('State:',
                               maxLines: 1,
                               style: TextStyle(
                                 color: Colors.black,
@@ -346,10 +393,9 @@ class FeaturedItem extends StatelessWidget {
                                 letterSpacing: 0.1,
                                 height: 1.2,
                               )), Text(
-                              ' ' +
-                                  result.age.toString(),
+                              result.stateName.toString(),
                               maxLines: 1,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: kTextGreyColor,
                                 fontSize: 12,
                                 letterSpacing: 0.1,
@@ -359,15 +405,15 @@ class FeaturedItem extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(height: 5),
+                  SizedBox(height: 0),
+/*
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child: Align(
                       alignment: Alignment.centerLeft,
 
                       child:Text(
-                          '' +
-                              result.maritialname.toString(),
+                          '' + result.maritialname.toString(),
                           maxLines: 1,
                           style: TextStyle(
                             color: Colors.black,
@@ -377,6 +423,7 @@ class FeaturedItem extends StatelessWidget {
                           )),
                     ),
                   ),
+*/
                   SizedBox(height: 5),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -394,7 +441,7 @@ class FeaturedItem extends StatelessWidget {
                                 height: 1.2,
                               )), Text(
                               'AGRS' +
-                                  result.mId.toString(),
+                                  result.id.toString(),
                               maxLines: 1,
                               style: TextStyle(
                                   color: kRedColor,
@@ -413,7 +460,7 @@ class FeaturedItem extends StatelessWidget {
               child: GestureDetector(
                 onTap: () {
                   Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-                    return UserDetailScreen(profileID: result.mId,);
+                    return SocialMemberDetailScreen(profileID: result.id,);
                   }));
                 },
                 child: Container(
