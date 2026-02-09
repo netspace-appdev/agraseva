@@ -8,12 +8,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 import '../helper.dart';
+import '../responseModel/GetSocialListResponse.dart';
 import '../responseModel/city_list_model.dart';
 import '../responseModel/gotra_list_model.dart';
 import '../responseModel/state_list_model.dart';
 
 class SocialMemberSignupController extends GetxController{
   var socialLoginResponse = Rxn<SocialLoginResponse>(); //
+  var getSocialListResponse = Rxn<GetSocialListResponse>(); //
 
   String base64Image = '';
 
@@ -158,6 +160,27 @@ class SocialMemberSignupController extends GetxController{
   Future<String> fileToBase64(File file) async {
     final bytes = await file.readAsBytes();
     return base64Encode(bytes);
+  }
+
+  Future <void> getSocialMemberDetailById({String? id}) async {
+    try {
+      isLoading(true);
+
+      var data = await SocialRegister.getSocialMemberDetailByIdApi(id!);
+      getSocialListResponse.value = GetSocialListResponse.fromJson(data);
+
+      if (getSocialListResponse.value?.responseCode== 200) {
+        isLoading(false);
+
+      } else {
+        ToastMessage.msg(data['message'] ?? AppText.somethingWentWrong);
+      }
+    } catch (e) {
+      print("Error in updateBankerDetailApi: $e");
+      ToastMessage.msg(AppText.somethingWentWrong);
+    } finally {
+      isLoading(false);
+    }
   }
 
 

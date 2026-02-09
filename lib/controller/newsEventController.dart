@@ -32,4 +32,27 @@ class NewsEventController extends GetxController {
     }
 
   }
+
+  Future <void> getNewsAndEventResponseById(String? id) async {
+    try {
+      isLoading(true);
+
+      var data = await SocialRegister.getNewsAndEventByIdApi(id!);
+      getNewsAndEventsListResponse.value = GetNewsAndEventsListResponse.fromJson(data);
+
+      if (getNewsAndEventsListResponse.value?.responseCode== 200) {
+        isLoading(false);
+
+      } else {
+        ToastMessage.msg(data['message'] ?? AppText.somethingWentWrong);
+      }
+    } catch (e) {
+      print("Error in updateBankerDetailApi: $e");
+      ToastMessage.msg(AppText.somethingWentWrong);
+    } finally {
+      isLoading(false);
+    }
+
+  }
+
 }

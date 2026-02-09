@@ -1,4 +1,5 @@
 import 'package:agraseva/responseModel/GetNewsAndEventsListResponse.dart';
+import 'package:agraseva/screen/social/newsEventDetailScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -40,21 +41,21 @@ class NewAndEventScreen extends StatelessWidget {
          }
 
          if (newsEventController.getNewsAndEventsListResponse.value?.result?.length==0) {
-           return const Center(child: Text('No News Found'));
+           return const Center(child: Text('No News Event Found'));
          }
 
          return ListView.builder(
            padding: const EdgeInsets.all(12),
            itemCount: newsEventController.getNewsAndEventsListResponse.value?.result?.length,
            itemBuilder: (context, index) {
-             return _eventCard(newsEventController.getNewsAndEventsListResponse.value?.result?[index]);
+             return _eventCard(newsEventController.getNewsAndEventsListResponse.value?.result?[index],context);
            },
          );
        }),
      );
    }
 
-   Widget _eventCard(Result? result) {
+   Widget _eventCard(Result? result, BuildContext context) {
      return Card(
        margin: const EdgeInsets.only(bottom: 16),
        shape: RoundedRectangleBorder(
@@ -105,12 +106,19 @@ class NewAndEventScreen extends StatelessWidget {
 
                  const SizedBox(height: 12),
 
-                 const Text(
-                   'READ MORE >',
-                   style: TextStyle(
-                     fontSize: 14,
-                     fontWeight: FontWeight.bold,
-                     color: Colors.red,
+                 InkWell(
+                   onTap: (){
+                     newsEventController.getNewsAndEventResponseById(result?.newsId);
+                     Navigator.push(context, MaterialPageRoute(builder:
+                         (BuildContext context) => NewEventDetailScreen()));
+                   },
+                   child: const Text(
+                     'READ MORE >',
+                     style: TextStyle(
+                       fontSize: 14,
+                       fontWeight: FontWeight.bold,
+                       color: Colors.red,
+                     ),
                    ),
                  ),
                ],

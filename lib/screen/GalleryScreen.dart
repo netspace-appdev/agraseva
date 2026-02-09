@@ -129,11 +129,11 @@ class FeaturedItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () async {
-        showImage(
-            Constant.base_url + '/admin/images/' + result.image.toString(),
-            list,
-            i,
-            context);
+        print("OnClick : ${ Constant.base_url +
+            '/admin/images/' +
+            result.image.toString()}");
+        showImageDialog(
+            Constant.base_url + '/admin/images/' + result.image.toString(),context);
       },
       child: Container(
         /*height: 280.0,*/
@@ -188,42 +188,116 @@ class FeaturedItem extends StatelessWidget {
       ),
     );
   }
-
-  static void showImage(
-      String imageString, List<Result>? list, int ind, BuildContext context) {
+  static void showImageDialog(String imageUrl,BuildContext context, ) {
     showDialog(
       context: context,
-      builder: (ctx) => Container(
-        child: ListView.builder(
-          itemCount: list!.length,
-          scrollDirection: Axis.horizontal,
-          itemBuilder: (context, index) {
-            Container contianer;
-          /*  if (index == 0) {
-              index = ind;
-            }*/
+      barrierDismissible: true,
+      barrierColor: Colors.black54,
+      builder: (_) {
+        return Dialog(
+          backgroundColor: Colors.transparent,
+          insetPadding: const EdgeInsets.symmetric(horizontal: 24),
+          child: Container(
+            padding: const EdgeInsets.all(0),
+            decoration: BoxDecoration(
+              color:  Colors.transparent, // soft pink like image
+              borderRadius: BorderRadius.circular(18),
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                /// 🔹 Image
+                Align(
+                  alignment: Alignment.topRight,
+                  child: GestureDetector(
+                    onTap: () => Navigator.pop(context),
+                    child: Container(
+                      margin: const EdgeInsets.all(8),
+                      height: 36,
+                      width: 36,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        shape: BoxShape.circle,
+                        boxShadow: const [
+                          BoxShadow(
+                            color: Colors.black12,
+                            blurRadius: 4,
+                            offset: Offset(0, 2),
+                          ),
+                        ],
+                      ),
+                      child: const Icon(Icons.close, size: 20),
+                    ),
+                  ),
+                ),
+                  ClipRRect(
+                  borderRadius: BorderRadius.circular(12),
+                  child: Image.network(
+                    imageUrl,
+                    height: 180,
+                    width: double.infinity,
+                    fit: BoxFit.cover,
+                    errorBuilder: (_, __, ___) => Container(
+                      height: 180,
+                      color: Colors.grey.shade300,
+                      child: const Icon(Icons.image, size: 60),
+                    ),
+                  ),
+                ),
 
-            contianer = Container(
-              margin: EdgeInsets.only(left: 3.0, right: 3.0, bottom: 8.0),
-              child: Image.network(
-                Constant.base_url +
-                    '/admin/images/' +
-                    list[index].image.toString(),
-                height: MediaQuery.of(context).size.width,
-                width: MediaQuery.of(context).size.width,
-              ),
-            );
-            return GestureDetector(
-              onTap: () {
-                print("OnClick : ");
-              },
-              child: contianer,
-            );
-          },
-          shrinkWrap: false,
-          /*physics: NeverScrollableScrollPhysics(),*/
-        ),
-      ),
+                const SizedBox(height: 14),
+
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
+
+  static void showImage(
+      String imageUrl,
+      BuildContext context,
+      ) {
+    showDialog(
+      context: context,
+      barrierColor: Colors.black,
+      builder: (_) {
+        return Dialog(
+          insetPadding: EdgeInsets.zero,
+          backgroundColor: Colors.black,
+          child: Stack(
+            children: [
+              Center(
+                child: InteractiveViewer(
+                  child: Image.network(
+                    imageUrl,
+                    fit: BoxFit.contain,
+                    width: double.infinity,
+                    height: double.infinity,
+                    errorBuilder: (_, __, ___) => const Icon(
+                      Icons.broken_image,
+                      color: Colors.white,
+                      size: 80,
+                    ),
+                  ),
+                ),
+              ),
+
+              /// ❌ Close button
+              Positioned(
+                top: 40,
+                right: 20,
+                child: IconButton(
+                  icon: const Icon(Icons.close, color: Colors.white, size: 28),
+                  onPressed: () => Navigator.pop(context),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
 }

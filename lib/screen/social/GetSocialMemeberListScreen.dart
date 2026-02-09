@@ -2,10 +2,13 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:http/http.dart'as http;
 import 'package:agraseva/responseModel/member_list_model.dart';
 import 'package:agraseva/utils/common_functions.dart';
 import 'package:agraseva/utils/constant.dart';
+import '../../controller/socialMemberSignUpController.dart';
 import '../../responseModel/GetSocialListResponse.dart';
 import 'package:agraseva/responseModel/GetSocialListResponse.dart' as social;
 
@@ -20,6 +23,7 @@ class GetsocialMemeberListScreen extends StatefulWidget {
 }
 
 class _GetsocialMemeberListScreenState extends State<GetsocialMemeberListScreen> {
+
 
   List<social.Result>? memberList = <social.Result>[];
 
@@ -136,30 +140,28 @@ class _GetsocialMemeberListScreenState extends State<GetsocialMemeberListScreen>
       ),
 
       body: Container(
+       // height: 300,
           decoration: const BoxDecoration(
               color: Colors.white
           ),
           padding: const EdgeInsets.only(bottom: 0.0,top: 0,right: 0),
 
-          child: GridView.builder(
+          child: ListView.builder(
             itemCount: memberList!.length,
             itemBuilder: (context, index) {
               return FeaturedItem(
                 result: memberList![index],
               );
             },
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              childAspectRatio: 0.55,
-            ),
-            shrinkWrap: false,
+
+            shrinkWrap: true,
             /*physics: NeverScrollableScrollPhysics(),*/
           )),
     );
   }
   Widget bottomsheet() {
     return new Scaffold(body:Container(
-      height: 350,
+     // height: 350,
       padding: const EdgeInsets.all(15.0),
       child: Column(
         children: [
@@ -239,261 +241,183 @@ class _GetsocialMemeberListScreenState extends State<GetsocialMemeberListScreen>
 }
 
 class FeaturedItem extends StatelessWidget {
-  const FeaturedItem({
+  FeaturedItem({
     Key? key,
     required this.result,
   }) : super(key: key);
 
   final social.Result result;
+  final SocialMemberSignupController controller =
+  Get.put(SocialMemberSignupController());
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () async {
-        Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-          return SocialMemberDetailScreen(profileID: result.id,);
-        }));
+      onTap: () {
+        controller.getSocialMemberDetailById(id: result.id);
+      //  Navigator.push(context, MaterialPageRoute(builder: (_) => SocialMemberDetailScreen()),);
       },
       child: Container(
-        /*height: 280.0,*/
-        decoration: const BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(15)),
+        margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+        padding: const EdgeInsets.all(12),
+        decoration: BoxDecoration(
           color: Colors.white,
-          boxShadow: [
+          borderRadius: BorderRadius.circular(16),
+          boxShadow: const [
             BoxShadow(
               color: Colors.black12,
-              offset: Offset(0.0, 0.3), //(x,y)
-              spreadRadius: 0.0,
-              blurRadius: 2.0,
-            ),
+              blurRadius: 6,
+              offset: Offset(0, 3),
+            )
           ],
         ),
-        margin: EdgeInsets.only(left: 3.0, right: 3.0, bottom: 5.0),
-        child: Column(
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            /// PROFILE IMAGE
+            ClipRRect(
+              borderRadius: BorderRadius.circular(14),
+              child: Image.network(
+                '${Constant.base_url}/${result.profilePhoto}',
+                height: 130,
+                width: 90,
+                fit: BoxFit.cover,
+                loadingBuilder: (context, child, loadingProgress) {
+                  if (loadingProgress == null) return child;
+                  return const SizedBox(
+                    height: 130,
+                    width: 90,
+                    child: Center(
+                      child: CircularProgressIndicator(strokeWidth: 2),
+                    ),
+                  );
+                },
+                errorBuilder: (_, __, ___) {
+                  return Container(
+                    height: 100,
+                    width: 90,
+                    color: Colors.grey.shade200,
+                    child: const Icon(Icons.person, size: 40),
+                  );
+                },
+              ),
+            ),
+
+            const SizedBox(width: 12),
+
+            /// DETAILS
             Expanded(
-              flex: 6,
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                      height: 120,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(15.0),
-                        child: Image.network(
-                          '${Constant.base_url}/${result.profilePhoto}',
-                          height: 120,
-                          width: MediaQuery.of(context).size.width,
-                          fit: BoxFit.cover,
-
-                          // ✅ Loader while image loads
-                          loadingBuilder: (context, child, loadingProgress) {
-                            if (loadingProgress == null) return child;
-                            return const Center(
-                              child: CircularProgressIndicator(strokeWidth: 2),
-                            );
-                          },
-
-                          // ✅ Error image if URL fails
-                          errorBuilder: (context, error, stackTrace) {
-                            return Container(
-                              color: Colors.grey.shade200,
-                              alignment: Alignment.center,
-                              child: const Icon(
-                                Icons.image,
-                                size: 50,
-                                color: Colors.grey,
-                              ),
-                            );
-                          },
-                        ),
-                      ),
-                    ),
-
-                  ),
-                  SizedBox(height: 5),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                          result.name.toString(),
-                             // ' ' +
-                            //  result.lName.toString(),
-                          maxLines: 1,
-                          style: const TextStyle(
-                              color: kTextBlackColor,
-                              fontSize: 14,
-                              letterSpacing: 0.1,
-                              height: 1.2,
-                              fontWeight: FontWeight.bold)),
+                  /// NAME
+                  Text(
+                    result.name ?? '',
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: kTextBlackColor,
                     ),
                   ),
-                  SizedBox(height: 5),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: Row(
-                        children: [
-                          const Text('Mobile: ',
-                              maxLines: 1,
-                              style: TextStyle(
-                                color:  Colors.black,
-                                fontSize: 12,
-                                letterSpacing: 0.1,
-                              )), Text(
-                              ' ' + result.mobileNumber.toString(),
-                              maxLines: 1,
-                              style: const TextStyle(
-                                color: kTextGreyColor,
-                                fontSize: 12,
-                                letterSpacing: 0.1,
-                                height: 1.2,
-                              )),
-                        ],
-                      ),
+                  const SizedBox(height: 4),
+
+                  _infoRow(Icons.phone, result.mobileNumber),
+                  _infoRow(Icons.date_range, result.dOB),
+                  _infoRow(
+                    Icons.work,
+                    buildFullAddress(
+                      address: result.jobType,
+                      city: result.jobDetails,
                     ),
                   ),
-                  SizedBox(height: 5),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-
-                      child:  Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text('City-',
-                              maxLines: 1,
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 12,
-                                letterSpacing: 0.1,
-                                height: 1.2,
-                              )),
-                          Text(
-                              result.cityName.toString(),
-                              maxLines: 1,
-                              style: const TextStyle(
-                                color: kTextGreyColor,
-                                fontSize: 12,
-                                letterSpacing: 0.1,
-                                height: 1.2,
-                              )),
-                          SizedBox(height: 5),
-
-                          const Text('State:',
-                              maxLines: 1,
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 12,
-                                letterSpacing: 0.1,
-                                height: 1.2,
-                              )), Text(
-                              result.stateName.toString(),
-                              maxLines: 1,
-                              style: const TextStyle(
-                                color: kTextGreyColor,
-                                fontSize: 12,
-                                letterSpacing: 0.1,
-                                height: 1.2,
-                              )),
-                        ],
-                      ),
+                  _infoRow(
+                     Icons.location_on,
+                     buildFullAddress(
+                      address: result.address,
+                      city: result.cityName,
+                      state: result.stateName,
                     ),
                   ),
-                  SizedBox(height: 0),
-/*
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: Align(
-                      alignment: Alignment.centerLeft,
 
-                      child:Text(
-                          '' + result.maritialname.toString(),
-                          maxLines: 1,
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 12,
-                            letterSpacing: 0.1,
-                            height: 1.2,
-                          )),
-                    ),
+                /*  const SizedBox(height: 4),
+                  _infoRow(
+                    "Job",
+                    "${result.jobType ?? ''} - ${result.jobDetails ?? ''}",
                   ),
-*/
-                  SizedBox(height: 5),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: Align(
-                      alignment: Alignment.centerLeft,
 
-                      child:  Row(
-                        children: [
-                          Text('Id: ',
-                              maxLines: 1,
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 12,
-                                letterSpacing: 0.1,
-                                height: 1.2,
-                              )), Text(
-                              'AGRS' +
-                                  result.id.toString(),
-                              maxLines: 1,
-                              style: TextStyle(
-                                  color: kRedColor,
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w800
-                              )) ,
-                        ],
-                      ),
+                  const SizedBox(height: 4),
+                  _infoRow(
+                    "Location",
+                  ),*/
+
+                //  const SizedBox(height: 6),
+
+                  /// ID
+                  Text(
+                    "ID: ASSM${result.id}",
+                    style: const TextStyle(
+                      color: kRedColor,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w700,
                     ),
                   ),
                 ],
               ),
             ),
-            Expanded(
-              flex: 1,
-              child: GestureDetector(
-                onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-                    return SocialMemberDetailScreen(profileID: result.id,);
-                  }));
-                },
-                child: Container(
-                  height: 30,
-                  margin: EdgeInsets.only(top: 5),
-                  decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(15),
-                        bottomRight: Radius.circular(15)),
-                    color: Colors.orangeAccent,
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
-                      Text(
-                        "View Profile",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 12.0,
-                            letterSpacing: 1.0),
-                      ),
-                      Icon(
-                        Icons.arrow_forward_rounded,
-                        color: Colors.white,
-                        size: 15,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            )
+
+            /// VIEW BUTTON
           ],
         ),
+      ),
+    );
+  }
+  String buildFullAddress({
+    String? address,
+    String? city,
+    String? state,
+  }) {
+    final parts = <String>[];
+
+    if (address != null && address.isNotEmpty) parts.add(address);
+    if (city != null && city.isNotEmpty) parts.add(city);
+    if (state != null && state.isNotEmpty) parts.add(state);
+
+    return parts.join(', ');
+  }
+
+  /// Reusable text row
+  Widget _infoRow(IconData icon,String? value
+  //{
+  //  required IconData icon,
+  //  required String? value,
+  //}
+  ) {
+    if (value == null || value.isEmpty) return const SizedBox();
+
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 6),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Icon(
+            icon,
+            size: 16,
+            color: kRedColor,
+          ),
+          const SizedBox(width: 6),
+          Expanded(
+            child: Text(
+              value,
+              style: const TextStyle(
+                fontSize: 12,
+                color: kTextGreyColor,
+                height: 1.3,
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

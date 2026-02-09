@@ -13,6 +13,8 @@ class SocialRegister{
 
   static final String SocialMemberSave = 'https://www.agraseva.com/agraapi/SocialMemberSave';
   static final String NewsAndEventResponse = 'https://www.agraseva.com/agraapi/GetNewsList';
+  static final String NewsAndEventResponsebyId = 'https://www.agraseva.com/agraapi/GetNewsList';
+  static final String SocialMemberResponsebyId = 'https://www.agraseva.com/agraapi/GetSocialMemberLists';
 
  /*static Future<Map<String, dynamic>> addSocialDetailApi({
     required String Name,
@@ -146,6 +148,60 @@ class SocialRegister{
 
       Helper.ApiReq('NewsAndEventResponse', request.fields);
       Helper.ApiRes('NewsAndEventResponse', response.body);
+
+      if (response.statusCode == 200) {
+        return jsonDecode(response.body);
+      } else {
+        throw Exception('Failed: ${response.statusCode}');
+      }
+    } catch (e) {
+      throw Exception('Error while submitting: $e');
+    }
+  }
+
+  static Future<Map<String, dynamic>> getNewsAndEventByIdApi(String id) async {
+    try {
+      final headers = await MyHeader.getHeaders2();
+
+      var request = http.MultipartRequest(
+        'POST',
+        Uri.parse(NewsAndEventResponsebyId),
+      );
+
+      request.fields['Id'] = id;
+
+      final streamedResponse = await request.send();
+      final response = await http.Response.fromStream(streamedResponse);
+
+      Helper.ApiReq('NewsAndEventResponse', request.fields);
+      Helper.ApiRes('NewsAndEventResponse', response.body);
+
+      if (response.statusCode == 200) {
+        return jsonDecode(response.body);
+      } else {
+        throw Exception('Failed: ${response.statusCode}');
+      }
+    } catch (e) {
+      throw Exception('Error while submitting: $e');
+    }
+  }
+
+  static Future<Map<String, dynamic>> getSocialMemberDetailByIdApi(String id) async {
+    try {
+      final headers = await MyHeader.getHeaders2();
+
+      var request = http.MultipartRequest(
+        'POST',
+        Uri.parse(SocialMemberResponsebyId),
+      );
+
+      request.fields['Id'] = id;
+
+      final streamedResponse = await request.send();
+      final response = await http.Response.fromStream(streamedResponse);
+
+      Helper.ApiReq('SocialMemberResponsebyId', request.fields);
+      Helper.ApiRes('SocialMemberResponsebyId', response.body);
 
       if (response.statusCode == 200) {
         return jsonDecode(response.body);

@@ -37,7 +37,7 @@ class _PreLoginDrawerState extends State<PreLoginDrawer> {
         icon: "assets/images/home_two.png",
         selected: false),
     new DrawerModel(
-        title: 'Member SigIn',
+        title: 'Member Login',
         position: '1',
         icon: "assets/images/login.png",
         selected: false),
@@ -292,7 +292,7 @@ class _PreLoginDrawerState extends State<PreLoginDrawer> {
                             return SignupScreen();
                           }));
                         }else{
-                          CommonFunctions.showSuccessToast("Admin Approval Required");
+                         // CommonFunctions.showSuccessToast("Admin Approval Required");
                         }
                       } else if (index == 3) {
 
@@ -303,7 +303,7 @@ class _PreLoginDrawerState extends State<PreLoginDrawer> {
                           Navigator.push(context, MaterialPageRoute(builder:
                               (BuildContext context) => NewAndEventScreen()));
                         }else{
-                          CommonFunctions.showSuccessToast("Admin Approval Required");
+                        //  CommonFunctions.showSuccessToast("Admin Approval Required");
                         }
                       } else if (index == 4) {
                         Navigator.of(context)
