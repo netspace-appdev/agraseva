@@ -1,5 +1,6 @@
 
 import 'package:agraseva/screen/SplashScreen.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -9,6 +10,8 @@ import 'utils/constant.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Constant.prefs = await SharedPreferences.getInstance();
+ // await Firebase.initializeApp();
+
   runApp(const MyApp());
 }
 

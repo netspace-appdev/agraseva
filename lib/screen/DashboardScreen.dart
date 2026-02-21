@@ -176,6 +176,17 @@ String payNow = "";
                             ),
                           ),
                           SizedBox(
+                            height: 5.0,
+                          ),
+                          Text(payNow+'Member'??'',
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: Colors.white,
+                              fontWeight: FontWeight.normal,
+                              letterSpacing: 0.5,
+                            ),
+                          ),
+                          SizedBox(
                             height: 10.0,
                           ),
 
@@ -341,7 +352,7 @@ String payNow = "";
                         child: Scrollbar(
                           child: SingleChildScrollView(
                             child: Container(
-                              child:   Text('Update for you',
+                              child:   const Text('Update for you',
                                 style: TextStyle(
                                   fontSize: 22,
                                   color: Colors.black,
@@ -358,7 +369,7 @@ String payNow = "";
                           decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(10),
-                            boxShadow: [
+                            boxShadow: const [
                               BoxShadow(
                                 color: Colors.black12,
                                 blurRadius: 0.1,

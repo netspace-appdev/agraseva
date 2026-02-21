@@ -358,7 +358,7 @@ class FeaturedItem extends StatelessWidget {
                   Text(
                     "ID: ASSM${result.id}",
                     style: const TextStyle(
-                      color: kRedColor,
+                      color: kTextBlackColor,
                       fontSize: 12,
                       fontWeight: FontWeight.w700,
                     ),
@@ -404,7 +404,7 @@ class FeaturedItem extends StatelessWidget {
           Icon(
             icon,
             size: 16,
-            color: kRedColor,
+            color: kTextBlackColor,
           ),
           const SizedBox(width: 6),
           Expanded(

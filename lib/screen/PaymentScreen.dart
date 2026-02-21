@@ -113,7 +113,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                             child: Align(
                               alignment: Alignment.centerLeft,
                               child: Text(
-                                "Govind Mittal",
+                                "Agraseva Matrimonial",
                                 style: TextStyle(
                                   color: Colors.black,
                                   fontWeight: FontWeight.w700,
@@ -146,7 +146,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                             child: Align(
                               alignment: Alignment.centerLeft,
                               child: Text(
-                                "57710100010304",
+                                "120100000456106",
                                 style: TextStyle(
                                   color: Colors.black,
                                   fontWeight: FontWeight.w700,
@@ -179,7 +179,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                             child: Align(
                               alignment: Alignment.centerLeft,
                               child: Text(
-                                "BARB0VEDUJJ",
+                                "TJSB0000179",
                                 style: TextStyle(
                                   color: Colors.black,
                                   fontWeight: FontWeight.w700,
@@ -190,8 +190,41 @@ class _PaymentScreenState extends State<PaymentScreen> {
                       ],
                     ),
                     SizedBox(
-                      height: 25,
+                      height: 15,
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                          flex: 1,
+                          child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              "Bank Name",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 14.0,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                            flex: 2,
+                            child: Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text(
+                                "TJSB Sahkari Bank limited ",
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 14.0,
+                                ),
+                              ),
+                            )),
+                      ],
                     ),//UPI TRANSFER
+                    SizedBox(
+                      height: 25,
+                    ),
                     Align(
                       alignment: Alignment.centerLeft,
                       child: Text(

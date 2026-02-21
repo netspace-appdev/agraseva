@@ -1,13 +1,20 @@
 import 'package:agraseva/responseModel/DrawerModel.dart';
+import 'package:agraseva/responseModel/GetNewsAndEventsListResponse.dart';
 import 'package:agraseva/screen/ContactusScreen.dart';
 import 'package:agraseva/screen/PaymentScreen.dart';
 import 'package:agraseva/screen/SigninScreen.dart';
 import 'package:agraseva/screen/SuccessStoryListScreen.dart';
+import 'package:agraseva/screen/social/GetSocialMemeberListScreen.dart';
+import 'package:agraseva/screen/social/newEventScreen.dart';
+import 'package:agraseva/screen/social/newsEventDetailScreen.dart';
 import 'package:agraseva/screen/socialMemberSignUpScreen.dart';
 import 'package:agraseva/utils/constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
+import '../controller/newsEventController.dart';
 import '../screen/AboutusScreen.dart';
 import '../screen/GalleryScreen.dart';
 import '../screen/HomeScreen.dart';
@@ -15,6 +22,7 @@ import '../screen/TermsConditionScreen.dart';
 import '../screen/delete_your_account_screen.dart';
 import '../screen/privacy_policy_screen.dart';
 import '../screen/report_user.dart';
+import '../screen/social/aboutAgrasewaScreen.dart';
 import '../utils/CustomCachedImage.dart';
 import '../utils/common_functions.dart';
 
@@ -25,6 +33,7 @@ class MyDrawer extends StatefulWidget {
 
 class _MyDrawerState extends State<MyDrawer> {
   List<DrawerModel> drawerItemList = [
+
     new DrawerModel(
         title: 'Home',
         position: '0',
@@ -64,9 +73,25 @@ class _MyDrawerState extends State<MyDrawer> {
         selected: false),
 
     new DrawerModel(
-        title: 'Social Register',
+        title: 'Social Members',
         position: '7',
+        icon: "assets/images/payment.png",
+        selected: false),
+
+    new DrawerModel(
+        title: 'Add Social Member',
+        position: '8',
         icon: "assets/images/success_story.png",
+        selected: false),
+    new DrawerModel(
+        title: 'About Agraseva',
+        position: '9',
+        icon: "assets/images/home_two.png",
+        selected: false),
+    new DrawerModel(
+        title: 'News & Events',
+        position: '10',
+        icon: "assets/images/event.png",
         selected: false),
   ];
 
@@ -168,7 +193,7 @@ class _MyDrawerState extends State<MyDrawer> {
                 ],
               )),
           Container(
-            height: 370,
+            height:  MediaQuery.sizeOf(context).height*0.6,
             child: ListView.builder(
               scrollDirection: Axis.vertical,
               itemCount: drawerItemList.length,
@@ -357,8 +382,24 @@ class _MyDrawerState extends State<MyDrawer> {
                       else if (index == 7) {
                         Navigator.of(context)
                             .push(MaterialPageRoute(builder: (context) {
+                          return GetsocialMemeberListScreen();
+                        }));
+                      }
+                      else if (index == 8) {
+                        Navigator.of(context)
+                            .push(MaterialPageRoute(builder: (context) {
                           return SocialMemberSignupScreen();
                         }));
+                      }
+                     else if (index == 9) {
+                        Navigator.of(context).push(MaterialPageRoute(builder:
+                            (context) {return AboutAgraSewaScreen();}));
+                      }
+                      else if (index == 10) {
+                        NewsEventController newsEventController = Get.put(NewsEventController());
+                        newsEventController.getNewsAndEventResponse();
+                        Navigator.of(context).push(MaterialPageRoute(builder:
+                            (context) {return NewAndEventScreen();}));
                       }
                     });
                   },

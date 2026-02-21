@@ -33,12 +33,15 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
   int currentPos = 0;
   bool showMoreOptions = false;
   bool showMenu = false;
+  String? memberType;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     isLoading = true;
+    memberType = Constant.prefs?.getString("memberType");
+
     Future.delayed(Duration.zero, () {
       this.getMemberList();
     });
@@ -319,7 +322,7 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
                                   borderRadius: BorderRadius.circular(10),
                                   color: kRedColor,
                                 ),
-                                child: Row(
+                                child: const Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Icon(Icons.star_outline_rounded, color: Colors.white, size: 15),
@@ -366,7 +369,7 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(7),
                                 color: kRedColor,
-                                boxShadow: [
+                                boxShadow: const [
                                   BoxShadow(
                                     color: Colors.black12,
                                     blurRadius: 2.0,
@@ -376,7 +379,7 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
                                   )
                                 ],
                               ),
-                              child: Row(
+                              child: const Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Icon(Icons.star_outline_rounded,color: Colors.white,size: 15,),
@@ -398,7 +401,7 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(7),
                                   color: Colors.white,
-                                  boxShadow: [
+                                  boxShadow: const [
                                     BoxShadow(
                                       color: Colors.black12,
                                       blurRadius: 2.0,
@@ -408,7 +411,7 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
                                     )
                                   ]
                               ),
-                              child: Row(
+                              child: const Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Icon(Icons.star_outline_rounded,color: Colors.black,size: 15,),
@@ -440,7 +443,7 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(7),
                                 color: kRedColor,
-                                boxShadow: [
+                                boxShadow: const [
                                   BoxShadow(
                                     color: Colors.black12,
                                     blurRadius: 2.0,
@@ -450,7 +453,7 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
                                   )
                                 ],
                               ),
-                              child: Row(
+                              child: const Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Icon(Icons.photo_camera_back,color: Colors.white,size: 15,),
@@ -472,7 +475,7 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(7),
                                   color: Colors.white,
-                                  boxShadow: [
+                                  boxShadow: const [
                                     BoxShadow(
                                       color: Colors.black12,
                                       blurRadius: 2.0,
@@ -482,7 +485,7 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
                                     )
                                   ]
                               ),
-                              child: Row(
+                              child: const Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Icon(Icons.photo_camera_back,color: Colors.black,size: 15,),
@@ -514,7 +517,7 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(7),
                                 color: kRedColor,
-                                boxShadow: [
+                                boxShadow: const [
                                   BoxShadow(
                                     color: Colors.black12,
                                     blurRadius: 2.0,
@@ -533,7 +536,7 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
                                     height: 15,
                                   ),
                                   SizedBox(width: 5,),
-                                  Text(
+                                  const Text(
                                     "Family",
                                     style: TextStyle(
                                       color: Colors.white,
@@ -550,7 +553,7 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(7),
                                   color: Colors.white,
-                                  boxShadow: [
+                                  boxShadow: const [
                                     BoxShadow(
                                       color: Colors.black12,
                                       blurRadius: 2.0,
@@ -569,7 +572,7 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
                                     height: 15,
                                   ),
                                   SizedBox(width: 5,),
-                                  Text(
+                                  const Text(
                                     "Family",
                                     style: TextStyle(
                                       color: Colors.black,
@@ -596,7 +599,7 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(7),
                                 color: kRedColor,
-                                boxShadow: [
+                                boxShadow: const [
                                   BoxShadow(
                                     color: Colors.black12,
                                     blurRadius: 2.0,
@@ -606,7 +609,7 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
                                   )
                                 ],
                               ),
-                              child: Row(
+                              child: const Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Icon(Icons.wb_sunny,color: Colors.white,size: 15,),
@@ -628,7 +631,7 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(7),
                                   color: Colors.white,
-                                  boxShadow: [
+                                  boxShadow: const [
                                     BoxShadow(
                                       color: Colors.black12,
                                       blurRadius: 2.0,
@@ -638,7 +641,7 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
                                     )
                                   ]
                               ),
-                              child: Row(
+                              child: const Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Icon(Icons.wb_sunny,color: Colors.black,size: 15,),
@@ -752,8 +755,7 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
                           return Container(
                             width: 8.0,
                             height: 8.0,
-                            margin: EdgeInsets.symmetric(
-                                vertical: 10.0, horizontal: 2.0),
+                            margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 2.0),
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               color: currentPos == index
@@ -786,19 +788,22 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
 
             children: [
               SizedBox(height: 15,),
-              Text("Email",
+              const Text("Email",
 
                 style: TextStyle(
                   color: kTextBlackColor,
                   fontSize: 14,),
               ),
               SizedBox(height: 3,),
-              Text(userModel!=null? userModel.email.toString() :'',
-
-                style: TextStyle(
-                    color: kTextBlackColor,
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold),
+              Text(
+                memberType == "Free"
+                    ? "Contact details available for Prime members only"
+                    : (userModel != null ? userModel.email.toString() : ''),
+                style: const TextStyle(
+                  color: kTextBlackColor,
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               Container(
                 width: double.infinity,
@@ -813,20 +818,29 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
 
             children: [
-              Text("Contact mobile number:",
-
+              const Text("Contact mobile number:",
                 style: TextStyle(
                   color: kTextBlackColor,
                   fontSize: 14,),
               ),
               SizedBox(height: 3,),
-              Text(userModel!=null? userModel.contact.toString() :'',
+              Text(
+                memberType == "Free"
+                    ? "Contact details available for Prime members only"
+                    : (userModel != null ? userModel.contact.toString() : ''),
+                style: const TextStyle(
+                  color: kTextBlackColor,
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            /*  Text(userModel!=null? userModel.contact.toString() :'',
 
                 style: TextStyle(
                     color: kTextBlackColor,
                     fontSize: 14,
                     fontWeight: FontWeight.bold),
-              ),
+              ),*/
               Container(
                 width: double.infinity,
                 height: 0.5,
@@ -840,7 +854,7 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
 
             children: [
-              Text("Address:",
+              const Text("Address:",
 
                 style: TextStyle(
                   color: kTextBlackColor,
@@ -849,7 +863,7 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
               SizedBox(height: 3,),
               Text(userModel!=null? userModel.address.toString()+' '+userModel.cityName.toString()+' '+userModel.stateName.toString()+' '+userModel.pincode.toString() :'',
 
-                style: TextStyle(
+                style: const TextStyle(
                     color: kTextBlackColor,
                     fontSize: 14,
                     fontWeight: FontWeight.bold),
@@ -867,8 +881,7 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
 
             children: [
-              Text("Marital status:",
-
+              const Text("Marital status:",
                 style: TextStyle(
                   color: kTextBlackColor,
                   fontSize: 14,),
@@ -876,7 +889,7 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
               SizedBox(height: 3,),
               Text(userModel!=null? userModel.maritialname.toString() :'',
 
-                style: TextStyle(
+                style: const TextStyle(
                     color: kTextBlackColor,
                     fontSize: 14,
                     fontWeight: FontWeight.bold),
@@ -894,7 +907,7 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
 
             children: [
-              Text("Complexion:",
+              const Text("Complexion:",
 
                 style: TextStyle(
                   color: kTextBlackColor,
@@ -903,7 +916,7 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
               SizedBox(height: 3,),
               Text(userModel!=null? userModel.complexion.toString() :'',
 
-                style: TextStyle(
+                style: const TextStyle(
                     color: kTextBlackColor,
                     fontSize: 14,
                     fontWeight: FontWeight.bold),
@@ -921,7 +934,7 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
 
             children: [
-              Text("Age:",
+              const Text("Age:",
 
                 style: TextStyle(
                   color: kTextBlackColor,
@@ -930,7 +943,7 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
               SizedBox(height: 3,),
               Text(userModel!=null? userModel.age.toString()+' Year' :'',
 
-                style: TextStyle(
+                style: const TextStyle(
                     color: kTextBlackColor,
                     fontSize: 14,
                     fontWeight: FontWeight.bold),
@@ -948,7 +961,7 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
 
             children: [
-              Text("Body type:",
+              const Text("Body type:",
 
                 style: TextStyle(
                   color: kTextBlackColor,
@@ -1090,7 +1103,7 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
                   fontSize: 14,),
               ),
               SizedBox(height: 3,),
-              Text(userModel!=null? userModel.education.toString() :'',
+              Text( userModel.education?.toString()??'',
 
                 style: TextStyle(
                     color: kTextBlackColor,
@@ -1117,7 +1130,7 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
                   fontSize: 14,),
               ),
               SizedBox(height: 3,),
-              Text(userModel!=null? userModel.businessName.toString() :'',
+              Text(userModel.businessName?.toString()??'',
 
                 style: TextStyle(
                     color: kTextBlackColor,
@@ -1144,7 +1157,7 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
                   fontSize: 14,),
               ),
               SizedBox(height: 3,),
-              Text(userModel!=null? userModel.income.toString() :'',
+              Text(userModel.income?.toString()??'',
 
                 style: TextStyle(
                     color: kTextBlackColor,

@@ -54,6 +54,8 @@ dependencies:
   path_provider: ^2.0.11   # Add this line
   change_app_package_name: ^1.4.0
   get: ^4.7.2
+  firebase_core: ^3.10.0
+  firebase_analytics: ^11.6.0
 
 
 

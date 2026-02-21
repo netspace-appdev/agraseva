@@ -265,7 +265,7 @@ class _SigninScreenState extends State<SigninScreen> {
                                           "Login",
                                           style: TextStyle(
                                             color: Colors.white,
-                                            fontSize: 14,
+                                            fontSize: 16,
                                             fontWeight: FontWeight.bold
                                           ),
                                         ),
@@ -279,7 +279,7 @@ class _SigninScreenState extends State<SigninScreen> {
 
                           SizedBox(height: 20),
 
-/*
+
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -293,7 +293,7 @@ class _SigninScreenState extends State<SigninScreen> {
                               GestureDetector(
                              onTap: () => Navigator.push(context, MaterialPageRoute(builder : (context) => SignupScreen())),
                                 child: Text(
-                                  "    Signup",
+                                  " Signup",
                                   style: TextStyle(
                                       color: kRedColor,
                                       fontSize: 14,),
@@ -301,7 +301,7 @@ class _SigninScreenState extends State<SigninScreen> {
                               ),
                             ],
                           ),
-*/
+
 
                           //SizedBox(height: size.height*0.03),
                         ],
@@ -349,6 +349,8 @@ class _SigninScreenState extends State<SigninScreen> {
      Constant.prefs?.setString("gotra", memberList![0].gotra!);
      Constant.prefs?.setString("userStatus", memberList![0].status!);
      Constant.prefs?.setString("memberType", memberList![0].memberType!);
+        print('Constant.prefs?.getString("memberType",)${Constant.prefs?.getString("memberType",)}');
+
         Navigator.pushReplacement(context, MaterialPageRoute(
             builder: (BuildContext context) =>
                 HomeScreen()));

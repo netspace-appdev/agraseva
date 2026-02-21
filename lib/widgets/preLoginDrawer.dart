@@ -279,7 +279,7 @@ class _PreLoginDrawerState extends State<PreLoginDrawer> {
                             return SigninScreen();
                             }));
                         }else{
-                          CommonFunctions.showSuccessToast("Admin Approval Required");
+                        //  CommonFunctions.showSuccessToast("Admin Approval Required");
                         }
                         /*Navigator.pushReplacement(context, MaterialPageRoute(
                             builder: (BuildContext context) =>

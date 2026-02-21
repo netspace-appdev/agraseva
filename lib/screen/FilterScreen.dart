@@ -181,70 +181,79 @@ class _FilterScreenState extends State<FilterScreen> {
                       textInputAction: TextInputAction.next,
                       keyboardType: TextInputType.text),
                 ),
-                Container(
-                  margin: EdgeInsets.only(top: 10.0, right: 5.0, left: 5.0),
-                  padding: EdgeInsets.only(
-                    left: 15.0,
-                    right: 15.0,
-                  ),
-                  decoration: BoxDecoration(
-                    shape: BoxShape.rectangle,
-                    color: Colors.white,
-                    borderRadius: BorderRadius.all(Radius.circular(25.0)),
-                    boxShadow: [BoxShadow(
-                      color: Colors.black12,
-                      offset: Offset(0.0, 0.0), //(x,y)
-                      blurRadius: 1.0,
-                    )],
-                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
 
-                  child: TextFormField(
-                    controller: _ageFrom,
-                      style: TextStyle(
-                          fontSize: 14,
-                          color: Colors.black),
-                      decoration: InputDecoration(
-                        hintText: 'Age From',
-                        border: InputBorder.none,
+                  children: [
+                    Container(
+                      width: MediaQuery.of(context).size.width/2.5,
+                      margin: EdgeInsets.only(top: 10.0, right: 5.0, left: 5.0),
+                      padding: EdgeInsets.only(
+                        left: 15.0,
+                        right: 15.0,
                       ),
-                      inputFormatters: [
-                        LengthLimitingTextInputFormatter(3),
-                      ],
-                      textInputAction: TextInputAction.next,
-                      keyboardType: TextInputType.number),
-                ),
-                Container(
-                  margin: EdgeInsets.only(top: 10.0, right: 5.0, left: 5.0),
-                  padding: EdgeInsets.only(
-                    left: 15.0,
-                    right: 15.0,
-                  ),
-                  decoration: BoxDecoration(
-                    shape: BoxShape.rectangle,
-                    color: Colors.white,
-                    borderRadius: BorderRadius.all(Radius.circular(25.0)),
-                    boxShadow: [BoxShadow(
-                      color: Colors.black12,
-                      offset: Offset(0.0, 0.0), //(x,y)
-                      blurRadius: 1.0,
-                    )],
-                  ),
+                      decoration: BoxDecoration(
+                        shape: BoxShape.rectangle,
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(Radius.circular(25.0)),
+                        boxShadow: [BoxShadow(
+                          color: Colors.black12,
+                          offset: Offset(0.0, 0.0), //(x,y)
+                          blurRadius: 1.0,
+                        )],
+                      ),
 
-                  child: TextFormField(
-                    controller: _ageTo,
-                      style: TextStyle(
-                          fontSize: 14,
-                          color: Colors.black),
-                      decoration: InputDecoration(
-                        hintText: 'Age To',
-                        border: InputBorder.none,
+                      child: TextFormField(
+                        controller: _ageFrom,
+                          style: TextStyle(
+                              fontSize: 14,
+                              color: Colors.black),
+                          decoration: const InputDecoration(
+                            hintText: 'Age From',
+                            border: InputBorder.none,
+                          ),
+                          inputFormatters: [
+                            LengthLimitingTextInputFormatter(3),
+                          ],
+                          textInputAction: TextInputAction.next,
+                          keyboardType: TextInputType.number),
+                    ),
+                    Container(
+                      width: MediaQuery.of(context).size.width/2.5,
+                      margin: EdgeInsets.only(top: 10.0, right: 5.0, left: 5.0),
+                      padding: EdgeInsets.only(
+                        left: 15.0,
+                        right: 15.0,
                       ),
-                      inputFormatters: [
-                        LengthLimitingTextInputFormatter(3),
-                      ],
-                      textInputAction: TextInputAction.next,
-                      keyboardType: TextInputType.number),
+                      decoration: const BoxDecoration(
+                        shape: BoxShape.rectangle,
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(Radius.circular(25.0)),
+                        boxShadow: [BoxShadow(
+                          color: Colors.black12,
+                          offset: Offset(0.0, 0.0), //(x,y)
+                          blurRadius: 1.0,
+                        )],
+                      ),
+
+                      child: TextFormField(
+                          controller: _ageTo,
+                          style: TextStyle(
+                              fontSize: 14,
+                              color: Colors.black),
+                          decoration: InputDecoration(
+                            hintText: 'Age To',
+                            border: InputBorder.none,
+                          ),
+                          inputFormatters: [
+                            LengthLimitingTextInputFormatter(3),
+                          ],
+                          textInputAction: TextInputAction.next,
+                          keyboardType: TextInputType.number),
+                    ),
+                  ],
                 ),
+
                 //marital status
                 Container(
                     height: 50,
@@ -364,121 +373,126 @@ class _FilterScreenState extends State<FilterScreen> {
 
                 ),
                 // height from
-                Container(
-                    height: 50,
-                    width:  MediaQuery.of(context).size.width,
-                    margin: EdgeInsets.only( top: 10.0,  right: 5.0, left: 5.0 ),
-                    padding: EdgeInsets.only(
-                      left: 10.0,
-                      right: 10.0,
-                    ),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.rectangle,
-                      color: Colors.white,
-                      borderRadius: BorderRadius.all(
-                          Radius.circular(25.0)),
-                      boxShadow: [BoxShadow(
-                        color: Colors.black12,
-                        offset: Offset(0.0, 0.0), //(x,y)
-                        blurRadius: 2.0,
-                      )],
-                    ),
-                    child:DropdownButton<String>(
-                        isExpanded: true,
-                        icon: Icon(
-                          Icons.keyboard_arrow_down_outlined,
-                          color: Colors.black,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                        height: 50,
+                        width:  MediaQuery.of(context).size.width/2.3,
+                        margin: EdgeInsets.only( top: 10.0,  right: 5.0, left: 5.0 ),
+                        padding: EdgeInsets.only(
+                          left: 10.0,
+                          right: 10.0,
                         ),
-                        iconSize: 25,
-                        value:  heightdropdownValueFrom,
-                        underline: SizedBox(),
-                        onChanged: (String? newValue) {
-                          setState(() {
-                            heightdropdownValueFrom = newValue.toString();
-                            for (var i = 0; i < heightListModel .length; i++) {
-                              if ( heightListModel[i].height == heightdropdownValueFrom) {
-                                heightIdFrom =  heightListModel[i].hId!;
-                                print( heightIdFrom);
-                              }
+                        decoration: BoxDecoration(
+                          shape: BoxShape.rectangle,
+                          color: Colors.white,
+                          borderRadius: BorderRadius.all(
+                              Radius.circular(25.0)),
+                          boxShadow: [BoxShadow(
+                            color: Colors.black12,
+                            offset: Offset(0.0, 0.0), //(x,y)
+                            blurRadius: 2.0,
+                          )],
+                        ),
+                        child:DropdownButton<String>(
+                            isExpanded: true,
+                            icon: Icon(
+                              Icons.keyboard_arrow_down_outlined,
+                              color: Colors.black,
+                            ),
+                            iconSize: 25,
+                            value:  heightdropdownValueFrom,
+                            underline: SizedBox(),
+                            onChanged: (String? newValue) {
+                              setState(() {
+                                heightdropdownValueFrom = newValue.toString();
+                                for (var i = 0; i < heightListModel .length; i++) {
+                                  if ( heightListModel[i].height == heightdropdownValueFrom) {
+                                    heightIdFrom =  heightListModel[i].hId!;
+                                    print( heightIdFrom);
+                                  }
 
-                            }
-                          });
-                        },
-                        items: heightListFrom
-                            .map<DropdownMenuItem<String>>(
-                                (String value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: Text(
-                                  value,
-                                  style: TextStyle(
-                                      fontSize: 13,
-                                      color: Color(
-                                          0xff191847) /* fontFamily: "segoesemibold"*/),
-                                ),
-                              );
-                            }).toList())
+                                }
+                              });
+                            },
+                            items: heightListFrom
+                                .map<DropdownMenuItem<String>>(
+                                    (String value) {
+                                  return DropdownMenuItem<String>(
+                                    value: value,
+                                    child: Text(
+                                      value,
+                                      style: TextStyle(
+                                          fontSize: 13,
+                                          color: Color(
+                                              0xff191847) /* fontFamily: "segoesemibold"*/),
+                                    ),
+                                  );
+                                }).toList())
 
 
+                    ),
+                    Container(
+                        height: 50,
+                        width:  MediaQuery.of(context).size.width/2.5,
+                        margin: EdgeInsets.only( top: 10.0,  right: 5.0, left: 5.0 ),
+                        padding: EdgeInsets.only(
+                          left: 10.0,
+                          right: 10.0,
+                        ),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.rectangle,
+                          color: Colors.white,
+                          borderRadius: BorderRadius.all(
+                              Radius.circular(25.0)),
+                          boxShadow: [BoxShadow(
+                            color: Colors.black12,
+                            offset: Offset(0.0, 0.0), //(x,y)
+                            blurRadius: 2.0,
+                          )],
+                        ),
+                        child:DropdownButton<String>(
+                            isExpanded: true,
+                            icon: Icon(
+                              Icons.keyboard_arrow_down_outlined,
+                              color: Colors.black,
+                            ),
+                            iconSize: 25,
+                            value:  heightdropdownValueTo,
+                            underline: SizedBox(),
+                            onChanged: (String? newValue) {
+                              setState(() {
+                                heightdropdownValueTo = newValue.toString();
+                                for (var i = 0; i < heightListModel .length; i++) {
+                                  if ( heightListModel[i].height == heightdropdownValueTo) {
+                                    heightIdTo =  heightListModel[i].hId!;
+                                    print( heightIdTo);
+                                  }
+
+                                }
+                              });
+                            },
+                            items: heightListTo
+                                .map<DropdownMenuItem<String>>(
+                                    (String value) {
+                                  return DropdownMenuItem<String>(
+                                    value: value,
+                                    child: Text(
+                                      value,
+                                      style: TextStyle(
+                                          fontSize: 13,
+                                          color: Color(
+                                              0xff191847) /* fontFamily: "segoesemibold"*/),
+                                    ),
+                                  );
+                                }).toList())
+
+
+                    ),
+                  ],
                 ),
                 // height from
-                Container(
-                    height: 50,
-                    width:  MediaQuery.of(context).size.width,
-                    margin: EdgeInsets.only( top: 10.0,  right: 5.0, left: 5.0 ),
-                    padding: EdgeInsets.only(
-                      left: 10.0,
-                      right: 10.0,
-                    ),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.rectangle,
-                      color: Colors.white,
-                      borderRadius: BorderRadius.all(
-                          Radius.circular(25.0)),
-                      boxShadow: [BoxShadow(
-                        color: Colors.black12,
-                        offset: Offset(0.0, 0.0), //(x,y)
-                        blurRadius: 2.0,
-                      )],
-                    ),
-                    child:DropdownButton<String>(
-                        isExpanded: true,
-                        icon: Icon(
-                          Icons.keyboard_arrow_down_outlined,
-                          color: Colors.black,
-                        ),
-                        iconSize: 25,
-                        value:  heightdropdownValueTo,
-                        underline: SizedBox(),
-                        onChanged: (String? newValue) {
-                          setState(() {
-                            heightdropdownValueTo = newValue.toString();
-                            for (var i = 0; i < heightListModel .length; i++) {
-                              if ( heightListModel[i].height == heightdropdownValueTo) {
-                                heightIdTo =  heightListModel[i].hId!;
-                                print( heightIdTo);
-                              }
-
-                            }
-                          });
-                        },
-                        items: heightListTo
-                            .map<DropdownMenuItem<String>>(
-                                (String value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: Text(
-                                  value,
-                                  style: TextStyle(
-                                      fontSize: 13,
-                                      color: Color(
-                                          0xff191847) /* fontFamily: "segoesemibold"*/),
-                                ),
-                              );
-                            }).toList())
-
-
-                ),
                 // Manglik
                 Container(
                   margin: EdgeInsets.only(top: 15.0, right: 5.0, left: 5.0,bottom: 15),

@@ -68,66 +68,71 @@ Our goal is to offer a secure and trustworthy matchmaking experience, ensuring t
         padding: const EdgeInsets.all(10.0),
         color: Colors.white,
         child:  SingleChildScrollView(
-      child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
 
-          /// ABOUT CONTENT
-          Html(data: dataValue),
+            /// ABOUT CONTENT
+            Html(data: dataValue),
 
-          const SizedBox(height: 20),
-          const Row(
-            children: [
-              Expanded(
-                child: ContactInfoCard(
-                  icon: Icons.call,
-                  title: "Contact Us",
-                  content: Column(
-                    children: [
-                      Text("9755739106",
-                          style: TextStyle(color: Colors.black)),
-                      SizedBox(height: 6),
-                      Text("7987127780",
-                          style: TextStyle(color: Colors.black)),
-                    ],
+            const SizedBox(height: 20),
+            const Row(
+              children: [
+                Expanded(
+                  child: ContactInfoCard(
+                    icon: Icons.call,
+                    title: "Contact Us",
+                    content: Column(
+                      children: [
+                        Text("9755739106",
+                            style: TextStyle(color: Colors.black,fontSize: 12)),
+                        SizedBox(height: 3),
+                        Text("7987127780",
+                            style: TextStyle(color: Colors.black,fontSize: 12)),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              SizedBox(width: 12),
-              Expanded(
-                child: ContactInfoCard(
-                  icon: Icons.email,
-                  title: "Email",
-                  content: Text(
-                    "agraseval@gmail.com",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(color: Colors.black),
+                SizedBox(width: 12),
+                Expanded(
+                  child: ContactInfoCard(
+                    icon: Icons.email,
+                    title: "Email",
+                    content: Text(
+                      "agraseval1@gmail.com",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: Colors.black,fontSize: 12),
+                    ),
                   ),
                 ),
-              ),
-            ],
-          ),
+              ],
+            ),
 
-          const SizedBox(height: 12),
+            const SizedBox(height: 5),
 
-          /// 🔹 ADDRESS (FULL WIDTH)
-          const ContactInfoCard(
-            icon: Icons.location_on,
-            title: "Address",
-            content: Text(
-              "B-22/11, Ved Nagar, Ujjain\n"
-                  "Madhya Pradesh, Ujjain\n"
-                  "Pin 456010",
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 13,
-                color: Colors.black54,
-                height: 1.4,
+            /// 🔹 ADDRESS (FULL WIDTH)
+            const ContactInfoCard(
+              icon: Icons.location_on,
+              title: "Address",
+              content: Center(
+                child: Text(
+                  "204/13 vyas nagar community hall Near Rishi Nagar, Ujjain,"
+                      "Madhya Pradesh"
+                      "456010",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: Colors.black54,
+                   // height: 1.4,
+                  ),
+                ),
               ),
             ),
-          ),
-        /// CONTACT SECTION
-        ],
+          /// CONTACT SECTION
+          ],
+        ),
       ),
     ),
 
@@ -151,6 +156,7 @@ class ContactInfoCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: 150,
       margin: const EdgeInsets.symmetric(vertical: 8),
       padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
       decoration: BoxDecoration(
@@ -167,16 +173,16 @@ class ContactInfoCard extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(icon, size: 42, color: Colors.red),
-          const SizedBox(height: 12),
+        Icon(icon, size: 30, color: Colors.red),
+          const SizedBox(height: 5),
           Text(
             title,
             style: const TextStyle(
-              fontSize: 16,
+              fontSize: 14,
               fontWeight: FontWeight.w600,
             ),
           ),
-          const SizedBox(height: 10),
+          const SizedBox(height: 5),
           content,
         ],
       ),

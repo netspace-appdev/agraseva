@@ -220,215 +220,215 @@ class _UserListScreenState extends State<UserListScreen> {
   }
 }
 
-class FeaturedItem extends StatelessWidget {
-  const FeaturedItem({
-    Key? key,
-    required this.result,
-  }) : super(key: key);
+  class FeaturedItem extends StatelessWidget {
+    const FeaturedItem({
+      Key? key,
+      required this.result,
+    }) : super(key: key);
 
-  final Result result;
+    final Result result;
 
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () async {
-        Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-          return UserDetailScreen(profileID: result.mId,);
-        }));
-      },
-      child: Container(
-        /*height: 280.0,*/
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(15)),
-          color: Colors.white,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black12,
-              offset: Offset(0.0, 0.3), //(x,y)
-              spreadRadius: 0.0,
-              blurRadius: 2.0,
-            ),
-          ],
-        ),
-        margin: EdgeInsets.only(left: 3.0, right: 3.0, bottom: 8.0),
-        child: Column(
-          children: [
-            Expanded(
-              flex: 6,
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                      height: 150,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(15.0),
-                        child: Image.network(Constant.base_url+'/uploaded/matri/profilepic/' +
-                                result.profilePic.toString(),
-                            /*color: Colors.black.withOpacity(0.1),
-                                    colorBlendMode: BlendMode.darken,*/
-                          /*  fit: BoxFit.cover,*/
-                            height: 150,
-                            width: MediaQuery.of(context).size.width),
+    @override
+    Widget build(BuildContext context) {
+      return InkWell(
+        onTap: () async {
+          Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+            return UserDetailScreen(profileID: result.mId,);
+          }));
+        },
+        child: Container(
+          /*height: 280.0,*/
+          decoration: const BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(15)),
+            color: Colors.white,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black12,
+                offset: Offset(0.0, 0.3), //(x,y)
+                spreadRadius: 0.0,
+                blurRadius: 2.0,
+              ),
+            ],
+          ),
+          margin: EdgeInsets.only(left: 3.0, right: 3.0, bottom: 8.0),
+          child: Column(
+            children: [
+              Flexible(
+                fit: FlexFit.loose,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        height: 150,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(15.0),
+                          child: Image.network(Constant.base_url+'/uploaded/matri/profilepic/' +
+                                  result.profilePic.toString(),
+                              /*color: Colors.black.withOpacity(0.1),
+                                      colorBlendMode: BlendMode.darken,*/
+                            /*  fit: BoxFit.cover,*/
+                              height: 150,
+                              width: MediaQuery.of(context).size.width),
+                        ),
                       ),
                     ),
-                  ),
-                  SizedBox(height: 5),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                          result.fName.toString()+
-                              ' ' +
-                              result.lName.toString(),
-                          maxLines: 1,
-                          style: TextStyle(
-                              color: kTextBlackColor,
-                              fontSize: 14,
-                              letterSpacing: 0.1,
-                              height: 1.2,
-                              fontWeight: FontWeight.bold)),
-                    ),
-                  ),
-                  SizedBox(height: 5),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: Row(
-                        children: [
-                          Text('Education: ',
-                              maxLines: 1,
-                              style: TextStyle(
-                                color:  Colors.black,
-                                fontSize: 12,
-                                letterSpacing: 0.1,
-                              )), Text( ' ' + result.education.toString(),
-                              maxLines: 2,
-                              style: TextStyle(
-                                color: kTextGreyColor,
-                                fontSize: 12,
+                    SizedBox(height: 5),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                            result.fName.toString()+
+                                ' ' +
+                                result.lName.toString(),
+                            maxLines: 1,
+                            style: TextStyle(
+                                color: kTextBlackColor,
+                                fontSize: 14,
                                 letterSpacing: 0.1,
                                 height: 1.2,
-                              )),
-                        ],
+                                fontWeight: FontWeight.bold)),
                       ),
                     ),
-                  ),
-                  SizedBox(height: 5),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-
-                      child:  Row(
-                        children: [
-                          Text('Height: ',
-                              maxLines: 1,
-                              style: TextStyle(
+                    SizedBox(height: 5),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Row(
+                          children: [
+                            Text('Education: ',
+                                maxLines: 1,
+                                style: TextStyle(
+                                  color:  Colors.black,
+                                  fontSize: 12,
+                                  letterSpacing: 0.1,
+                                )), Text( ' ' + result.education.toString(),
+                                maxLines: 2,
+                                style: TextStyle(
+                                  color: kTextGreyColor,
+                                  fontSize: 12,
+                                  letterSpacing: 0.1,
+                                  height: 1.2,
+                                )),
+                          ],
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 5),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                
+                        child:  Row(
+                          children: [
+                            const Text('Height: ',
+                                maxLines: 1,
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 12,
+                                    letterSpacing: 0.1,
+                                    height: 1.2,
+                                )), Text(
+                                ' ' +
+                                    result.height2.toString(),
+                                maxLines: 1,
+                                style: const TextStyle(
+                                  color: kTextGreyColor,
+                                  fontSize: 12,
+                                  letterSpacing: 0.1,
+                                  height: 1.2,
+                                )),
+                            const Text('   Age: ',
+                                maxLines: 1,
+                                style: TextStyle(
                                   color: Colors.black,
                                   fontSize: 12,
                                   letterSpacing: 0.1,
                                   height: 1.2,
-                              )), Text(
-                              ' ' +
-                                  result.height2.toString(),
-                              maxLines: 1,
-                              style: TextStyle(
-                                color: kTextGreyColor,
-                                fontSize: 12,
-                                letterSpacing: 0.1,
-                                height: 1.2,
-                              )),
-                          Text('   Age: ',
-                              maxLines: 1,
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 12,
-                                letterSpacing: 0.1,
-                                height: 1.2,
-                              )), Text(
-                              ' ' +
-                                  result.age.toString(),
-                              maxLines: 1,
-                              style: TextStyle(
-                                color: kTextGreyColor,
-                                fontSize: 12,
-                                letterSpacing: 0.1,
-                                height: 1.2,
-                              )),
-                        ],
+                                )), Text(
+                                ' ' +
+                                    result.age.toString(),
+                                maxLines: 1,
+                                style: const TextStyle(
+                                  color: kTextGreyColor,
+                                  fontSize: 12,
+                                  letterSpacing: 0.1,
+                                  height: 1.2,
+                                )),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                  SizedBox(height: 5),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-
-                      child:Text(
-                          '' +
-                              result.maritialname.toString(),
-                          maxLines: 1,
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 12,
-                            letterSpacing: 0.1,
-                            height: 1.2,
-                          )),
-                    ),
-                  ),
-                  SizedBox(height: 5),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-
-                      child:  Row(
-                        children: [
-                          Text('Id: ',
-                              maxLines: 1,
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 12,
-                                letterSpacing: 0.1,
-                                height: 1.2,
-                              )), Text(
-                              'AGRS' +
-                                  result.mId.toString(),
-                              maxLines: 1,
-                              style: TextStyle(
-                                color: kRedColor,
-                                fontSize: 12,
-                              fontWeight: FontWeight.w800
-                              )) ,
-                        ],
+                    SizedBox(height: 5),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                
+                        child:Text(
+                            '' + result.maritialname.toString(),
+                            maxLines: 1,
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 12,
+                              letterSpacing: 0.1,
+                              height: 1.2,
+                            )),
                       ),
                     ),
-                  ),
-                ],
+                    SizedBox(height: 5),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                
+                        child:  Row(
+                          children: [
+                            Text('Id: ',
+                                maxLines: 1,
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 12,
+                                  letterSpacing: 0.1,
+                                  height: 1.2,
+                                )), Text(
+                                'AGRS' +
+                                    result.mId.toString(),
+                                maxLines: 1,
+                                style: TextStyle(
+                                  color: kRedColor,
+                                  fontSize: 12,
+                                fontWeight: FontWeight.w800
+                                )) ,
+                          ],
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 5),
+
+                  ],
+                ),
               ),
-            ),
-            Expanded(
-              flex: 1,
-              child: GestureDetector(
+              GestureDetector(
                 onTap: () {
                   Navigator.of(context).push(MaterialPageRoute(builder: (context) {
                     return UserDetailScreen(profileID: result.mId,);
                   }));
                 },
                 child: Container(
-                  height: 30,
-                  margin: EdgeInsets.only(top: 5),
-                  decoration: BoxDecoration(
+                  height: 50,
+                 // margin: EdgeInsets.only(top: 5),
+                  decoration: const BoxDecoration(
                     borderRadius: BorderRadius.only(
                         bottomLeft: Radius.circular(15),
                         bottomRight: Radius.circular(15)),
                     color: Colors.orangeAccent,
                   ),
-                  child: Row(
+                  child: const Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
@@ -446,11 +446,10 @@ class FeaturedItem extends StatelessWidget {
                     ],
                   ),
                 ),
-              ),
-            )
-          ],
+              )
+            ],
+          ),
         ),
-      ),
-    );
+      );
+    }
   }
-}

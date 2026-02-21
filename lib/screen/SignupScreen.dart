@@ -764,7 +764,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                 left: 10.0,
                                 right: 10.0,
                               ),
-                              decoration: BoxDecoration(
+                              decoration: const BoxDecoration(
                                 shape: BoxShape.rectangle,
                                 color: Colors.white,
                                 borderRadius: BorderRadius.all(
@@ -944,23 +944,44 @@ class _SignupScreenState extends State<SignupScreen> {
                                       "Register",
                                       style: TextStyle(
                                           color: Colors.white,
-                                          fontSize: 14,
+                                          fontSize: 16,
                                           fontWeight: FontWeight.bold),
                                     ),
                                   ],
                                 ),
                               ),
                             ),
-                            SizedBox(height: 20),
+                            SizedBox(height: 10),
 
                           ],
                         ),
                       ),
 
-                      SizedBox(height: 20),
 
 
 
+
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "You have an account?",
+                            style: TextStyle(
+                              color: Color(0xFF666666),
+                              fontSize: 14,
+                            ),
+                          ),
+                          GestureDetector(
+                            onTap: () => Navigator.push(context, MaterialPageRoute(builder : (context) => SigninScreen())),
+                            child: Text(
+                              " SignIn",
+                              style: TextStyle(
+                                color: kRedColor,
+                                fontSize: 14,),
+                            ),
+                          ),
+                        ],
+                      ),
                       //SizedBox(height: size.height*0.03),
                     ],
                   ),
