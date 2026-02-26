@@ -957,30 +957,28 @@ class _SignupScreenState extends State<SignupScreen> {
                         ),
                       ),
 
-
-
-
-
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            "You have an account?",
-                            style: TextStyle(
-                              color: Color(0xFF666666),
-                              fontSize: 14,
-                            ),
-                          ),
-                          GestureDetector(
-                            onTap: () => Navigator.push(context, MaterialPageRoute(builder : (context) => SigninScreen())),
-                            child: Text(
-                              " SignIn",
+                      SafeArea(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "You have an account?",
                               style: TextStyle(
-                                color: kRedColor,
-                                fontSize: 14,),
+                                color: Color(0xFF666666),
+                                fontSize: 14,
+                              ),
                             ),
-                          ),
-                        ],
+                            GestureDetector(
+                              onTap: () => Navigator.push(context, MaterialPageRoute(builder : (context) => SigninScreen())),
+                              child: Text(
+                                " SignIn",
+                                style: TextStyle(
+                                  color: kRedColor,
+                                  fontSize: 14,),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                       //SizedBox(height: size.height*0.03),
                     ],

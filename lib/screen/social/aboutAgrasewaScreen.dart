@@ -101,7 +101,7 @@ Our goal is to offer a secure and trustworthy matchmaking experience, ensuring t
                     icon: Icons.email,
                     title: "Email",
                     content: Text(
-                      "agraseval1@gmail.com",
+                      "agraseva1@gmail.com",
                       textAlign: TextAlign.center,
                       style: TextStyle(color: Colors.black,fontSize: 12),
                     ),

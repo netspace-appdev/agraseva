@@ -117,7 +117,7 @@ class _UserListScreenState extends State<UserListScreen> {
             backgroundColor: kRedColor,
           )),*/
       body: Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
               color: Colors.white
           ),
           padding: const EdgeInsets.only(bottom: 0.0,top: 0,right: 0),
@@ -129,11 +129,20 @@ class _UserListScreenState extends State<UserListScreen> {
                   result: memberList![index],
                 );
               },
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+/*
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
-                childAspectRatio: 0.56,
+                childAspectRatio: 0.63,
               ),
-              shrinkWrap: false,
+*/
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                mainAxisSpacing: 8,
+                crossAxisSpacing: 8,
+                mainAxisExtent: 280,
+              ),
+
+
               /*physics: NeverScrollableScrollPhysics(),*/
             ),
           )),
@@ -145,11 +154,11 @@ class _UserListScreenState extends State<UserListScreen> {
       padding: const EdgeInsets.all(15.0),
       child: Column(
         children: [
-          Align(
+          const Align(
               alignment: Alignment.centerRight,
               child: Icon(Icons.close_outlined, color: Colors.black38)),
 
-          Column(
+          const Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -167,11 +176,11 @@ class _UserListScreenState extends State<UserListScreen> {
           ),
           Container(
             margin: EdgeInsets.only( top: 10.0, right: 5.0,left: 5.0 ),
-            padding: EdgeInsets.only(
+            padding: const EdgeInsets.only(
               left: 10.0,
               right: 10.0,
             ),
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               shape: BoxShape.rectangle,
               color: Colors.white,
               borderRadius: BorderRadius.all(
@@ -179,12 +188,12 @@ class _UserListScreenState extends State<UserListScreen> {
             ),
             child: TextFormField(
               // controller: userNameEditTextController,
-                style: TextStyle(
+                style: const TextStyle(
                   /* fontFamily: "segoeregular",*/
                     fontSize: 14,
                     color: Color(0xff191847)
                 ),
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   hintText: 'enter id e.g. - 15',
                   border: InputBorder.none,
                 ),
@@ -195,17 +204,17 @@ class _UserListScreenState extends State<UserListScreen> {
           Container(
 
             margin: EdgeInsets.only( top: 10.0, right: 5.0,left: 5.0 ),
-            padding: EdgeInsets.only(
+            padding: const EdgeInsets.only(
               left: 10.0,
               right: 10.0,
             ),
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               shape: BoxShape.rectangle,
               color: Colors.white,
               borderRadius: BorderRadius.all(
                   Radius.circular(25.0)),
             ),
-            child: Text(
+            child: const Text(
               "From age",
               style: TextStyle(
                 color: kTextBlackColor,
@@ -250,62 +259,64 @@ class _UserListScreenState extends State<UserListScreen> {
               ),
             ],
           ),
-          margin: EdgeInsets.only(left: 3.0, right: 3.0, bottom: 8.0),
+          margin: EdgeInsets.only(left: 3.0, right: 3.0, bottom: 0.0),
           child: Column(
             children: [
-              Flexible(
-                fit: FlexFit.loose,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        height: 150,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(15.0),
-                          child: Image.network(Constant.base_url+'/uploaded/matri/profilepic/' +
-                                  result.profilePic.toString(),
-                              /*color: Colors.black.withOpacity(0.1),
-                                      colorBlendMode: BlendMode.darken,*/
-                            /*  fit: BoxFit.cover,*/
-                              height: 150,
-                              width: MediaQuery.of(context).size.width),
-                        ),
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      height: 100,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(15.0),
+                        child: Image.network(Constant.base_url+'/uploaded/matri/profilepic/' +
+                                result.profilePic.toString(),
+                            /*color: Colors.black.withOpacity(0.1),
+                                    colorBlendMode: BlendMode.darken,*/
+                          /*  fit: BoxFit.cover,*/
+                            height: 150,
+                            width: MediaQuery.of(context).size.width),
                       ),
                     ),
-                    SizedBox(height: 5),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                      child: Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                            result.fName.toString()+
-                                ' ' +
-                                result.lName.toString(),
-                            maxLines: 1,
-                            style: TextStyle(
-                                color: kTextBlackColor,
-                                fontSize: 14,
+                  ),
+                  SizedBox(height: 5),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                          result.fName.toString()+
+                              ' ' +
+                              result.lName.toString(),
+                          maxLines: 1,
+                          style: TextStyle(
+                              color: kTextBlackColor,
+                              fontSize: 14,
+                              letterSpacing: 0.1,
+                              height: 1.2,
+                              fontWeight: FontWeight.bold)),
+                    ),
+                  ),
+                  SizedBox(height: 5),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Row(
+                        children: [
+                          const Text('Education: ',
+                              maxLines: 1,
+                              style: TextStyle(
+                                color:  Colors.black,
+                                fontSize: 12,
                                 letterSpacing: 0.1,
-                                height: 1.2,
-                                fontWeight: FontWeight.bold)),
-                      ),
-                    ),
-                    SizedBox(height: 5),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                      child: Align(
-                        alignment: Alignment.centerLeft,
-                        child: Row(
-                          children: [
-                            Text('Education: ',
-                                maxLines: 1,
-                                style: TextStyle(
-                                  color:  Colors.black,
-                                  fontSize: 12,
-                                  letterSpacing: 0.1,
-                                )), Text( ' ' + result.education.toString(),
+                              )),
+
+                          SizedBox(
+                            child: Text( ' ' + result.education.toString(),
+                                overflow: TextOverflow.ellipsis,
                                 maxLines: 2,
                                 style: TextStyle(
                                   color: kTextGreyColor,
@@ -313,105 +324,105 @@ class _UserListScreenState extends State<UserListScreen> {
                                   letterSpacing: 0.1,
                                   height: 1.2,
                                 )),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ),
-                    SizedBox(height: 5),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                      child: Align(
-                        alignment: Alignment.centerLeft,
-                
-                        child:  Row(
-                          children: [
-                            const Text('Height: ',
-                                maxLines: 1,
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 12,
-                                    letterSpacing: 0.1,
-                                    height: 1.2,
-                                )), Text(
-                                ' ' +
-                                    result.height2.toString(),
-                                maxLines: 1,
-                                style: const TextStyle(
-                                  color: kTextGreyColor,
-                                  fontSize: 12,
-                                  letterSpacing: 0.1,
-                                  height: 1.2,
-                                )),
-                            const Text('   Age: ',
-                                maxLines: 1,
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 12,
-                                  letterSpacing: 0.1,
-                                  height: 1.2,
-                                )), Text(
-                                ' ' +
-                                    result.age.toString(),
-                                maxLines: 1,
-                                style: const TextStyle(
-                                  color: kTextGreyColor,
-                                  fontSize: 12,
-                                  letterSpacing: 0.1,
-                                  height: 1.2,
-                                )),
-                          ],
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: 5),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                      child: Align(
-                        alignment: Alignment.centerLeft,
-                
-                        child:Text(
-                            '' + result.maritialname.toString(),
-                            maxLines: 1,
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 12,
-                              letterSpacing: 0.1,
-                              height: 1.2,
-                            )),
-                      ),
-                    ),
-                    SizedBox(height: 5),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                      child: Align(
-                        alignment: Alignment.centerLeft,
-                
-                        child:  Row(
-                          children: [
-                            Text('Id: ',
-                                maxLines: 1,
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 12,
-                                  letterSpacing: 0.1,
-                                  height: 1.2,
-                                )), Text(
-                                'AGRS' +
-                                    result.mId.toString(),
-                                maxLines: 1,
-                                style: TextStyle(
-                                  color: kRedColor,
-                                  fontSize: 12,
-                                fontWeight: FontWeight.w800
-                                )) ,
-                          ],
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: 5),
+                  ),
+                  SizedBox(height: 5),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: Align(
+                      alignment: Alignment.centerLeft,
 
-                  ],
-                ),
+                      child:  Row(
+                        children: [
+                          const Text('Height: ',
+                              maxLines: 1,
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 12,
+                                  letterSpacing: 0.1,
+                                  height: 1.2,
+                              )), Text(
+                              ' ' +
+                                  result.height2.toString(),
+                              maxLines: 1,
+                              style: const TextStyle(
+                                color: kTextGreyColor,
+                                fontSize: 12,
+                                letterSpacing: 0.1,
+                                height: 1.2,
+                              )),
+                          const Text('   Age: ',
+                              maxLines: 1,
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 12,
+                                letterSpacing: 0.1,
+                                height: 1.2,
+                              )), Text(
+                              ' ' +
+                                  result.age.toString(),
+                              maxLines: 1,
+                              style: const TextStyle(
+                                color: kTextGreyColor,
+                                fontSize: 12,
+                                letterSpacing: 0.1,
+                                height: 1.2,
+                              )),
+                        ],
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 5),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+
+                      child:Text(
+                          '' + result.maritialname.toString(),
+                          maxLines: 1,
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 12,
+                            letterSpacing: 0.1,
+                            height: 1.2,
+                          )),
+                    ),
+                  ),
+                  SizedBox(height: 5),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+
+                      child:  Row(
+                        children: [
+                          Text('Id: ',
+                              maxLines: 1,
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 12,
+                                letterSpacing: 0.1,
+                                height: 1.2,
+                              )), Text(
+                              'AGRS' +
+                                  result.mId.toString(),
+                              maxLines: 1,
+                              style: TextStyle(
+                                color: kRedColor,
+                                fontSize: 12,
+                              fontWeight: FontWeight.w800
+                              )) ,
+                        ],
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 5),
+
+                ],
               ),
               GestureDetector(
                 onTap: () {

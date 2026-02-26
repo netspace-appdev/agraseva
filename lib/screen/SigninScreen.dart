@@ -6,6 +6,7 @@ import 'package:agraseva/responseModel/member_list_model.dart';
 import 'package:agraseva/screen/HomeScreen.dart';
 import 'package:agraseva/utils/common_functions.dart';
 import 'package:agraseva/utils/constant.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -328,7 +329,7 @@ class _SigninScreenState extends State<SigninScreen> {
     await  http.post(uri,
        //  headers: {"Content-Type": "application/json"},
         body: body
-    ).then((http.Response response) {
+    ).then((http.Response response) async {
       final jsonData = json.decode(response.body);
       print(jsonData);
 
@@ -340,6 +341,10 @@ class _SigninScreenState extends State<SigninScreen> {
         memberList = modelData.result;
         print("memberListsize:  " + memberList!.length.toString());
         print("memberType:  " + memberList![0].memberType!);
+
+        await FirebaseAnalytics.instance.setUserId(
+          id: memberList?[0].mId?.toString()??'',
+        );
      Constant.prefs?.setBool("loggedIn", true);
      Constant.prefs?.setString("ProfileID", memberList![0].mId!);
      Constant.prefs?.setString("contact", memberList![0].contact!);
