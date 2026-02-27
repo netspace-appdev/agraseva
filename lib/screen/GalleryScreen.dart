@@ -35,7 +35,8 @@ class _GalleryScreenState extends State<GalleryScreen> {
 
   Future<http.Response?> getMemberList() async {
     CommonFunctions.showLoader(true, context);
-    final uri = Uri.parse(Constant.base_url + '/agraapi_dev/getGallery');
+    //final uri = Uri.parse(Constant.base_url + '/agraapi_dev/getGallery');
+    final uri = Uri.parse(Constant.base_url + '/agraapi/getGallery');
 
     await http.post(uri).then((http.Response response) {
       final jsonData = json.decode(response.body);

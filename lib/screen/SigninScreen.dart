@@ -350,7 +350,7 @@ class _SigninScreenState extends State<SigninScreen> {
      Constant.prefs?.setString("contact", memberList![0].contact!);
      Constant.prefs?.setString("token", memberList![0].token!);
      Constant.prefs?.setString("name", memberList![0].fName!+' '+ memberList![0].lName!);
-   Constant.prefs?.setString("gender", memberList![0].gender!);
+     Constant.prefs?.setString("gender", memberList![0].gender!);
      Constant.prefs?.setString("gotra", memberList![0].gotra!);
      Constant.prefs?.setString("userStatus", memberList![0].status!);
      Constant.prefs?.setString("memberType", memberList![0].memberType!);

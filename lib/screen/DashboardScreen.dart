@@ -49,12 +49,13 @@ String payNow = "";
   List<QuickInfo>? quickInfo =  <QuickInfo>[];
   List<NotificationAlert>? notiAlert =  <NotificationAlert>[];
   int currentPos = 0;
+
   Future<http.Response?> getDashboardData() async {
     CommonFunctions.showLoader(true, context);
     final uri = Uri.parse(Constant.base_url + '/agraapi/GetDashboardData');
+
     Map<String, String> body = {
       'ProfileID': Constant.prefs!.getString("ProfileID").toString(),
-
     };
     await http.post(uri, body: body).then((http.Response response) {
       final jsonData = json.decode(response.body);
@@ -71,9 +72,24 @@ String payNow = "";
         var map = Map<String, dynamic>.from(jsonData);
         var modelData = DashboardModel.fromJson(map);
 
-        htmldata = modelData.result[0].notificationContent[0].details!;
+        /*htmldata = modelData.result[0].notificationContent[0].details!;
         quickInfo = modelData.result[0].quickInfo;
-        notiAlert = modelData.result[0].notificationAlert;
+        notiAlert = modelData.result[0].notificationAlert;*/
+
+        if (modelData.result != null && modelData.result!.isNotEmpty) {
+
+          final dashboard = modelData.result![0];
+
+          htmldata = dashboard.notificationContent != null &&
+              dashboard.notificationContent!.isNotEmpty &&
+              dashboard.notificationContent![0].details != null
+              ? dashboard.notificationContent![0].details!
+              : "";
+
+          quickInfo = dashboard.quickInfo ?? [];
+          notiAlert = dashboard.notificationAlert ?? [];
+
+        }
        print("notiAlert:  " + notiAlert!.length.toString());
       } else {
         print(jsonData['message'] as String);
@@ -84,6 +100,7 @@ String payNow = "";
   String imageProfile ="";
   List<Result>? memberList = <Result>[];
   late Result userModel;
+
   Future<http.Response?> getProfileData() async {
     final uri = Uri.parse(Constant.base_url + '/agraapi/CheckUserSession');
     Map<String, String> body = {
@@ -283,7 +300,42 @@ String payNow = "";
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        payNow=="Premier"?Container():
+
+                        Transform(
+                          transform: Matrix4.identity()
+                            ..setEntry(3, 2, 0.001) // perspective
+                            ..rotateX(0.02) // slight tilt
+                            ..rotateY(-0.02),
+                          alignment: FractionalOffset.center,
+                          child: Container(
+                          height: MediaQuery.of(context).size.height/3,
+
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10),
+
+                            boxShadow:  [
+                              BoxShadow(
+                                color: Colors.red.withOpacity(0.5),
+                                blurRadius: 0.1,
+                                spreadRadius: 0.1,
+                                offset: Offset(0.0, 2.0), // shadow direction: bottom right
+                              )
+                            ],
+                          ),
+
+                              padding: EdgeInsets.all(10.0),
+                              margin: EdgeInsets.all(15.0),
+                          child: Scrollbar(
+                            child: SingleChildScrollView(
+                              child: Container(
+                                child: Html(data: htmldata),
+
+                              ),
+                            ),
+                          )),
+                        ),
+                      /*   payNow=="Premier"?Container():
                         GestureDetector(
                         onTap: () {
                           Navigator.of(context)
@@ -293,7 +345,7 @@ String payNow = "";
                   },
                     child:
                     Container(
-                            height: 40,
+                            height: 50,
                             width: size.width,
                       decoration: BoxDecoration(
                         color: Colors.white,
@@ -319,32 +371,7 @@ String payNow = "";
                                   letterSpacing: 0.5,
                                 ),
                               ),
-                            ),)),
-                        Container(
-                        height: 250,
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(10),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black12,
-                              blurRadius: 0.1,
-                              spreadRadius: 0.1,
-                              offset: Offset(
-                                  1.0, 1.0), // shadow direction: bottom right
-                            )
-                          ],
-                        ),
-                            padding: EdgeInsets.all(10.0),
-                            margin: EdgeInsets.all(15.0),
-                        child: Scrollbar(
-                          child: SingleChildScrollView(
-                            child: Container(
-                              child: Html(data: htmldata),
-
-                            ),
-                          ),
-                        )),
+                            ),)),*/
                         Container(
                        /* height: 250, */
                             padding: EdgeInsets.only(left: 10.0,right: 10.0),
@@ -352,9 +379,9 @@ String payNow = "";
                         child: Scrollbar(
                           child: SingleChildScrollView(
                             child: Container(
-                              child:   const Text('Update for you',
+                              child:   const Text('For you',
                                 style: TextStyle(
-                                  fontSize: 22,
+                                  fontSize: 18,
                                   color: Colors.black,
                                   fontWeight: FontWeight.w600,
                                   letterSpacing: 0.5,
@@ -369,6 +396,19 @@ String payNow = "";
                           decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(10),
+
+                            boxShadow:  [
+                              BoxShadow(
+                                color: Colors.red.withOpacity(0.5),
+                                blurRadius: 0.1,
+                                spreadRadius: 0.1,
+                                offset: Offset(0.0, 2.0), // shadow direction: bottom right
+                              )
+                            ],
+                          ),
+                         /* decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10),
                             boxShadow: const [
                               BoxShadow(
                                 color: Colors.black12,
@@ -378,7 +418,7 @@ String payNow = "";
                                     1.0, 1.0), // shadow direction: bottom right
                               )
                             ],
-                          ),
+                          ),*/
                           padding: EdgeInsets.all(10.0),
                           margin: EdgeInsets.all(15.0),
                           child: ListView.builder(
@@ -502,13 +542,13 @@ class NotificationAlertCell extends StatelessWidget {
 
           child: Row(
             children: [
-               Image.asset(
+           /*    Image.asset(
               "assets/images/new_streep_icon.png",
               height: 25,
             ),
               SizedBox(
                 width: 10,
-              ),
+              ),*/
               Expanded(
                 flex: 1,
                 child: Text(res.details!,

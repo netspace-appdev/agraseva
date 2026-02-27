@@ -63,260 +63,262 @@ class _PaymentScreenState extends State<PaymentScreen> {
           bottom: Radius.circular(20),
         )),
       ),
-      body: Container(
-          decoration: BoxDecoration(color: Colors.white),
-          padding: const EdgeInsets.only(bottom: 0.0, top: 0, right: 0),
-          child: Container(
-            padding: EdgeInsets.all(10.0),
-            child: SingleChildScrollView(
-              child: Container(
-                child: Column(
-                  children: [
-                    SizedBox(
-                      height: 15,
-                    ),//BANK DETAILS
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        "Bank Details",
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18.0,
+      body: SafeArea(
+        child: Container(
+            decoration: BoxDecoration(color: Colors.white),
+            padding: const EdgeInsets.only(bottom: 0.0, top: 0, right: 0),
+            child: Container(
+              padding: EdgeInsets.all(10.0),
+              child: SingleChildScrollView(
+                child: Container(
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: 15,
+                      ),//BANK DETAILS
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          "Bank Details",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18.0,
+                          ),
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    MySeparator(color: kRedColor),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    Row(
-                      children: [
-                        Expanded(
-                          flex: 1,
-                          child: Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              "A/c. Holder",
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 14.0,
-                              ),
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                            flex: 2,
+                      SizedBox(
+                        height: 15,
+                      ),
+                      MySeparator(color: kRedColor),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Row(
+                        children: [
+                          Expanded(
+                            flex: 1,
                             child: Align(
                               alignment: Alignment.centerLeft,
                               child: Text(
-                                "Agraseva Matrimonial",
+                                "A/c. Holder",
                                 style: TextStyle(
                                   color: Colors.black,
-                                  fontWeight: FontWeight.w700,
                                   fontSize: 14.0,
                                 ),
-                              ),
-                            )),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    Row(
-                      children: [
-                        Expanded(
-                          flex: 1,
-                          child: Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              "A/c. No.",
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 14.0,
                               ),
                             ),
                           ),
-                        ),
-                        Expanded(
-                            flex: 2,
+                          Expanded(
+                              flex: 2,
+                              child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  "Agraseva Matrimonial",
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 14.0,
+                                  ),
+                                ),
+                              )),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Row(
+                        children: [
+                          Expanded(
+                            flex: 1,
                             child: Align(
                               alignment: Alignment.centerLeft,
                               child: Text(
-                                "120100000456106",
+                                "A/c. No.",
                                 style: TextStyle(
                                   color: Colors.black,
-                                  fontWeight: FontWeight.w700,
                                   fontSize: 14.0,
                                 ),
-                              ),
-                            )),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    Row(
-                      children: [
-                        Expanded(
-                          flex: 1,
-                          child: Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              "IFSC",
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 14.0,
                               ),
                             ),
                           ),
-                        ),
-                        Expanded(
-                            flex: 2,
+                          Expanded(
+                              flex: 2,
+                              child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  "120100000456106",
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 14.0,
+                                  ),
+                                ),
+                              )),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Row(
+                        children: [
+                          Expanded(
+                            flex: 1,
                             child: Align(
                               alignment: Alignment.centerLeft,
                               child: Text(
-                                "TJSB0000179",
+                                "IFSC",
                                 style: TextStyle(
                                   color: Colors.black,
-                                  fontWeight: FontWeight.w700,
                                   fontSize: 14.0,
                                 ),
-                              ),
-                            )),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    Row(
-                      children: [
-                        Expanded(
-                          flex: 1,
-                          child: Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              "Bank Name",
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 14.0,
                               ),
                             ),
                           ),
-                        ),
-                        Expanded(
-                            flex: 2,
+                          Expanded(
+                              flex: 2,
+                              child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  "TJSB0000179",
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 14.0,
+                                  ),
+                                ),
+                              )),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Row(
+                        children: [
+                          Expanded(
+                            flex: 1,
                             child: Align(
                               alignment: Alignment.centerLeft,
                               child: Text(
-                                "TJSB Sahkari Bank limited ",
+                                "Bank Name",
                                 style: TextStyle(
                                   color: Colors.black,
-                                  fontWeight: FontWeight.w700,
                                   fontSize: 14.0,
                                 ),
                               ),
-                            )),
-                      ],
-                    ),//UPI TRANSFER
-                    SizedBox(
-                      height: 25,
-                    ),
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        "UPI Transfer",
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18.0,
+                            ),
+                          ),
+                          Expanded(
+                              flex: 2,
+                              child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  "TJSB Sahkari Bank limited ",
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 14.0,
+                                  ),
+                                ),
+                              )),
+                        ],
+                      ),//UPI TRANSFER
+                      SizedBox(
+                        height: 25,
+                      ),
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          "UPI Transfer",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18.0,
+                          ),
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    MySeparator(color: kRedColor),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    Row(
-                      children: [
-                        Expanded(
-                          flex: 1,
-                          child: Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              "UPI ID",
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 14.0,
-                              ),
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                            flex: 2,
+                      SizedBox(
+                        height: 15,
+                      ),
+                      MySeparator(color: kRedColor),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Row(
+                        children: [
+                          Expanded(
+                            flex: 1,
                             child: Align(
                               alignment: Alignment.centerLeft,
                               child: Text(
-                                "gmittal689-3@okicici",
+                                "UPI ID",
                                 style: TextStyle(
                                   color: Colors.black,
-                                  fontWeight: FontWeight.w700,
                                   fontSize: 14.0,
                                 ),
                               ),
-                            )),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    SizedBox(
-                      height: 25,
-                    ),//Scan QR Code
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        "Scan QR Code",
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18.0,
+                            ),
+                          ),
+                          Expanded(
+                              flex: 2,
+                              child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  "gmittal689-3@okicici",
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 14.0,
+                                  ),
+                                ),
+                              )),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      SizedBox(
+                        height: 25,
+                      ),//Scan QR Code
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          "Scan QR Code",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18.0,
+                          ),
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    MySeparator(color: kRedColor),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    Container(
-                      height: size.width,
-                      width: size.width,
-                      child: ClipRRect(
-                        child: Image.network("https://www.agraseva.com/images/agarseva_qr_code.jpeg",
-
-                            height: size.width,
-                            width: MediaQuery.of(context)
-                                .size
-                                .width),
+                      SizedBox(
+                        height: 15,
                       ),
-                    ),
-                    SizedBox(
-                      height: 45,
-                    ),
-                  ],
+                      MySeparator(color: kRedColor),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Container(
+                        height: size.width,
+                        width: size.width,
+                        child: ClipRRect(
+                          child: Image.network("https://www.agraseva.com/images/agarseva_qr_code.jpeg",
+        
+                              height: size.width,
+                              width: MediaQuery.of(context)
+                                  .size
+                                  .width),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 45,
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-          )),
+            )),
+      ),
     );
   }
 }

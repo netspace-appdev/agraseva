@@ -19,7 +19,7 @@ class DeleteAccountScreen extends StatelessWidget {
     <li><strong>Email:</strong> agraseva1@gmail.com, gmittal689@gmail.com</li>
     <li><strong>Call:</strong> 9755739106, 7987127780</li>
     <li><strong>Website:</strong> www.agraseva.com</li>
-    <li><strong>Address:</strong> B-22/11, Ved Nagar, Ujjain, Madhya Pradesh, 456010</li>
+    <li><strong>Address:</strong> 204/13 vyas nagar community hall Near Rishi Nagar, Ujjain, Madhya Pradesh, 456010</li>
   </ul>
 
 

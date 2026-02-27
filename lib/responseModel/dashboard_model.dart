@@ -89,7 +89,7 @@ class DashboradResult {
 
   List<QuickInfo> get quickInfo => _quickInfo!;
   List<NotificationContent> get notificationContent => _notificationContent!;
-  List<NotificationAlert> get notificationAlert => _notificationAlert!;
+  List<NotificationAlert> get notificationAlert => _notificationAlert??[];
 
   Map<String?, dynamic> toJson() {
     final map = <String?, dynamic>{};

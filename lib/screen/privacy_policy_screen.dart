@@ -109,13 +109,13 @@ class PrivacyPolicyScreen extends StatelessWidget {
         elevation: 0.0,
         centerTitle: true,
         backgroundColor: Colors.red,
-        title: Text(
+        title: const Text(
           "Privacy Policy",
           style: TextStyle(
               color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18),
         ),
         leading: IconButton(
-          icon: Icon(
+          icon: const Icon(
             Icons.arrow_back_ios_rounded,
             color: Colors.white,
           ),
@@ -123,17 +123,19 @@ class PrivacyPolicyScreen extends StatelessWidget {
             Navigator.pop(context, true);
           },
         ),
-        shape: RoundedRectangleBorder(
+        shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(
             bottom: Radius.circular(20),
           ),
         ),
       ),
-      body: Container(
-        padding: const EdgeInsets.all(10.0),
-        color: Colors.white,
-        child: SingleChildScrollView(
-          child: Html(data: dataValue),
+      body: SafeArea(
+        child: Container(
+          padding: const EdgeInsets.all(10.0),
+          color: Colors.white,
+          child: SingleChildScrollView(
+            child: Html(data: dataValue),
+          ),
         ),
       ),
     );

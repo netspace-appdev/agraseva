@@ -99,8 +99,19 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(8.0),
+                      child: Align(
+                        alignment: Alignment.topLeft,
+                        child: Text(widget.res.title!,
+                          style: TextStyle(
+                              color: Colors.black, fontWeight: FontWeight.w700, fontSize: 18),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
                       child: Container(
-                        height: 160,
+                        // height: 160,
+                        width: double.infinity,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.all(Radius.circular(10)),
                           color: Colors.white,
@@ -108,31 +119,26 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(10.0),
                           child: Image.network(
-                              Constant.base_url +
-                                  '/uploaded/notification/' +
-                                  widget.res.image.toString(),
-                              height: 160,
-                              width: MediaQuery.of(context).size.width),
+                            Constant.base_url +
+                                '/uploaded/notification/' +
+                                widget.res.image.toString(),
+                            // height: 160,
+                            width: double.infinity,
+                            fit: BoxFit.contain,
+                            // width: MediaQuery.of(context).size.width
+                          ),
                         ),
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Align(
-                        alignment: Alignment.topLeft,
-                        child: Text(widget.res.title!,
-                          style: TextStyle(
-                              color: Colors.black, fontWeight: FontWeight.w700, fontSize: 14),
-                        ),
-                      ),
-                    ),
+
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(widget.res.details!,
                         style: TextStyle(
                             color: Colors.black,  fontSize: 14),
                       ),
-                    )
+                    ),
+
                   ],
                 ),
 

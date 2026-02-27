@@ -85,10 +85,16 @@ class _WhoVisitScreenState extends State<WhoVisitScreen> {
                   result: memberList![index],
                 );
               },
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                mainAxisSpacing: 8,
+                crossAxisSpacing: 8,
+                mainAxisExtent: 280,
+              ),
+            /*  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 childAspectRatio: 0.63,
-              ),
+              ),*/
               shrinkWrap: false,
               /*physics: NeverScrollableScrollPhysics(),*/
             ),
@@ -206,205 +212,199 @@ class FeaturedItem extends StatelessWidget {
             ),
           ],
         ),
-        margin: EdgeInsets.only(left: 3.0, right: 3.0, bottom: 8.0),
+        margin: EdgeInsets.only(left: 3.0, right: 3.0, bottom: 0.0),
         child: Column(
           children: [
-            Expanded(
-              flex: 6,
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                      height: 120,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(15.0),
-                        child: Image.network(
-                            Constant.base_url +
-                                '/uploaded/matri/' +
-                                result.profilePic.toString(),
-                            /*color: Colors.black.withOpacity(0.1),
-                                    colorBlendMode: BlendMode.darken,*/
+            Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    height: 100,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(15.0),
+                      child: Image.network(
+                          Constant.base_url +
+                              '/uploaded/matri/' +
+                              result.profilePic.toString(),
+                          /*color: Colors.black.withOpacity(0.1),
+                                  colorBlendMode: BlendMode.darken,*/
 
-                            height: 120,
-                            width: MediaQuery.of(context).size.width),
-                      ),
+                          height: 120,
+                          width: MediaQuery.of(context).size.width),
                     ),
                   ),
-                  SizedBox(height: 5),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                          result.fName.toString() +
-                              ' ' +
-                              result.lName.toString(),
-                          maxLines: 1,
-                          style: TextStyle(
-                              color: kTextBlackColor,
-                              fontSize: 14,
-                              letterSpacing: 0.1,
-                              height: 1.2,
-                              fontWeight: FontWeight.bold)),
-                    ),
-                  ),
-                  SizedBox(height: 5),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: Row(
-                        children: [
-                          Text('Education: ',
-                              maxLines: 1,
-                              style: TextStyle(
-                                color:  Colors.black,
-                                fontSize: 12,
-                                letterSpacing: 0.1,
-                              )), Text(
-                                  ' ' +
-                                  result.education.toString(),
-                              maxLines: 1,
-                              style: TextStyle(
-                                color: kTextGreyColor,
-                                fontSize: 12,
-                                letterSpacing: 0.1,
-                                height: 1.2,
-                              )),
-                        ],
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 5),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-
-                      child:  Row(
-                        children: [
-                          const Text('Height: ',
-                              maxLines: 1,
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 12,
-                                  letterSpacing: 0.1,
-                                  height: 1.2,
-                              )), Text(
-                              ' ' +
-                                  result.height2.toString(),
-                              maxLines: 1,
-                              style: TextStyle(
-                                color: kTextGreyColor,
-                                fontSize: 12,
-                                letterSpacing: 0.1,
-                                height: 1.2,
-                              )),
-                          Text('   Age: ',
-                              maxLines: 1,
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 12,
-                                letterSpacing: 0.1,
-                                height: 1.2,
-                              )), Text(
-                              ' ' +
-                                  result.age.toString(),
-                              maxLines: 1,
-                              style: TextStyle(
-                                color: kTextGreyColor,
-                                fontSize: 12,
-                                letterSpacing: 0.1,
-                                height: 1.2,
-                              )),
-                        ],
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 5),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-
-                      child:Text(
-                          '' +
-                              result.maritialname.toString(),
-                          maxLines: 1,
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 12,
+                ),
+                SizedBox(height: 5),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                        result.fName.toString() +
+                            ' ' +
+                            result.lName.toString(),
+                        maxLines: 1,
+                        style: TextStyle(
+                            color: kTextBlackColor,
+                            fontSize: 14,
                             letterSpacing: 0.1,
                             height: 1.2,
-                          )),
+                            fontWeight: FontWeight.bold)),
+                  ),
+                ),
+                SizedBox(height: 5),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Row(
+                      children: [
+                        Text('Education: ',
+                            maxLines: 1,
+                            style: TextStyle(
+                              color:  Colors.black,
+                              fontSize: 12,
+                              letterSpacing: 0.1,
+                            )), Text(
+                                ' ' +
+                                result.education.toString(),
+                            maxLines: 1,
+                            style: TextStyle(
+                              color: kTextGreyColor,
+                              fontSize: 12,
+                              letterSpacing: 0.1,
+                              height: 1.2,
+                            )),
+                      ],
                     ),
                   ),
-                  SizedBox(height: 5),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: Align(
-                      alignment: Alignment.centerLeft,
+                ),
+                SizedBox(height: 5),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
 
-                      child:  Row(
-                        children: [
-                          Text('Id: ',
-                              maxLines: 1,
-                              style: TextStyle(
+                    child:  Row(
+                      children: [
+                        const Text('Height: ',
+                            maxLines: 1,
+                            style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 12,
                                 letterSpacing: 0.1,
                                 height: 1.2,
-                              )), Text(
-                              'AGRS' +
-                                  result.mId.toString(),
-                              maxLines: 1,
-                              style: TextStyle(
-                                color: kRedColor,
-                                fontSize: 12,
-                              fontWeight: FontWeight.w800
-                              )) ,
-                        ],
-                      ),
+                            )), Text(
+                            ' ' +
+                                result.height2.toString(),
+                            maxLines: 1,
+                            style: TextStyle(
+                              color: kTextGreyColor,
+                              fontSize: 12,
+                              letterSpacing: 0.1,
+                              height: 1.2,
+                            )),
+                        Text('   Age: ',
+                            maxLines: 1,
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 12,
+                              letterSpacing: 0.1,
+                              height: 1.2,
+                            )), Text(
+                            ' ' +
+                                result.age.toString(),
+                            maxLines: 1,
+                            style: TextStyle(
+                              color: kTextGreyColor,
+                              fontSize: 12,
+                              letterSpacing: 0.1,
+                              height: 1.2,
+                            )),
+                      ],
                     ),
                   ),
-                ],
-              ),
-            ),
-            Expanded(
-              flex: 1,
-              child: GestureDetector(
-                onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-                    return UserDetailScreen(profileID: result.mId,);
-                  }));
-                },
-                child: Container(
-                  height: 30,
-                  margin: EdgeInsets.only(top: 5),
-                  decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(15),
-                        bottomRight: Radius.circular(15)),
-                    color: Colors.orangeAccent,
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
-                      Text(
-                        "View Profile",
+                ),
+                SizedBox(height: 5),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+
+                    child:Text(
+                        '' +
+                            result.maritialname.toString(),
+                        maxLines: 1,
                         style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 12.0,
-                            letterSpacing: 1.0),
-                      ),
-                      Icon(
-                        Icons.arrow_forward_rounded,
-                        color: Colors.white,
-                        size: 15,
-                      ),
-                    ],
+                          color: Colors.black,
+                          fontSize: 12,
+                          letterSpacing: 0.1,
+                          height: 1.2,
+                        )),
                   ),
+                ),
+                SizedBox(height: 5),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+
+                    child:  Row(
+                      children: [
+                        Text('Id: ',
+                            maxLines: 1,
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 12,
+                              letterSpacing: 0.1,
+                              height: 1.2,
+                            )), Text(
+                            'AGRS' +
+                                result.mId.toString(),
+                            maxLines: 1,
+                            style: TextStyle(
+                              color: kRedColor,
+                              fontSize: 12,
+                            fontWeight: FontWeight.w800
+                            )) ,
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            GestureDetector(
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+                  return UserDetailScreen(profileID: result.mId,);
+                }));
+              },
+              child: Container(
+                height: 50,
+                margin: EdgeInsets.only(top: 5),
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(15),
+                      bottomRight: Radius.circular(15)),
+                  color: Colors.orangeAccent,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    Text(
+                      "View Profile",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 12.0,
+                          letterSpacing: 1.0),
+                    ),
+                    Icon(
+                      Icons.arrow_forward_rounded,
+                      color: Colors.white,
+                      size: 15,
+                    ),
+                  ],
                 ),
               ),
             )

@@ -71,6 +71,7 @@ class _GetsocialMemeberListScreenState extends State<GetsocialMemeberListScreen>
     } catch (e) {
       setState(() => isLoading = false);
       CommonFunctions.showSuccessToast("Something went wrong");
+      print('memberList${e.toString()}');
     }
   }
 
@@ -139,7 +140,7 @@ class _GetsocialMemeberListScreenState extends State<GetsocialMemeberListScreen>
             )),
       ),
 
-      body: Container(
+      body:  memberList != null && memberList!.isNotEmpty?Container(
        // height: 300,
           decoration: const BoxDecoration(
               color: Colors.white
@@ -156,8 +157,18 @@ class _GetsocialMemeberListScreenState extends State<GetsocialMemeberListScreen>
 
             shrinkWrap: true,
             /*physics: NeverScrollableScrollPhysics(),*/
-          )),
-    );
+          )):Center(
+           child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+        Image.asset(
+          "assets/images/no_data.jfif",
+          // height: 150,
+        ),
+      ],
+    ),
+    ));
+
   }
   Widget bottomsheet() {
     return new Scaffold(body:Container(
@@ -255,6 +266,7 @@ class FeaturedItem extends StatelessWidget {
     return InkWell(
       onTap: () {
         controller.getSocialMemberDetailById(id: result.id);
+        print('vuuvuvu${result.profilePhoto}');
       //  Navigator.push(context, MaterialPageRoute(builder: (_) => SocialMemberDetailScreen()),);
       },
       child: Container(

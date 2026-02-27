@@ -10,9 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:http/http.dart' as http;
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
-import 'UserDetailScreen.dart';
 
 class SuccessStoryListScreen extends StatefulWidget {
   @override
@@ -41,7 +39,7 @@ class _SuccessStoryListScreenState extends State<SuccessStoryListScreen> {
 
     await http.post(uri).then((http.Response response) {
       final jsonData = json.decode(response.body);
-      print("getSuccessStory");
+      print("getSuccessStory....${response.body.toString()}");
       print(jsonData);
       setState(() {
         isLoading = false;
@@ -102,7 +100,7 @@ class _SuccessStoryListScreenState extends State<SuccessStoryListScreen> {
           ),
           padding: const EdgeInsets.only(bottom: 0.0,top: 0,right: 0),
 
-          child: Container(
+          child: memberList != null && memberList!.isNotEmpty?Container(
 
 
             child: GridView.builder(
@@ -118,6 +116,16 @@ class _SuccessStoryListScreenState extends State<SuccessStoryListScreen> {
               ),
               shrinkWrap: false,
               /*physics: NeverScrollableScrollPhysics(),*/
+            ),
+          ):Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset(
+                  "assets/images/no_data.jfif",
+                 // height: 150,
+                ),
+              ],
             ),
           )),
     );
