@@ -25,7 +25,7 @@ class _UserListScreenState extends State<UserListScreen> {
 
   bool isLoading = false;
 
-  @override
+ @override
   void initState() {
     // TODO: implement initState
     super.initState();
@@ -51,6 +51,62 @@ class _UserListScreenState extends State<UserListScreen> {
 
   }
 
+  Future<void> getMemberList(Map<String, String> body) async {
+    try {
+      CommonFunctions.showLoader(true, context);
+     // isLoading = true;
+
+      final uri = Uri.parse(Constant.base_url + '/agraapi/UserList');
+      print("Request Body: $body");
+
+      final response = await http.post(uri, body: body);
+
+      print("Status Code: ${response.statusCode}");
+      print("Raw Response: '${response.body}'");
+      Navigator.of(context).pop();
+
+      // ✅ Always stop loader FIRST
+      setState(() {
+        isLoading = false;
+      });
+
+      // ✅ Check if body is empty
+      if (response.body.isEmpty) {
+        print("Empty response from server");
+        CommonFunctions.showSuccessToast("No data found");
+        return;
+      }
+
+      // ✅ Now decode safely
+      final jsonData = json.decode(response.body);
+
+      if (response.statusCode == 200) {
+        var map = Map<String, dynamic>.from(jsonData);
+        var modelData = MemberListModel.fromJson(map);
+
+        setState(() {
+          memberList = modelData.result;
+          isLoading = false;
+        });
+
+        print("memberList size: ${memberList?.length}");
+      } else {
+        setState(() {
+          isLoading = false;
+        });
+
+        CommonFunctions.showSuccessToast(jsonData['message'] ?? "Server error");
+      }
+
+    } catch (e) {
+      CommonFunctions.showLoader(false, context);
+      print("ERROR: $e");
+      CommonFunctions.showSuccessToast("Something went wrong");
+    }
+  }
+
+
+/*
   Future<http.Response?> getMemberList(Map<String, String> body) async {
     CommonFunctions.showLoader(true, context);
     final uri = Uri.parse(Constant.base_url + '/agraapi/UserList');
@@ -69,11 +125,15 @@ class _UserListScreenState extends State<UserListScreen> {
         memberList = modelData.result;
         print("memberListsize:  " + memberList!.length.toString());
       } else {
-        print(jsonData['message'] as String);
+        setState(() {
+          isLoading = false;
+        });
+        print('the error is here${jsonData['message'] as String}');
         CommonFunctions.showSuccessToast(jsonData['message'] as String);
       }
     });
   }
+*/
 
   @override
   Widget build(BuildContext context) {

@@ -117,7 +117,7 @@ class SocialMemberDetailScreen extends StatelessWidget {
                               borderRadius: BorderRadius.circular(20),
                             ),
                             child: Text(
-                              "ID: ASSM${member.id}",
+                              "ID: ASSM${member.memId}",
                               style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 13,
@@ -133,11 +133,11 @@ class SocialMemberDetailScreen extends StatelessWidget {
                     const SizedBox(height: 10),
 
                     _info("Name", member.name),
-                    _info("Mobile", member.mobileNumber),
-                    _info("DOB", member.dOB),
+                    _info("Mobile", member.mobile),
+                    _info("DOB", member.dob),
                     _info("Address", member.address),
-                    _info("Job Type", member.jobType),
-                    _info("Job Details", member.jobDetails),
+                    _info("Job Type", member.businessType),
+                    _info("Job Details", member.businessType),
                     _info("City", member.cityName),
                     _info("State", member.stateName),
 

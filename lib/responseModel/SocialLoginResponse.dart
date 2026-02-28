@@ -2,7 +2,7 @@ class SocialLoginResponse {
   String? status;
   int? responseCode;
   String? message;
-  int? result;
+  String? result;
 
   SocialLoginResponse(
       {this.status, this.responseCode, this.message, this.result});

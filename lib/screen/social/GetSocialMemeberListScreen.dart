@@ -42,8 +42,7 @@ class _GetsocialMemeberListScreenState extends State<GetsocialMemeberListScreen>
   Future<void> getMemberList() async {
     setState(() => isLoading = true);
 
-    final uri = Uri.parse(
-        '${Constant.base_url}/agraapi/GetSocialMemberLists');
+    final uri = Uri.parse('${Constant.base_url}/agraapi/GetSocialMemberLists');
 
     final body = {
       'ProfileID': Constant.prefs!.getString("ProfileID") ?? '',
@@ -54,15 +53,14 @@ class _GetsocialMemeberListScreenState extends State<GetsocialMemeberListScreen>
 
       final jsonData = json.decode(response.body);
 
-      if (response.statusCode == 200 &&
-          jsonData['response_code'] == 200) {
+      if (response.statusCode == 200 && jsonData['response_code'] == 200) {
 
-        final socialList =
-        GetSocialListResponse.fromJson(jsonData);
+        final socialList = GetSocialListResponse.fromJson(jsonData);
 
         setState(() {
           memberList = socialList.result ?? [];
           isLoading = false;
+
         });
       } else {
         setState(() => isLoading = false);
@@ -150,6 +148,11 @@ class _GetsocialMemeberListScreenState extends State<GetsocialMemeberListScreen>
           child: ListView.builder(
             itemCount: memberList!.length,
             itemBuilder: (context, index) {
+              print('memberList....${memberList?[index].name}');
+              print('memberList....${memberList?[index].profilePhoto}');
+              print('memberList....${memberList?[index].mobile}');
+              print('memberList....${memberList?[index].dob}');
+
               return FeaturedItem(
                 result: memberList![index],
               );
@@ -265,7 +268,7 @@ class FeaturedItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        controller.getSocialMemberDetailById(id: result.id);
+        controller.getSocialMemberDetailById(id: result.memId);
         print('vuuvuvu${result.profilePhoto}');
       //  Navigator.push(context, MaterialPageRoute(builder: (_) => SocialMemberDetailScreen()),);
       },
@@ -330,18 +333,18 @@ class FeaturedItem extends StatelessWidget {
                     style: const TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
-                      color: kTextBlackColor,
+                      color: Colors.black,
                     ),
                   ),
                   const SizedBox(height: 4),
 
-                  _infoRow(Icons.phone, result.mobileNumber),
-                  _infoRow(Icons.date_range, result.dOB),
+                  _infoRow(Icons.phone, result.mobile),
+                  _infoRow(Icons.date_range, result.dob),
                   _infoRow(
                     Icons.work,
                     buildFullAddress(
-                      address: result.jobType,
-                      city: result.jobDetails,
+                      address: result.address,
+                      city: result.cityName,
                     ),
                   ),
                   _infoRow(
@@ -367,14 +370,14 @@ class FeaturedItem extends StatelessWidget {
                 //  const SizedBox(height: 6),
 
                   /// ID
-                  Text(
-                    "ID: ASSM${result.id}",
+                /*  Text(
+                    "ID: ASSM${result.memId}",
                     style: const TextStyle(
                       color: kTextBlackColor,
                       fontSize: 12,
                       fontWeight: FontWeight.w700,
                     ),
-                  ),
+                  ),*/
                 ],
               ),
             ),

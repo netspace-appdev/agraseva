@@ -172,722 +172,738 @@ class _SocialMemberSecondSignupScreenState extends State<SocialMemberSignupScree
     return Scaffold(
       key: _scaffoldKey,
       drawer: new PreLoginDrawer(),
-      body: Container(
-        decoration: const BoxDecoration(
-            image: DecorationImage(
-              image:  AssetImage("assets/images/bg.png"),
-              fit: BoxFit.cover,
-            )
-        ),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            children: [
-              Expanded(
-                flex: 2,
-                child: Container(
-                  alignment: Alignment.center,
-                  child:Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          IconButton(
-                            icon: Icon(
-                              Icons.menu,
-                              size: 30,
-                              color: Colors.white,
+      body: SafeArea(
+        child: Container(
+          decoration: const BoxDecoration(
+              image: DecorationImage(
+                image:  AssetImage("assets/images/bg.png"),
+                fit: BoxFit.cover,
+              )
+          ),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              children: [
+                Expanded(
+                  flex: 2,
+                  child: Container(
+                    alignment: Alignment.center,
+                    child:Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            IconButton(
+                              icon: Icon(
+                                Icons.menu,
+                                size: 30,
+                                color: Colors.white,
+                              ),
+                              onPressed: () {
+                                _scaffoldKey.currentState?.openDrawer();
+                              },
                             ),
-                            onPressed: () {
-                              _scaffoldKey.currentState?.openDrawer();
-                            },
-                          ),
-                        ],
-                      ),
-                      Text(
-                        "Agraseva",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontSize: 30,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      SizedBox(width: 40,),
-
-                    ],
+                          ],
+                        ),
+                        Text(
+                          "Agraseva",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontSize: 30,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(width: 40,),
+        
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              Expanded(
-                flex: 11,
-                child:Obx(()=>
-                        socialMemberSignupController.isLoading.value
-                          ?Container()
-                          :Container(
-                                        margin: EdgeInsets.only(top: 0, right: 20, left: 20, bottom: 20),
-                                        alignment: Alignment.center,
-                                        height:  MediaQuery.of(context).size.height*4/6,
-                                        decoration: const BoxDecoration(
-                      shape: BoxShape.rectangle,
-                      color: Colors.white,
-                      borderRadius: BorderRadius.all(Radius.circular(25.0),),
-                                        ),
-                                        padding:
-                                        EdgeInsets.only(top: 20, right: 15, left: 15, bottom: 20),
-                                        child: SingleChildScrollView(
-                      child: Column(
-                        //mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Container(
+                Expanded(
+                  flex: 11,
+                  child:Obx(()=>
+                 /* socialMemberSignupController.isLoading.value
+                      ?Center(
+                      child: CommonFunctions.showLoader(true, context);
+                  ) :*/
+                  Stack(
+                    children: [
+                      Container(
+                        margin: EdgeInsets.only(top: 0, right: 20, left: 20, bottom: 20),
+                        alignment: Alignment.center,
+                        height:  MediaQuery.of(context).size.height/1.2,
+                        decoration: const BoxDecoration(
+                          shape: BoxShape.rectangle,
+                          color: Colors.white,
+                          borderRadius: BorderRadius.all(Radius.circular(25.0),),
+                        ),
+                        padding:
+                        EdgeInsets.only(top: 20, right: 15, left: 15, bottom: 20),
+                        child: SingleChildScrollView(
                             child: Column(
+                              //mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
-                                SizedBox(height: 20),
-                                const Align(
-                                  alignment: Alignment.center,
-                                  child: Padding(
-                                    padding: EdgeInsets.only(
-                                      left: 0.0,
-                                    ),
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          "Social",
-                                          style: TextStyle(fontSize: 30, color: Colors.black,fontWeight: FontWeight.bold),),
-                                       SizedBox(width:5),
-                                        Text(
-                                          "Memeber",
-                                          style: TextStyle(fontSize: 30, color: kRedColor,fontWeight: FontWeight.bold),),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-
-
-                                SizedBox(height: 20),
-
-                                //name
                                 Container(
-                                  margin: EdgeInsets.only( left: 5.0, right: 5.0, ),
-                                  padding: const EdgeInsets.only(
-                                    left: 10.0,
-                                    right: 10.0,
-                                  ),
-                                  decoration: const BoxDecoration(
-                                    shape: BoxShape.rectangle,
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.all(
-                                        Radius.circular(25.0)),
-                                    boxShadow: [BoxShadow(
-                                      color: Colors.black12,
-                                      offset: Offset(0.0, 0.0), //(x,y)
-                                      blurRadius: 5.0,
-                                    )],
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(left: 8.0),
-                                    child: TextFormField(
-                                        controller: socialMemberSignupController.userName,
-                                        style: const TextStyle(
-                                          /* fontFamily: "segoeregular",*/
-                                            fontSize: 14,
-                                            color: Color(0xff191847)
-                                        ),
-                                        decoration: const InputDecoration(
-                                          hintText: 'Full Name*',
-                                          border: InputBorder.none,
-                                          //  icon: Image.asset("assets/images/user.png", height: 20.0,width: 20,)
-                                        ),
-                                        textInputAction: TextInputAction.next,
-                                        keyboardType: TextInputType.text),
-                                  ),
-
-                                ),
-
-                                SizedBox(height: 10),
-
-
-                                //Mobile
-                                Container(
-                                  margin: EdgeInsets.only( top: 10.0, right: 5.0, left: 5.0 ),
-                                  padding: const EdgeInsets.only(
-                                    left: 10.0,
-                                    right: 10.0,
-                                  ),
-                                  decoration: const BoxDecoration(
-                                    shape: BoxShape.rectangle,
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.all(
-                                        Radius.circular(25.0)),
-                                    boxShadow: [BoxShadow(
-                                      color: Colors.black12,
-                                      offset: Offset(0.0, 0.0), //(x,y)
-                                      blurRadius: 5.0,
-                                    )],
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(left: 8.0),
-                                    child: TextFormField(
-                                        controller: socialMemberSignupController.userMobile,
-                                        maxLength: 10,
-                                        style: const TextStyle(
-                                          /* fontFamily: "segoeregular",*/
-                                            fontSize: 14,
-                                            color: Color(0xff191847)
-                                        ),
-                                        decoration: const InputDecoration(
-                                          hintText: 'Mobile Number*',
-                                          counterText: "",        // ✅ hides counter space
-
-                                          border: InputBorder.none,
-                                          // icon: Image.asset("assets/images/mobile.png", height: 20.0,width: 20,)
-                                        ),
-                                        inputFormatters: [
-                                          LengthLimitingTextInputFormatter(12),
-                                        ],
-                                        textInputAction: TextInputAction.next,
-                                        keyboardType: TextInputType.number),
-                                  ),
-
-                                ),
-                                const SizedBox(height: 10),
-
-                                Container(
-                                  margin: const EdgeInsets.only(top: 10.0, right: 5.0, left: 5.0),
-                                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                                  decoration: const BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.all(Radius.circular(25.0)),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.black12,
-                                        blurRadius: 5.0,
-                                      )
-                                    ],
-                                  ),
-                                  child: InkWell(
-                                    borderRadius: BorderRadius.circular(25),
-                                    onTap: () async {
-                                      DateTime? pickedDate = await showDatePicker(
-                                        context: context,
-                                        initialDate: DateTime(2000),
-                                        firstDate: DateTime(1900),
-                                        lastDate: DateTime.now(),
-                                      );
-
-                                      if (pickedDate != null) {
-                                      //  setState(() {
-                                          socialMemberSignupController.dob.value =
-                                          "${pickedDate.day}-${pickedDate.month}-${pickedDate.year}";
-                                      //  });
-                                      }
-                                    },
-                                    child: InputDecorator(
-                                      decoration:  const InputDecoration(
-                                        border: InputBorder.none,
-                                        hintText: 'Date of Birth',
-                                        hintStyle: TextStyle(
-                                            fontSize: 14,
-                                            color: Color(0xff191847)
-
-                                        ),
-
-                                        suffixIcon: Icon(Icons.calendar_today, size: 18),
-                                      ),
-                                      child: Padding(
-                                        padding: const EdgeInsets.only(top: 8.0,left: 8),
-                                        child: Text(
-                                          socialMemberSignupController.dob.value.isEmpty ? 'Date of Birth' : socialMemberSignupController.dob.value,
-                                          style: TextStyle(
-                                            fontSize: 14,
-                                            color: socialMemberSignupController.dob.value.isEmpty
-                                                ? Colors.black
-                                                : const Color(0xff191847),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(height: 10),
-                                Container(
-                                  height: 50,
-                                  width:  MediaQuery.of(context).size.width,
-                                  margin: const EdgeInsets.only(top: 10.0, right: 5.0, left: 5.0),
-                                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(25.0),
-                                    boxShadow: const [
-                                      BoxShadow(
-                                        color: Colors.black12,
-                                        blurRadius: 5.0,
-                                      )
-                                    ],
-                                  ),
-                                  child: Row(
+                                  child: Column(
                                     children: [
-                                      const SizedBox(width: 10),
-                                      Expanded(
-                                        child: DropdownButton<String>(
-                                          isExpanded: true,
-                                          hint: const Text(
-                                            "Select Occupation",
-                                            style: TextStyle(
-                                              fontSize: 13,
-                                              color: Colors.black,
-                                            ),
+                                      SizedBox(height: 20),
+                                      const Align(
+                                        alignment: Alignment.center,
+                                        child: Padding(
+                                          padding: EdgeInsets.only(
+                                            left: 0.0,
                                           ),
-                                          icon: const Icon(
-                                            Icons.keyboard_arrow_down_outlined,
-                                            color: Colors.black,
-                                          ),
-                                          value: socialMemberSignupController.occupationDropdownValue.value,
-                                          underline: const SizedBox(),
-                                          onChanged: (String? newValue) {
-                                         //   setState(() {
-                                              socialMemberSignupController.occupationDropdownValue.value = newValue;
-                                         //   });
-                                          },
-                                          items: socialMemberSignupController.occupationList.map((String value) {
-                                            return DropdownMenuItem<String>(
-                                              value: value,
-                                              child: Text(
-                                                value,
-                                                style: const TextStyle(
-                                                  fontSize: 13,
-                                                  color: Color(0xff191847),
-                                                ),
-                                              ),
-                                            );
-                                          }).toList(),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-
-                                //gotra
-                                SizedBox(height: 10),
-                                //Gender
-                                SizedBox(height: 10),
-
-
-                                Container(
-                                  margin: EdgeInsets.only( top: 10.0, right: 5.0, left: 5.0 ),
-                                  padding: const EdgeInsets.only(
-                                    left: 10.0,
-                                    right: 10.0,
-                                  ),
-                                  decoration: const BoxDecoration(
-                                    shape: BoxShape.rectangle,
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.all(
-                                        Radius.circular(25.0)),
-                                    boxShadow: [BoxShadow(
-                                      color: Colors.black12,
-                                      offset: Offset(0.0, 0.0), //(x,y)
-                                      blurRadius: 5.0,
-                                    )],
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(left: 8.0),
-                                    child: TextFormField(
-                                        controller: socialMemberSignupController.userOccupation,
-                                        style: const TextStyle(
-                                          /* fontFamily: "segoeregular",*/
-                                            fontSize: 14,
-                                            color: Color(0xff191847)
-                                        ),
-                                        decoration: const InputDecoration(
-                                          hintText: 'Occupation Detail*',
-                                          border: InputBorder.none,
-                                          // icon: Image.asset("assets/images/mobile.png", height: 20.0,width: 20,)
-                                        ),
-
-                                        textInputAction: TextInputAction.next,
-                                        maxLines: 1,
-                                        keyboardType: TextInputType.text),
-                                  ),
-
-                                ),
-                                const SizedBox(height: 10),
-                                //State
-                                Container(
-                                    height: 50,
-                                    width:  MediaQuery.of(context).size.width,
-                                    margin: const EdgeInsets.only( top: 10.0,  right: 5.0, left: 5.0 ),
-                                    padding: const EdgeInsets.only(
-                                      left: 10.0,
-                                      right: 10.0,
-                                    ),
-                                    decoration: const BoxDecoration(
-                                      shape: BoxShape.rectangle,
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(25.0)),
-                                      boxShadow: [BoxShadow(
-                                        color: Colors.black12,
-                                        offset: Offset(0.0, 0.0), //(x,y)
-                                        blurRadius: 5.0,
-                                      )],
-                                    ),
-                                    child:Row(
-                                      children: [
-                                        Image.asset("assets/images/state.png",
-                                          height: 20.0,width: 20,
-                                        ),
-                                        SizedBox(width: 10,),
-                                        Expanded(
-                                          flex: 1,
-                                          child: Obx(() => DropdownButton<String>(
-                                            isExpanded: true,
-                                            icon: const Icon(Icons.keyboard_arrow_down_outlined),
-                                            underline: const SizedBox(),
-                                            value: socialMemberSignupController.stateList.contains(
-                                                socialMemberSignupController.stateDropdownValue.value)
-                                                ? socialMemberSignupController.stateDropdownValue.value
-                                                : "Select State",
-                                            onChanged: (String? newValue) {
-                                              if (newValue == null || newValue == "Select State") return;
-
-                                              socialMemberSignupController.stateDropdownValue.value = newValue;
-                                              socialMemberSignupController.cityDropdownValue.value = "Select City";
-
-                                              for (var e in socialMemberSignupController.stateListModel) {
-                                                if (e.state == newValue) {
-                                                  socialMemberSignupController.stateId.value = e.stateId!;
-                                                  getCityRequest(e.stateId!);
-                                                  break;
-                                                }
-                                              }
-                                            },
-                                            items: socialMemberSignupController.stateList
-                                                .map((value) => DropdownMenuItem<String>(
-                                              value: value,
-                                              child: Text(value, style: const TextStyle(fontSize: 13)),
-                                            ))
-                                                .toList(),
-                                          ))
-
-                                        ),
-                                      ],
-                                    )
-
-
-                                ),
-                                SizedBox(height: 10),
-                                //City
-                                Container(
-                                    height: 50,
-                                    width:  MediaQuery.of(context).size.width,
-                                    margin: EdgeInsets.only( top: 10.0,  right: 5.0, left: 5.0 ),
-                                    padding: const EdgeInsets.only(
-                                      left: 10.0,
-                                      right: 10.0,
-                                    ),
-                                    decoration: const BoxDecoration(
-                                      shape: BoxShape.rectangle,
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(25.0)),
-                                      boxShadow: [BoxShadow(
-                                        color: Colors.black12,
-                                        offset: Offset(0.0, 0.0), //(x,y)
-                                        blurRadius: 5.0,
-                                      )],
-                                    ),
-                                    child:Row(
-                                      children: [
-                                        //Image.asset("assets/images/city.png", height: 20.0,width: 20,),
-                                        SizedBox(width: 10,),
-                                        Expanded(
-                                          flex: 1,
-                                          child: Obx(()=>
-
-                                             DropdownButton<String>(
-                                                isExpanded: true,
-                                                icon: const Icon(
-                                                  Icons.keyboard_arrow_down_outlined,
-                                                  color: Colors.black,
-                                                ),
-                                                iconSize: 25,
-                                                value: socialMemberSignupController.cityDropdownValue.value,
-                                                underline: SizedBox(),
-                                                onChanged: (String? newValue) {
-                                                  socialMemberSignupController.cityDropdownValue.value = newValue.toString();
-                                                  for (var i = 0; i < socialMemberSignupController.cityListModel .length; i++) {
-                                                    if (socialMemberSignupController.cityListModel[i].district == socialMemberSignupController.cityDropdownValue.value) {
-                                                      socialMemberSignupController.cityId.value =  socialMemberSignupController.cityListModel[i].distId!;
-                                                      print( socialMemberSignupController.cityId.value);
-                                                    }
-                                                  }
-
-                                                },
-                                                items: socialMemberSignupController.cityList
-                                                    .map<DropdownMenuItem<String>>(
-                                                        (String value) {
-                                                      return DropdownMenuItem<String>(
-                                                        value: value,
-                                                        child: Text(
-                                                          value,
-                                                          style: const TextStyle(
-                                                              fontSize: 13,
-                                                              color: Color(
-                                                                  0xff191847) /* fontFamily: "segoesemibold"*/),
-                                                        ),
-                                                      );
-                                                    }).toList())
-                                          ),
-                                        ),
-                                      ],
-                                    )
-
-
-                                ),
-                                SizedBox(height: 10),
-                                //Address
-                                Container(
-                                  height: 100,
-                                  margin: const EdgeInsets.only(
-                                    left: 5.0,
-                                    right: 5.0,top: 10.0,
-                                  ),
-                                  padding: const EdgeInsets.only(
-                                    left: 10.0,
-                                    right: 10.0,
-                                  ),
-                                  decoration: const BoxDecoration(
-                                    shape: BoxShape.rectangle,
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.all(
-                                        Radius.circular(25.0)),
-                                    boxShadow: [BoxShadow(
-                                      color: Colors.black12,
-                                      offset: Offset(0.0, 0.0), //(x,y)
-                                      blurRadius: 5.0,
-                                    )],
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(left: 8.0),
-                                    child: TextFormField(
-                                        controller: socialMemberSignupController.userAddress,
-                                        style: const TextStyle(
-                                            fontSize: 14, color: Color(0xff191847)),
-                                        decoration: const InputDecoration(
-                                          hintText: 'Address*',
-                                          border: InputBorder.none,
-                                          // icon: Image.asset("assets/images/address.png", height: 20.0,width: 20,)
-                                        ),
-                                        textInputAction: TextInputAction.next,
-                                        keyboardType: TextInputType.text),
-                                  ),
-                                ),
-
-                                SizedBox(height: 20),
-                                Stack(
-                                  children: [
-                                    // Obx(() {return
-                                    CircleAvatar(
-                                      radius: 55,
-                                      backgroundColor: Colors.grey.shade300,
-                                      backgroundImage:
-                                      socialMemberSignupController.profileImage.value != null ? FileImage(socialMemberSignupController.profileImage.value!) : null,
-                                      child: socialMemberSignupController.profileImage.value == null
-                                          ? const Icon(Icons.person, size: 55, color: Colors.white)
-                                          : null,
-                                    ),
-                                    // }),
-                                    Positioned(
-                                      bottom: 0,
-                                      right: 0,
-                                      child: InkWell(
-                                        onTap: () => _showPicker(context),
-                                        child: Container(
-                                          padding: const EdgeInsets.all(6),
-                                          decoration: const BoxDecoration(
-                                            color: Colors.red,
-                                            shape: BoxShape.circle,
-                                          ),
-                                          child: const Icon(Icons.camera_alt,
-                                              color: Colors.white, size: 20),
-                                        ),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                                SizedBox(height: 10),
-                                //checkbox
-                              Obx(() => Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-
-                                  /// Checkbox
-                                  GestureDetector(
-                                    onTap: () {
-                                      socialMemberSignupController.isTermCheck.toggle();
-                                    },
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(top: 12),
-                                      child: Image.asset(
-                                        socialMemberSignupController.isTermCheck.value
-                                            ? "assets/images/checked.png"
-                                            : "assets/images/unchecked.png",
-                                        height: 22,
-                                      ),
-                                    ),
-                                  ),
-
-                                  const SizedBox(width: 8),
-
-                                  /// Text + Navigation
-                                  Expanded(
-                                    child: GestureDetector(
-                                      onTap: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (_) => TermsConditionScreen(),
-                                          ),
-                                        );
-                                      },
-                                      child: Padding(
-                                        padding: const EdgeInsets.only(top: 10),
-                                        child: RichText(
-                                          text: const TextSpan(
-                                            style: TextStyle(fontSize: 14),
+                                          child: Row(
+                                            mainAxisAlignment: MainAxisAlignment.center,
                                             children: [
-                                              TextSpan(
-                                                text: "By logging in, you agree to our ",
-                                                style: TextStyle(color: Colors.black87),
-                                              ),
-                                              TextSpan(
-                                                text: "Terms & Conditions",
-                                                style: TextStyle(
-                                                  color: kRedColor,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                              ),
-
+                                              Text(
+                                                "Social",
+                                                style: TextStyle(fontSize: 30, color: Colors.black,fontWeight: FontWeight.bold),),
+                                             SizedBox(width:5),
+                                              Text(
+                                                "Memeber",
+                                                style: TextStyle(fontSize: 30, color: kRedColor,fontWeight: FontWeight.bold),),
                                             ],
                                           ),
                                         ),
                                       ),
-                                    ),
-                                  ),
-                                ],
-                              )),
-
-                                SizedBox(height: 10),
-                                GestureDetector(
-                                  onTap: () {
-                                    // Full Name
-                                   // if (_formKey.currentState?.validate() != true) {}
-                                    if (_formKey.currentState?.validate() != true) {
-                                      return; // stop if form is invalid
-                                    }
-
-                                    if (socialMemberSignupController.userName.text.trim().isEmpty) {
-                                      CommonFunctions.showSuccessToast('Please enter full name');
-                                      return;
-                                    }
-
-                                    // Mobile
-                                    if (socialMemberSignupController.userMobile.text.trim().isEmpty) {
-                                      CommonFunctions.showSuccessToast('Please enter mobile number');
-                                      return;
-                                    }
-                                    if (socialMemberSignupController.userMobile.text.length < 10) {
-                                      CommonFunctions.showSuccessToast('Please enter valid mobile number');
-                                      return;
-                                    }
-
-                                    // State
-                                    if (socialMemberSignupController.stateDropdownValue.value == 'Select State') {
-                                      CommonFunctions.showSuccessToast('Please select state');
-                                      return;
-                                    }
-
-                                    // City
-                                    if (socialMemberSignupController.cityDropdownValue.value == 'Select City') {
-                                      CommonFunctions.showSuccessToast('Please select city');
-                                      return;
-                                    }
-
-
-
-                                    // Terms & Conditions
-                                  /*  if (socialMemberSignupController.isTermCheck.value) {
-                                      CommonFunctions.showSuccessToast('Please accept Terms & Conditions');
-                                      return;
-
-                                    }*/
-                                    // ✅ All validations passed
-                                    socialMemberSignupController.registerRequest(
-                                    /*   name:_userName.text,
-                                       mobile:_userMobile.text,
-                                        dob:dob, stateId:stateId,
-                                      cityId:cityId,
-                                      Address: _userAddress.text,
-                                      JobType: occupationDropdownValue.toString() ,
-                                      JobDetails:_userOccupation.text ,
-                                      profilePhoto: _profileImage,*/
-                                    );
-
-                                   // if (socialMemberSignupController.socialLoginResponse.value?.responseCode== 200) {
-                                      //isLoading(false);
-
-                                      // clear(mobile, dob, stateId, cityId, Address, JobType, JobDetails,profilePhoto,name);
-
-                                      //   clear();
-                                      //   SnackbarHelper.showSnackbar(title: AppText.success, message: data['message'] );
-                                      //Get.back();
-                                   // }
-                                  },
-                                  child: Container(
-                                    alignment: Alignment.center,
-                                    height:  MediaQuery.of(context).size.height * 0.065,
-                                    width:  MediaQuery.of(context).size.width,
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(25),
-                                        color: kRedColor
-                                    ),
-                                    child: const Row(
-                                      crossAxisAlignment:
-                                      CrossAxisAlignment.center,
-                                      mainAxisAlignment: MainAxisAlignment.center,
+        
+        
+                                      SizedBox(height: 20),
+        
+                                      //name
+                                      Container(
+                                        margin: EdgeInsets.only( left: 5.0, right: 5.0, ),
+                                        padding: const EdgeInsets.only(
+                                          left: 10.0,
+                                          right: 10.0,
+                                        ),
+                                        decoration: const BoxDecoration(
+                                          shape: BoxShape.rectangle,
+                                          color: Colors.white,
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(25.0)),
+                                          boxShadow: [BoxShadow(
+                                            color: Colors.black12,
+                                            offset: Offset(0.0, 0.0), //(x,y)
+                                            blurRadius: 5.0,
+                                          )],
+                                        ),
+                                        child: Padding(
+                                          padding: const EdgeInsets.only(left: 8.0),
+                                          child: TextFormField(
+                                              controller: socialMemberSignupController.userName,
+                                              style: const TextStyle(
+                                                /* fontFamily: "segoeregular",*/
+                                                  fontSize: 14,
+                                                  color: Color(0xff191847)
+                                              ),
+                                              decoration: const InputDecoration(
+                                                hintText: 'Full Name*',
+                                                border: InputBorder.none,
+                                                //  icon: Image.asset("assets/images/user.png", height: 20.0,width: 20,)
+                                              ),
+                                              textInputAction: TextInputAction.next,
+                                              keyboardType: TextInputType.text),
+                                        ),
+        
+                                      ),
+        
+                                      SizedBox(height: 10),
+        
+        
+                                      //Mobile
+                                      Container(
+                                        margin: EdgeInsets.only( top: 10.0, right: 5.0, left: 5.0 ),
+                                        padding: const EdgeInsets.only(
+                                          left: 10.0,
+                                          right: 10.0,
+                                        ),
+                                        decoration: const BoxDecoration(
+                                          shape: BoxShape.rectangle,
+                                          color: Colors.white,
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(25.0)),
+                                          boxShadow: [BoxShadow(
+                                            color: Colors.black12,
+                                            offset: Offset(0.0, 0.0), //(x,y)
+                                            blurRadius: 5.0,
+                                          )],
+                                        ),
+                                        child: Padding(
+                                          padding: const EdgeInsets.only(left: 8.0),
+                                          child: TextFormField(
+                                              controller: socialMemberSignupController.userMobile,
+                                              maxLength: 10,
+                                              style: const TextStyle(
+                                                /* fontFamily: "segoeregular",*/
+                                                  fontSize: 14,
+                                                  color: Color(0xff191847)
+                                              ),
+                                              decoration: const InputDecoration(
+                                                hintText: 'Mobile Number*',
+                                                counterText: "",        // ✅ hides counter space
+        
+                                                border: InputBorder.none,
+                                                // icon: Image.asset("assets/images/mobile.png", height: 20.0,width: 20,)
+                                              ),
+                                              inputFormatters: [
+                                                LengthLimitingTextInputFormatter(12),
+                                              ],
+                                              textInputAction: TextInputAction.next,
+                                              keyboardType: TextInputType.number),
+                                        ),
+        
+                                      ),
+                                      const SizedBox(height: 10),
+        
+                                      Container(
+                                        margin: const EdgeInsets.only(top: 10.0, right: 5.0, left: 5.0),
+                                        padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                                        decoration: const BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius: BorderRadius.all(Radius.circular(25.0)),
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: Colors.black12,
+                                              blurRadius: 5.0,
+                                            )
+                                          ],
+                                        ),
+                                        child: InkWell(
+                                          borderRadius: BorderRadius.circular(25),
+                                          onTap: () async {
+                                            DateTime? pickedDate = await showDatePicker(
+                                              context: context,
+                                              initialDate: DateTime(2000),
+                                              firstDate: DateTime(1900),
+                                              lastDate: DateTime.now(),
+                                            );
+        
+                                            if (pickedDate != null) {
+                                            //  setState(() {
+                                                socialMemberSignupController.dob.value =
+                                                "${pickedDate.day}-${pickedDate.month}-${pickedDate.year}";
+                                            //  });
+                                            }
+                                          },
+                                          child: InputDecorator(
+                                            decoration:  const InputDecoration(
+                                              border: InputBorder.none,
+                                              hintText: 'Date of Birth',
+                                              hintStyle: TextStyle(
+                                                  fontSize: 14,
+                                                  color: Color(0xff191847)
+        
+                                              ),
+        
+                                              suffixIcon: Icon(Icons.calendar_today, size: 18),
+                                            ),
+                                            child: Padding(
+                                              padding: const EdgeInsets.only(top: 8.0,left: 8),
+                                              child: Text(
+                                                socialMemberSignupController.dob.value.isEmpty ? 'Date of Birth' : socialMemberSignupController.dob.value,
+                                                style: TextStyle(
+                                                  fontSize: 14,
+                                                  color: socialMemberSignupController.dob.value.isEmpty
+                                                      ? Colors.black
+                                                      : const Color(0xff191847),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(height: 10),
+                                      Container(
+                                        height: 50,
+                                        width:  MediaQuery.of(context).size.width,
+                                        margin: const EdgeInsets.only(top: 10.0, right: 5.0, left: 5.0),
+                                        padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius: BorderRadius.circular(25.0),
+                                          boxShadow: const [
+                                            BoxShadow(
+                                              color: Colors.black12,
+                                              blurRadius: 5.0,
+                                            )
+                                          ],
+                                        ),
+                                        child: Row(
+                                          children: [
+                                            const SizedBox(width: 10),
+                                            Expanded(
+                                              child: DropdownButton<String>(
+                                                isExpanded: true,
+                                                hint: const Text(
+                                                  "Select Occupation",
+                                                  style: TextStyle(
+                                                    fontSize: 13,
+                                                    color: Colors.black,
+                                                  ),
+                                                ),
+                                                icon: const Icon(
+                                                  Icons.keyboard_arrow_down_outlined,
+                                                  color: Colors.black,
+                                                ),
+                                                value: socialMemberSignupController.occupationDropdownValue.value,
+                                                underline: const SizedBox(),
+                                                onChanged: (String? newValue) {
+                                               //   setState(() {
+                                                    socialMemberSignupController.occupationDropdownValue.value = newValue;
+                                               //   });
+                                                },
+                                                items: socialMemberSignupController.occupationList.map((String value) {
+                                                  return DropdownMenuItem<String>(
+                                                    value: value,
+                                                    child: Text(
+                                                      value,
+                                                      style: const TextStyle(
+                                                        fontSize: 13,
+                                                        color: Color(0xff191847),
+                                                      ),
+                                                    ),
+                                                  );
+                                                }).toList(),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+        
+                                      //gotra
+                                      SizedBox(height: 10),
+                                      //Gender
+                                      SizedBox(height: 10),
+        
+        
+                                      Container(
+                                        margin: EdgeInsets.only( top: 10.0, right: 5.0, left: 5.0 ),
+                                        padding: const EdgeInsets.only(
+                                          left: 10.0,
+                                          right: 10.0,
+                                        ),
+                                        decoration: const BoxDecoration(
+                                          shape: BoxShape.rectangle,
+                                          color: Colors.white,
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(25.0)),
+                                          boxShadow: [BoxShadow(
+                                            color: Colors.black12,
+                                            offset: Offset(0.0, 0.0), //(x,y)
+                                            blurRadius: 5.0,
+                                          )],
+                                        ),
+                                        child: Padding(
+                                          padding: const EdgeInsets.only(left: 8.0),
+                                          child: TextFormField(
+                                              controller: socialMemberSignupController.userOccupation,
+                                              style: const TextStyle(
+                                                /* fontFamily: "segoeregular",*/
+                                                  fontSize: 14,
+                                                  color: Color(0xff191847)
+                                              ),
+                                              decoration: const InputDecoration(
+                                                hintText: 'Occupation Detail*',
+                                                border: InputBorder.none,
+                                                // icon: Image.asset("assets/images/mobile.png", height: 20.0,width: 20,)
+                                              ),
+        
+                                              textInputAction: TextInputAction.next,
+                                              maxLines: 1,
+                                              keyboardType: TextInputType.text),
+                                        ),
+        
+                                      ),
+                                      const SizedBox(height: 10),
+                                      //State
+                                      Container(
+                                          height: 50,
+                                          width:  MediaQuery.of(context).size.width,
+                                          margin: const EdgeInsets.only( top: 10.0,  right: 5.0, left: 5.0 ),
+                                          padding: const EdgeInsets.only(
+                                            left: 10.0,
+                                            right: 10.0,
+                                          ),
+                                          decoration: const BoxDecoration(
+                                            shape: BoxShape.rectangle,
+                                            color: Colors.white,
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(25.0)),
+                                            boxShadow: [BoxShadow(
+                                              color: Colors.black12,
+                                              offset: Offset(0.0, 0.0), //(x,y)
+                                              blurRadius: 5.0,
+                                            )],
+                                          ),
+                                          child:Row(
+                                            children: [
+                                              Image.asset("assets/images/state.png",
+                                                height: 20.0,width: 20,
+                                              ),
+                                              SizedBox(width: 10,),
+                                              Expanded(
+                                                flex: 1,
+                                                child: Obx(() => DropdownButton<String>(
+                                                  isExpanded: true,
+                                                  icon: const Icon(Icons.keyboard_arrow_down_outlined),
+                                                  underline: const SizedBox(),
+                                                  value: socialMemberSignupController.stateList.contains(
+                                                      socialMemberSignupController.stateDropdownValue.value)
+                                                      ? socialMemberSignupController.stateDropdownValue.value
+                                                      : "Select State",
+                                                  onChanged: (String? newValue) {
+                                                    if (newValue == null || newValue == "Select State") return;
+        
+                                                    socialMemberSignupController.stateDropdownValue.value = newValue;
+                                                    socialMemberSignupController.cityDropdownValue.value = "Select City";
+        
+                                                    for (var e in socialMemberSignupController.stateListModel) {
+                                                      if (e.state == newValue) {
+                                                        socialMemberSignupController.stateId.value = e.stateId!;
+                                                        getCityRequest(e.stateId!);
+                                                        break;
+                                                      }
+                                                    }
+                                                  },
+                                                  items: socialMemberSignupController.stateList
+                                                      .map((value) => DropdownMenuItem<String>(
+                                                    value: value,
+                                                    child: Text(value, style: const TextStyle(fontSize: 13)),
+                                                  ))
+                                                      .toList(),
+                                                ))
+        
+                                              ),
+                                            ],
+                                          )
+        
+        
+                                      ),
+                                      SizedBox(height: 10),
+                                      //City
+                                      Container(
+                                          height: 50,
+                                          width:  MediaQuery.of(context).size.width,
+                                          margin: EdgeInsets.only( top: 10.0,  right: 5.0, left: 5.0 ),
+                                          padding: const EdgeInsets.only(
+                                            left: 10.0,
+                                            right: 10.0,
+                                          ),
+                                          decoration: const BoxDecoration(
+                                            shape: BoxShape.rectangle,
+                                            color: Colors.white,
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(25.0)),
+                                            boxShadow: [BoxShadow(
+                                              color: Colors.black12,
+                                              offset: Offset(0.0, 0.0), //(x,y)
+                                              blurRadius: 5.0,
+                                            )],
+                                          ),
+                                          child:Row(
+                                            children: [
+                                              //Image.asset("assets/images/city.png", height: 20.0,width: 20,),
+                                              SizedBox(width: 10,),
+                                              Expanded(
+                                                flex: 1,
+                                                child: Obx(()=>
+        
+                                                   DropdownButton<String>(
+                                                      isExpanded: true,
+                                                      icon: const Icon(
+                                                        Icons.keyboard_arrow_down_outlined,
+                                                        color: Colors.black,
+                                                      ),
+                                                      iconSize: 25,
+                                                      value: socialMemberSignupController.cityDropdownValue.value,
+                                                      underline: SizedBox(),
+                                                      onChanged: (String? newValue) {
+                                                        socialMemberSignupController.cityDropdownValue.value = newValue.toString();
+                                                        for (var i = 0; i < socialMemberSignupController.cityListModel .length; i++) {
+                                                          if (socialMemberSignupController.cityListModel[i].district == socialMemberSignupController.cityDropdownValue.value) {
+                                                            socialMemberSignupController.cityId.value =  socialMemberSignupController.cityListModel[i].distId!;
+                                                            print( socialMemberSignupController.cityId.value);
+                                                          }
+                                                        }
+        
+                                                      },
+                                                      items: socialMemberSignupController.cityList
+                                                          .map<DropdownMenuItem<String>>(
+                                                              (String value) {
+                                                            return DropdownMenuItem<String>(
+                                                              value: value,
+                                                              child: Text(
+                                                                value,
+                                                                style: const TextStyle(
+                                                                    fontSize: 13,
+                                                                    color: Color(
+                                                                        0xff191847) /* fontFamily: "segoesemibold"*/),
+                                                              ),
+                                                            );
+                                                          }).toList())
+                                                ),
+                                              ),
+                                            ],
+                                          )
+        
+        
+                                      ),
+                                      SizedBox(height: 10),
+                                      //Address
+                                      Container(
+                                        height: 100,
+                                        margin: const EdgeInsets.only(
+                                          left: 5.0,
+                                          right: 5.0,top: 10.0,
+                                        ),
+                                        padding: const EdgeInsets.only(
+                                          left: 10.0,
+                                          right: 10.0,
+                                        ),
+                                        decoration: const BoxDecoration(
+                                          shape: BoxShape.rectangle,
+                                          color: Colors.white,
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(25.0)),
+                                          boxShadow: [BoxShadow(
+                                            color: Colors.black12,
+                                            offset: Offset(0.0, 0.0), //(x,y)
+                                            blurRadius: 5.0,
+                                          )],
+                                        ),
+                                        child: Padding(
+                                          padding: const EdgeInsets.only(left: 8.0),
+                                          child: TextFormField(
+                                              controller: socialMemberSignupController.userAddress,
+                                              style: const TextStyle(
+                                                  fontSize: 14, color: Color(0xff191847)),
+                                              decoration: const InputDecoration(
+                                                hintText: 'Address*',
+                                                border: InputBorder.none,
+                                                // icon: Image.asset("assets/images/address.png", height: 20.0,width: 20,)
+                                              ),
+                                              textInputAction: TextInputAction.next,
+                                              keyboardType: TextInputType.text),
+                                        ),
+                                      ),
+        
+                                      SizedBox(height: 20),
+                                      Stack(
+                                        children: [
+                                          // Obx(() {return
+                                          CircleAvatar(
+                                            radius: 55,
+                                            backgroundColor: Colors.grey.shade300,
+                                            backgroundImage:
+                                            socialMemberSignupController.profileImage.value != null ? FileImage(socialMemberSignupController.profileImage.value!) : null,
+                                            child: socialMemberSignupController.profileImage.value == null
+                                                ? const Icon(Icons.person, size: 55, color: Colors.white)
+                                                : null,
+                                          ),
+                                          // }),
+                                          Positioned(
+                                            bottom: 0,
+                                            right: 0,
+                                            child: InkWell(
+                                              onTap: () => _showPicker(context),
+                                              child: Container(
+                                                padding: const EdgeInsets.all(6),
+                                                decoration: const BoxDecoration(
+                                                  color: Colors.red,
+                                                  shape: BoxShape.circle,
+                                                ),
+                                                child: const Icon(Icons.camera_alt,
+                                                    color: Colors.white, size: 20),
+                                              ),
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                      SizedBox(height: 10),
+                                      //checkbox
+                                    Obx(() => Row(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
-                                        SizedBox(width: 5),
-                                        Text(
-                                          "Register",
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.bold),
+        
+                                        /// Checkbox
+                                        GestureDetector(
+                                          onTap: () {
+                                            socialMemberSignupController.isTermCheck.toggle();
+                                          },
+                                          child: Padding(
+                                            padding: const EdgeInsets.only(top: 12),
+                                            child: Image.asset(
+                                              socialMemberSignupController.isTermCheck.value
+                                                  ? "assets/images/checked.png"
+                                                  : "assets/images/unchecked.png",
+                                              height: 22,
+                                            ),
+                                          ),
+                                        ),
+        
+                                        const SizedBox(width: 8),
+        
+                                        /// Text + Navigation
+                                        Expanded(
+                                          child: GestureDetector(
+                                            onTap: () {
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (_) => TermsConditionScreen(),
+                                                ),
+                                              );
+                                            },
+                                            child: Padding(
+                                              padding: const EdgeInsets.only(top: 10),
+                                              child: RichText(
+                                                text: const TextSpan(
+                                                  style: TextStyle(fontSize: 14),
+                                                  children: [
+                                                    TextSpan(
+                                                      text: "By logging in, you agree to our ",
+                                                      style: TextStyle(color: Colors.black87),
+                                                    ),
+                                                    TextSpan(
+                                                      text: "Terms & Conditions",
+                                                      style: TextStyle(
+                                                        color: kRedColor,
+                                                        fontWeight: FontWeight.bold,
+                                                      ),
+                                                    ),
+        
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ),
                                         ),
                                       ],
-                                    ),
+                                    )),
+        
+                                      SizedBox(height: 10),
+                                      GestureDetector(
+                                        onTap: () {
+                                          // Full Name
+                                         // if (_formKey.currentState?.validate() != true) {}
+                                          if (_formKey.currentState?.validate() != true) {
+                                            return; // stop if form is invalid
+                                          }
+        
+                                          if (socialMemberSignupController.userName.text.trim().isEmpty) {
+                                            CommonFunctions.showSuccessToast('Please enter full name');
+                                            return;
+                                          }
+        
+                                          // Mobile
+                                          if (socialMemberSignupController.userMobile.text.trim().isEmpty) {
+                                            CommonFunctions.showSuccessToast('Please enter mobile number');
+                                            return;
+                                          }
+                                          if (socialMemberSignupController.userMobile.text.length < 10) {
+                                            CommonFunctions.showSuccessToast('Please enter valid mobile number');
+                                            return;
+                                          }
+        
+                                          // State
+                                          if (socialMemberSignupController.stateDropdownValue.value == 'Select State') {
+                                            CommonFunctions.showSuccessToast('Please select state');
+                                            return;
+                                          }
+        
+                                          // City
+                                          if (socialMemberSignupController.cityDropdownValue.value == 'Select City') {
+                                            CommonFunctions.showSuccessToast('Please select city');
+                                            return;
+                                          }
+        
+        
+        
+                                          // Terms & Conditions
+                                        /*  if (socialMemberSignupController.isTermCheck.value) {
+                                            CommonFunctions.showSuccessToast('Please accept Terms & Conditions');
+                                            return;
+        
+                                          }*/
+                                          // ✅ All validations passed
+                                          socialMemberSignupController.registerRequest(
+                                          /*   name:_userName.text,
+                                             mobile:_userMobile.text,
+                                              dob:dob, stateId:stateId,
+                                            cityId:cityId,
+                                            Address: _userAddress.text,
+                                            JobType: occupationDropdownValue.toString() ,
+                                            JobDetails:_userOccupation.text ,
+                                            profilePhoto: _profileImage,*/
+                                          );
+        
+                                         // if (socialMemberSignupController.socialLoginResponse.value?.responseCode== 200) {
+                                            //isLoading(false);
+        
+                                            // clear(mobile, dob, stateId, cityId, Address, JobType, JobDetails,profilePhoto,name);
+        
+                                            //   clear();
+                                            //   SnackbarHelper.showSnackbar(title: AppText.success, message: data['message'] );
+                                            //Get.back();
+                                         // }
+                                        },
+                                        child: Container(
+                                          alignment: Alignment.center,
+                                          height:  MediaQuery.of(context).size.height * 0.065,
+                                          width:  MediaQuery.of(context).size.width,
+                                          decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.circular(25),
+                                              color: kRedColor
+                                          ),
+                                          child: const Row(
+                                            crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            children: [
+                                              SizedBox(width: 5),
+                                              Text(
+                                                "Register",
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 14,
+                                                    fontWeight: FontWeight.bold),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(height: 20),
+        
+                                    ],
                                   ),
                                 ),
+        
                                 SizedBox(height: 20),
-
+        
+        
+        
+                                //SizedBox(height: size.height*0.03),
                               ],
                             ),
+                               ),
+                            ),
+                      /// 🔴 LOADER OVERLAY
+                      if (socialMemberSignupController.isLoading.value)
+                        SizedBox(
+                        //  color: Colors.purple.withOpacity(0.3),
+                          child: const Center(
+                            child: CircularProgressIndicator(),
                           ),
-
-                          SizedBox(height: 20),
-
-
-
-                          //SizedBox(height: size.height*0.03),
-                        ],
+                        ),
+                    ],
+                  ),
                       ),
-                         ),
-                      ),
-                    ),
-              ),
-            ],
+                ),
+              ],
+            ),
           ),
         ),
       ),

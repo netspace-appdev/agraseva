@@ -83,6 +83,117 @@ flutter {
 }
 
 */
+
+/*
+plugins {
+    id "com.android.application"
+    id "kotlin-android"
+    id "dev.flutter.flutter-gradle-plugin"
+    id "com.google.gms.google-services"
+}
+
+*/
+/* ---------- local.properties ---------- *//*
+
+def localProperties = new Properties()
+def localPropertiesFile = rootProject.file("local.properties")
+if (localPropertiesFile.exists()) {
+    localPropertiesFile.withReader("UTF-8") { reader ->
+        localProperties.load(reader)
+    }
+}
+
+def flutterVersionCode = (localProperties.getProperty("flutter.versionCode") ?: "1").toInteger()
+def flutterVersionName = localProperties.getProperty("flutter.versionName") ?: "1.0"
+
+*/
+/* ---------- key.properties ---------- *//*
+
+def keystoreProperties = new Properties()
+def keystorePropertiesFile = rootProject.file("key.properties")
+def hasReleaseKey = keystorePropertiesFile.exists()
+
+if (hasReleaseKey) {
+    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+}
+
+android {
+    namespace "com.ns.agraseva"
+    compileSdkVersion 35
+
+
+    defaultConfig {
+        applicationId "com.ns.agraseva"
+        minSdkVersion flutter.minSdkVersion
+        targetSdkVersion 35
+        //versionCode flutterVersionCode
+        versionCode 3//flutterVersionCode.toInteger()
+        versionName flutterVersionName
+        multiDexEnabled true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
+    sourceSets {
+        main.java.srcDirs += "src/main/kotlin"
+    }
+
+    signingConfigs {
+
+        debug {
+            // default debug keystore
+        }
+
+        if (hasReleaseKey) {
+            release {
+                storeFile file(keystoreProperties["storeFile"])
+                storePassword keystoreProperties["storePassword"]
+                keyAlias keystoreProperties["keyAlias"]
+                keyPassword keystoreProperties["keyPassword"]
+            }
+        }
+    }
+
+    buildTypes {
+
+        debug {
+            signingConfig signingConfigs.debug
+        }
+
+        release {
+            signingConfig hasReleaseKey
+                    ? signingConfigs.release
+                    : signingConfigs.debug
+
+            minifyEnabled false
+            shrinkResources false
+        }
+    }
+
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+}
+
+flutter {
+    source "../.."
+}
+
+dependencies {
+    implementation(platform("com.google.firebase:firebase-bom:34.9.0"))
+    implementation("com.google.firebase:firebase-analytics")
+}
+
+
+*/
 plugins {
     id "com.android.application"
     id "kotlin-android"
@@ -114,12 +225,14 @@ if (hasReleaseKey) {
 android {
     namespace "com.ns.agraseva"
     compileSdkVersion 35
+    ndkVersion "25.1.8937393"   // 👈 Add this line
+
 
     defaultConfig {
         applicationId "com.ns.agraseva"
         minSdkVersion flutter.minSdkVersion
         targetSdkVersion 35
-        versionCode flutterVersionCode
+        versionCode 3
         versionName flutterVersionName
         multiDexEnabled true
     }
@@ -137,10 +250,14 @@ android {
         main.java.srcDirs += "src/main/kotlin"
     }
 
+    // ✅ ADD THIS BLOCK (Fix for strip debug symbols error)
+    packagingOptions {
+        doNotStrip "**/*.so"
+    }
+
     signingConfigs {
 
         debug {
-            // default debug keystore
         }
 
         if (hasReleaseKey) {
